@@ -71,11 +71,11 @@ body {
 }
 @font-face {
     font-family: 'Campton200';
-    src: url(/includes/css/fonts/Campton200/Campton200-Regular.otf) format("opentype");
+    src: url(fonts/Campton200/Campton200-Regular.otf) format("opentype");
 }
 @font-face {
     font-family: 'BD Merced';
-    src: url(/includes/css/fonts/bd-merced.ttf) format("truetype");
+    src: url(fonts/bd-merced.ttf) format("truetype");
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
     display: block;

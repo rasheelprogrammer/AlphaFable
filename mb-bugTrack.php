@@ -97,7 +97,7 @@ if (isset($_POST['How'])) {
                         <option value="Other Problems">Other Problems</option>
                     </select><br />
                     <br />What Happened?:<br />
-                    <textarea NAME="How" rows="10" cols="60"></textarea>
+                    <textarea NAME="How" rows="10" cols="60" placeholder="What is the problem and how did it happen?"></textarea>
                     </select><br />
                     <br />Is it a recurring problem?:<br />
                     <select NAME="recurring">
@@ -105,9 +105,9 @@ if (isset($_POST['How'])) {
                         <option value='Yes'>Yes</option>
                     </select><br />
                     <br />What is your Username?:<br />
-                    <input name="username"><br />
+                    <input name="username" placeholder="username"><br />
                     <br />What is your Character name?:<br />
-                    <input name="charname"><br />
+                    <input name="charname" placeholder="character name"><br />
                     <br /><input type='submit' name='bugs' value='Submit Bug'>
                 </form>
                 <?php
