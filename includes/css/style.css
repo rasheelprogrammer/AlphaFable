@@ -1,0 +1,132 @@
+/*********************** MAIN MENU ***********************/
+
+/*dark menu*/
+#mainHeader .navbar-inner {
+    background:#454545;
+}
+.navbar {
+    border-bottom:1px solid #111;
+}
+#mainMenu ul li a {
+    color:#ededed;	
+}
+
+#mainMenu ul ul, #mainMenu  ul li ul li.hover a {
+    background-color:#454545;
+}
+#mainMenu ul ul {
+    border:1px solid #454545;
+}
+
+#mainMenu ul li .active, #mainMenu ul li.hover>a, #mainMenu ul li.hover>a.hasSubMenu, #mainMenu ul li.Shover>a{
+    color:white!important;
+    background: #f2836d; /* Old browsers */
+    /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+    background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2YyODM2ZCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNlZTQ0NDQiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+    background: -moz-linear-gradient(top,  #f2836d 0%, #ee4444 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2836d), color-stop(100%,#ee4444)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #f2836d 0%,#ee4444 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #f2836d 0%,#ee4444 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #f2836d 0%,#ee4444 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #f2836d 0%,#ee4444 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2836d', endColorstr='#ee4444',GradientType=0 ); /* IE6-8 */
+
+}
+#mainMenu ul ul a {
+    color:#B4B4B4;
+}
+#mainMenu ul ul li.Shover a {
+    color:white !important;
+    background-color:#EE4444;
+}
+#mainMenu .hasSubMenu {
+    background-image:url('../images/icons/main-nav-normalstate.png');
+    background-repeat:no-repeat;
+    background-position:90% center;
+}
+#mainMenu ul ul li.hover>a, #mainMenu ul ul li.Shover>a {
+    background-image:url('../images/icons/main-nav-hoverstate.png')!important;
+    background-repeat:no-repeat!important;
+    background-position:90% center!important;
+    color:white !important;
+    background-color:#EE4444!important;
+}
+
+#mainMenu ul ul li.Shover>a {
+    background-image:none !important;
+}
+
+/*********************** END MAIN MENU ***********************/
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    text-align: center;
+}
+body {
+    font-family: 'Campton200';
+    background-color: #660000;
+    color: #FFF;
+}
+@font-face {
+    font-family: 'Campton200';
+    src: url(/includes/css/fonts/Campton200/Campton200-Regular.otf) format("opentype");
+}
+@font-face {
+    font-family: 'BD Merced';
+    src: url(/includes/css/fonts/bd-merced.ttf) format("truetype");
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+a {
+    text-decoration: underline;
+    outline: none;
+}
+a:link, a:visited {
+    color: #FF0;
+}
+a:hover, a:active, a:focus {
+    color: #FF3;
+}
+#window {
+    margin-left: auto;
+    margin-right: auto;
+    display:table;
+    padding: 10px;
+}
+#gameWindow {
+    border: 1px solid #860000;
+    height: 550px;
+    width: 750px;
+    padding: 7px 7px 25px 7px;
+    background-color: #860000;
+    border-radius: 5px;
+}
+#notes {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #860000;
+    width: 80%;
+    padding: 2px 2px 2px 2px;
+    background-color: #860000;
+    border-radius: 5px;
+}
+#charWindow {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #860000;
+    width: 490px;
+    padding: 10px 10px 10px 10px;
+    background-color: #860000;
+    border-radius: 5px;
+}
+.subheader {
+    font-family: 'BD Merced';
+    font-size: 18pt;
+}
+#outsideWindow {
+    display: table-cell;
+    vertical-align: middle;
+}
