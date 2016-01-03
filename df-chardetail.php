@@ -114,7 +114,7 @@ if (isset($_GET['id'])) {
                 if ($user['access'] >= 25) {
                     echo ("<td><img src='images/badges/badge-mod.png' /></td>");
                 }
-                if ($user['dragon_amulet'] = 1 || $char['dragon_amulet'] = 1) {
+                if ($user['dragon_amulet'] == 1 || $char['dragon_amulet'] == 1) {
                     echo ("<td><img src='images/badges/badge-vip.png' /></td>");
                 }
                 ?>

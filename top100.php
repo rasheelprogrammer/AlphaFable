@@ -57,7 +57,7 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
                     <td class='top100'><p><?php echo $chr["gold"]; ?></p></td>
                     <td class='top100'><p><?php echo $chr["Coins"]; ?></p></td>
                     <td class='top100'><p><?php
-                            if ($chr['dragon_amulet'] == "1") {
+                            if ($chr['dragon_amulet'] == "1" || $user['dragon_amulet'] == 1) {
                                 echo "<font style=\"color: gold; font-weight: bold;\">True</font>";
                             } else {
                                 echo "False";

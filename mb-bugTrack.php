@@ -79,7 +79,7 @@ if (isset($_POST['How'])) {
     </head>
     <body>
         <br /><a href="game/index.php"><img src="images/logo.png" width="300px"/></a><br />
-        <section class="downloaded">
+        <section class="downloaded" style="width:500px;">
             <?php
             if (isset($_POST['How'])) {
                 echo $EmailResult;
