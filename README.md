@@ -2,15 +2,15 @@
 
 This README would normally document whatever steps are necessary to get your application up and running.
 
-### What is this repository for? ###
+### What is this? ###
 
-* These are files needed in the creation of a DragonFable private server
+These are files needed in the creation of a DragonFable private server
 
 ### How do I get set up? ###
 
 COMING SOON!
 
-### CREDITS & THANKS ###
+### Credits & Thanks ###
 * MentalBlank
 * The AlphaEvolution Team
 * Artix Entertainment
