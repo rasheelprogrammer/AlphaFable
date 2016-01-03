@@ -20,47 +20,44 @@ if (isset($Email)) {
         $subject = "Your {$sitename} Account List";
         
         $query = $MySQLi->query("SELECT * FROM df_users WHERE email = '{$Email}'");
-        //CHECK USER COUNT
-        $message = "
-        <div>
-        Dear {$sitename} Player,<br>
-        <p>
-            Here are your {$sitename} game accounts.<br>
-            <p>";
-            while ($result = $query->fetch_assoc()) {
-                $lastPlayed = explode('T', $result['lastLogin']);
-                $lastPlayed = $lastPlayed;
-                $message .= "<strong>{$result['name']}</strong><br>
-                Password: {$Security->decode($result['pass'])}<br>
-                Last Activity: {$lastPlayed[0]}<br><br>";
-            }
-            $message .= "</p>
+        if($query->num_rows != 0){
+            $message = "
+            <div>
+            Dear {$sitename} Player,<br>
             <p>
-                You (or someone by mistake) requested this information be sent to your email address via the Lost Password system on our web site.<br>
-                If you need help, contact us via <a href='http://{$_SERVER['SERVER_NAME']}/mb-bugTrack.php' target='_blank'>the bug report system</a>
+                Here are your {$sitename} game accounts.<br>
+                <p>";
+                while ($result = $query->fetch_assoc()) {
+                    $lastPlayed = explode('T', $result['lastLogin']);
+                    $lastPlayed = $lastPlayed;
+                    $message .= "<strong>{$result['name']}</strong><br>
+                    Password: {$Security->decode($result['pass'])}<br>
+                    Last Activity: {$lastPlayed[0]}<br><br>";
+                }
+                $message .= "</p>
+                <p>
+                    You (or someone by mistake) requested this information be sent to your email address via the Lost Password system on our web site.<br>
+                    If you need help, contact us via <a href='http://{$_SERVER['SERVER_NAME']}/mb-bugTrack.php' target='_blank'>the bug report system</a>
+                </p>
+                <p>
+                    Party on!<br>
+                    The {$sitename} Staff<br><a href='http://{$_SERVER['SERVER_NAME']}' target='_blank'>http://{$_SERVER['SERVER_NAME']}</a>
+                </p>
             </p>
-            <p>
-                Party on!<br>
-                The {$sitename} Staff<br><a href='http://{$_SERVER['SERVER_NAME']}' target='_blank'>http://{$_SERVER['SERVER_NAME']}</a>
-            </p>
-        </p>
-        </div>
-        ";
+            </div>
+            ";
 
-        // To send HTML mail, the Content-type header must be set
-        $headers = "MIME-Version: 1.0\r\n";
-        $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+            $headers = "MIME-Version: 1.0\r\n";
+            $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 
-        // Additional headers
-        $headers .= "From: {$sitename} <noreply@{$_SERVER['SERVER_NAME']}>" . "\r\n";
-        $headers .= "Cc: noreply@{$_SERVER['SERVER_NAME']}\r\n";
-        $headers .= "Bcc: noreply@{$_SERVER['SERVER_NAME']}\r\n";
+            $headers .= "From: {$sitename} <noreply@{$_SERVER['SERVER_NAME']}>" . "\r\n";
+            $headers .= "Cc: noreply@{$_SERVER['SERVER_NAME']}\r\n";
+            $headers .= "Bcc: noreply@{$_SERVER['SERVER_NAME']}\r\n";
 
-        // Mail it
-        mail($to, $subject, $message, $headers);
-    } else {
-        $fail = 1;
-    }
+            // Mail it
+            mail($to, $subject, $message, $headers);
+        } else { $fail = 1;}
+    } else { $fail = 1; }
 }
 ?>
 
