@@ -87,6 +87,7 @@ if (isset($_POST['character'])) {
                     if ($userQuery->num_rows > 0) {
                         $_SESSION["id"] = $user['id'];
                     } else {
+                        session_unset();
                         echo("<br />Error - Could not Find {$sitename} user<br /><br />");
                         echo("<a href='df-upgrade.php'>Back</a><br /><br />");
                         die();
