@@ -181,12 +181,15 @@ if (isset($_GET['id'])) {
 </p>
 <br /><br />
 <section id="linkWindow">
-    <span>
-        <a href="game/">Play</a> | 
-        <a href="game/df-signup.php">Register</a> | 
-        <a href="game/mb-charTransfer.php">Transfer</a> | 
-        <a href="top100.php">Top100</a> | 
-        <a href="mb-lostpassword.php">Lost Password</a>
+                        <span>
+                            <a href="game/">Play</a> | 
+                            <a href="game/df-signup.php">Register</a> | 
+                            <a href="game/mb-charTransfer.php">Transfer</a> | 
+                            <a href="top100.php">Top100</a> | 
+                            <a href="mb-bugTrack.php">Submit Bug</a> | 
+                            <a href="df-upgrade.php">Upgrade</a> | 
+                            <a href="mb-lostpassword.php">Lost Password</a>
+                        </span>
 </section>
 <br />
 </body>

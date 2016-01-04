@@ -2,7 +2,7 @@
 /*
  * AlphaFable (DragonFable Private Server) 
  * Made by MentalBlank
- * File: mb-upgrade.php - v0.0.1
+ * File: df-upgrade3.php - v0.0.1
  */
 
 require("includes/config.php");
@@ -13,7 +13,7 @@ $sitename = $fetch['DFSitename'];
 
 $CharID = filter_input(INPUT_GET, 'CharID');
 if ($CharID == NULL) {
-    header('Location: index.php');
+    header('Location: /game/');
 }
 ?>
 
@@ -35,10 +35,6 @@ if ($CharID == NULL) {
     </head>
     <body style="color:#000;">
         <form name="Form1" method="post" id="Form1">
-            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjA2NjUyNDI2ZGRX3PMl+cJyne7ujtuE9Evk/qu6n+ClVmaLUCsoYB+Xnw==" />
-
-            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="AA11CAEF" />
-            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAN/08KrgC94laePUroZZK0i38+DI6AbiIDwfK7BS3SF2qKeKEbp39eHc9mbdvkCgxAg1Mn8AJvMqgjzXXtZAYSXP4ex9tVXFHqOVtJnNLU00Q==" />
             <p align="center">
                 <a href="game/index.php"><img src="images/logo.png" width="300px"/></a>
             </p>
@@ -72,7 +68,7 @@ if ($CharID == NULL) {
                             </ul>
                             </p>
                             <span class="style1"><font color="#530000"><b>$2.50</b></font></span>
-                            <form method="post" target="_top">
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <table style="visibility: hidden;">
                                     <tr><td><input type="hidden" name="on0" value="Upgrade">Upgrade</td></tr><tr><td><select name="os0">
@@ -80,7 +76,8 @@ if ($CharID == NULL) {
                                             </select> </td></tr>
                                     <tr><td><input type="hidden" name="on1" value="Character ID">Character ID</td></tr><tr><td><input type="text" name="os1" maxlength="200" value="<?php echo $CharID; ?>"></td></tr>
                                 </table>
-                                <input type="hidden" name="currency_code" value="USD">
+                                <input type="hidden" name="currency_code" value="AUD">
+                                
                                 <input type="image" src="images/button-buy.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
                                 <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
                             </form>
@@ -118,7 +115,7 @@ if ($CharID == NULL) {
                                     <li class="style9">One time fee!</li>
                                 </ul>
                                 <span class="style1"><font color="#530000"><b>$10.00</b></font></span>
-                                <form method="post" target="_top">
+                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                     <input type="hidden" name="cmd" value="_s-xclick">
                                     <table style="visibility: hidden;">
                                         <tr><td><input type="hidden" name="on0" value="Upgrade">Upgrade</td></tr><tr><td><select name="os0">
@@ -126,7 +123,8 @@ if ($CharID == NULL) {
                                                 </select> </td></tr>
                                         <tr><td><input type="hidden" name="on1" value="Character ID">Character ID</td></tr><tr><td><input type="text" name="os1" maxlength="200" value="<?php echo $CharID; ?>"></td></tr>
                                     </table>
-                                    <input type="hidden" name="currency_code" value="USD">
+                                    <input type="hidden" name="currency_code" value="AUD">
+                                    
                                     <input type="image" src="images/button-buy.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
                                     <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
                                 </form>
@@ -153,7 +151,7 @@ if ($CharID == NULL) {
                                 <b>Doom Knight Armor</b>
                             </p>           
                             <span class="style1"><font color="#530000"><b>$15.00</b></font></span>
-                            <form method="post" target="_top">
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <table style="visibility: hidden;">
                                     <tr><td><input type="hidden" name="on0" value="Upgrade">Upgrade</td></tr><tr><td><select name="os0">
@@ -161,7 +159,8 @@ if ($CharID == NULL) {
                                             </select> </td></tr>
                                     <tr><td><input type="hidden" name="on1" value="Character ID">Character ID</td></tr><tr><td><input type="text" name="os1" maxlength="200" value="<?php echo $CharID; ?>"></td></tr>
                                 </table>
-                                <input type="hidden" name="currency_code" value="USD">
+                                <input type="hidden" name="currency_code" value="AUD">
+                                
                                 <input type="image" src="images/button-buy.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
                                 <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
                             </form>
@@ -181,7 +180,7 @@ if ($CharID == NULL) {
                             <span class="style1"><b>10000 Dragon Coins</b></span><br>
                             for your character<br>
                             <span class="style1"><font color="#530000"><b>$2.00</b></font></span>
-                            <form method="post" target="_top">
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <table style="visibility: hidden;">
                                     <tr><td><input type="hidden" name="on0" value="Upgrade">Upgrade</td></tr><tr><td><select name="os0">
@@ -189,7 +188,8 @@ if ($CharID == NULL) {
                                             </select> </td></tr>
                                     <tr><td><input type="hidden" name="on1" value="Character ID">Character ID</td></tr><tr><td><input type="text" name="os1" maxlength="200" value="<?php echo $CharID; ?>"></td></tr>
                                 </table>
-                                <input type="hidden" name="currency_code" value="USD">
+                                <input type="hidden" name="currency_code" value="AUD">
+                                
                                 <input type="image" src="images/button-buy.gif" border="0" name="submit" alt="PayPal — The safer, easier way to pay online.">
                                 <img alt="" border="0" src="https://www.paypalobjects.com/en_AU/i/scr/pixel.gif" width="1" height="1">
                             </form>
@@ -201,13 +201,15 @@ if ($CharID == NULL) {
 
         </form><br />
     <section id="linkWindow">
-        <span>
-            <a href="game/">Play</a> | 
-            <a href="game/df-signup.php">Register</a> | 
-            <a href="game/mb-charTransfer.php">Transfer</a> | 
-            <a href="top100.php">Top100</a> | 
-            <a href="mb-bugTrack.php">Submit Bug</a> | 
-            <a href="mb-lostpassword.php">Lost Password</a><br /><br />
+                        <span>
+                            <a href="game/">Play</a> | 
+                            <a href="game/df-signup.php">Register</a> | 
+                            <a href="game/mb-charTransfer.php">Transfer</a> | 
+                            <a href="top100.php">Top100</a> | 
+                            <a href="mb-bugTrack.php">Submit Bug</a> | 
+                            <a href="df-upgrade.php">Upgrade</a> | 
+                            <a href="mb-lostpassword.php">Lost Password</a>
+                        </span>
     </section>
     <script type="text/javascript">
         document.Form1.textEmail.focus();
