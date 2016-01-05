@@ -80,6 +80,7 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
                             <a href="df-upgrade.php">Upgrade</a> | 
+                            <a href="account/">Account</a> |
                             <a href="mb-lostpassword.php">Lost Password</a>
                         </span>
     </section>

@@ -12,8 +12,8 @@ $query = $MySQLi->query("SELECT * FROM df_settings LIMIT 1");
 $fetch = $query->fetch_assoc();
 $sitename = $fetch['DFSitename'];
 
-$Email = $_POST['textEmail'];
-if (isset($Email)) {
+$Email = filter_input(INPUT_POST, "textEmail");
+if (isset($Email) && filter_var($txtNewEmail, FILTER_VALIDATE_EMAIL)) {
     $fail = 0;
     if (strlen($Email) > 1 && strpos($Email, '@') == true && strpos($Email, ".") == true) {
         $to = $Email;
@@ -21,19 +21,18 @@ if (isset($Email)) {
         
         $query = $MySQLi->query("SELECT * FROM df_users WHERE email = '{$Email}'");
         if($query->num_rows != 0){
+            while ($result = $query->fetch_assoc()) {
             $message = "
             <div>
             Dear {$sitename} Player,<br>
             <p>
                 Here are your {$sitename} game accounts.<br>
                 <p>";
-                while ($result = $query->fetch_assoc()) {
                     $lastPlayed = explode('T', $result['lastLogin']);
                     $lastPlayed = $lastPlayed;
                     $message .= "<strong>{$result['name']}</strong><br>
                     Password: {$Security->decode($result['pass'])}<br>
                     Last Activity: {$lastPlayed[0]}<br><br>";
-                }
                 $message .= "</p>
                 <p>
                     You (or someone by mistake) requested this information be sent to your email address via the Lost Password system on our web site.<br>
@@ -56,6 +55,7 @@ if (isset($Email)) {
 
             // Mail it
             mail($to, $subject, $message, $headers);
+        }
         } else { $fail = 1;}
     } else { $fail = 1; }
 }
@@ -131,6 +131,7 @@ if (isset($Email)) {
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
                             <a href="df-upgrade.php">Upgrade</a> | 
+                            <a href="account/">Account</a> |
                             <a href="mb-lostpassword.php">Lost Password</a>
                         </span>
     </section>
