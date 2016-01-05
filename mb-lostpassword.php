@@ -13,7 +13,7 @@ $fetch = $query->fetch_assoc();
 $sitename = $fetch['DFSitename'];
 
 $Email = filter_input(INPUT_POST, "textEmail");
-if (isset($Email) && filter_var($txtNewEmail, FILTER_VALIDATE_EMAIL)) {
+if (isset($Email) && filter_var($Email, FILTER_VALIDATE_EMAIL)) {
     $fail = 0;
     if (strlen($Email) > 1 && strpos($Email, '@') == true && strpos($Email, ".") == true) {
         $to = $Email;
@@ -21,18 +21,19 @@ if (isset($Email) && filter_var($txtNewEmail, FILTER_VALIDATE_EMAIL)) {
         
         $query = $MySQLi->query("SELECT * FROM df_users WHERE email = '{$Email}'");
         if($query->num_rows != 0){
-            while ($result = $query->fetch_assoc()) {
             $message = "
             <div>
             Dear {$sitename} Player,<br>
             <p>
                 Here are your {$sitename} game accounts.<br>
                 <p>";
+                while ($result = $query->fetch_assoc()) {
                     $lastPlayed = explode('T', $result['lastLogin']);
                     $lastPlayed = $lastPlayed;
                     $message .= "<strong>{$result['name']}</strong><br>
                     Password: {$Security->decode($result['pass'])}<br>
                     Last Activity: {$lastPlayed[0]}<br><br>";
+                }
                 $message .= "</p>
                 <p>
                     You (or someone by mistake) requested this information be sent to your email address via the Lost Password system on our web site.<br>
@@ -55,7 +56,6 @@ if (isset($Email) && filter_var($txtNewEmail, FILTER_VALIDATE_EMAIL)) {
 
             // Mail it
             mail($to, $subject, $message, $headers);
-        }
         } else { $fail = 1;}
     } else { $fail = 1; }
 }

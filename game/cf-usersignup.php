@@ -32,7 +32,7 @@ if (isset($_POST['strUserName'])) {
             $query = $query->fetch_assoc();
 
             $SetQuer= $MySQLi->query("SELECT * FROM df_settings LIMIT 1");
-            $fetch = $query->fetch_assoc();
+            $fetch = $SetQuer->fetch_assoc();
             $subject = "Welcome To {$fetch['DFSitename']}";
 
             $message = "<div style='text-align:center;padding:0;'>
