@@ -10,4 +10,4 @@ Redirect /af/df-chardetail.asp /df-chardetail.php
 Redirect /af/df-signup.asp /game/df-signup.php
 Redirect /af/df-lostpassword.aspx /game/mb-lostpassword.php
 Redirect /af/amulet/ /
-Redirect /af/game/ /game/
+Redirect /af/ /

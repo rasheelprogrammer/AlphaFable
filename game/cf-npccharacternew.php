@@ -27,10 +27,10 @@ if (isset($_POST['intUserID']) && isset($_POST['strToken'])) {
         $dateToday = date('Y\-m\-j\TH\:i\:s\.B');
         switch ($sign['intNPC']) {
             case 1: //Ash DragonBlade
-                $MySQLi->query("INSERT INTO df_characters(userid, name, dragon_amulet, HomeTownID, gender, born, hairid, colorhair, colorskin, colorbase, colortrim, classid, BaseClassID, PrevClassID, raceid, hairframe) VALUES('{$sign['intUserID']}', 'Ash Dragonblade', {$result[0]['upgrade']}, 373, 'M', '{$date}', '3', '7027237', '15388042', '12766664', '7570056', '42', '42', '42', 'Human', '1')");
+                $MySQLi->query("INSERT INTO df_characters(userid, name, dragon_amulet, HomeTownID, gender, born, hairid, colorhair, colorskin, colorbase, colortrim, classid, BaseClassID, PrevClassID, raceid, hairframe) VALUES('{$sign['intUserID']}', 'Ash Dragonblade', {$result[0]['upgrade']}, 373, 'M', '{$dateToday}', '3', '7027237', '15388042', '12766664', '7570056', '42', '42', '42', 'Human', '1')");
                 break;
             case 2: //Alexander
-                $MySQLi->query("INSERT INTO df_characters(userid, name, dragon_amulet, HomeTownID, gender, born, hairid, colorhair, colorskin, colorbase, colortrim, classid, BaseClassID, PrevClassID, raceid, hairframe) VALUES('{$sign['intUserID']}', 'Alexander', {$result[0]['upgrade']}, 832, 'M', '{$date}', '3', '7027237', '15388042', '12766664', '7570056', '71', '71', '71', 'Human', '1')");
+                $MySQLi->query("INSERT INTO df_characters(userid, name, dragon_amulet, HomeTownID, gender, born, hairid, colorhair, colorskin, colorbase, colortrim, classid, BaseClassID, PrevClassID, raceid, hairframe) VALUES('{$sign['intUserID']}', 'Alexander', {$result[0]['upgrade']}, 832, 'M', '{$dateToday}', '3', '7027237', '15388042', '12766664', '7570056', '71', '71', '71', 'Human', '1')");
                 break;
         }
         
