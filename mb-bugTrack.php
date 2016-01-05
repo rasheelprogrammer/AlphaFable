@@ -51,7 +51,18 @@ if (isset($_POST['How'])) {
         <link rel="shortcut icon" href="includes/favicon.ico" />
         <script src="http://cloud.nodehost.ca/js/livedata.js?code=gc7h3tg40g0b8cn3gcgv7pi66784q9"></script>
         <title><?php echo $sitename; ?> | Bug Tracker</title>
-
+        <style>
+            .downloaded {
+                width: 800px;
+                margin-left: auto;
+                margin-right: auto;
+                padding: 10px 20px;
+                border-radius: 5px 2px 2px 5px;
+                overflow-y: auto;
+                border: 1px solid #860000;
+                background-color: #860000;
+                border-radius: 5px;
+            }
         </style>
     </head>
     <body>
@@ -98,8 +109,7 @@ if (isset($_POST['How'])) {
                             <a href="game/mb-charTransfer.php">Transfer</a> | 
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
-                            <a href="df-upgrade.php">Upgrade</a> |  
-                            <a href="account/">Account</a> |
+                            <a href="df-upgrade.php">Upgrade</a> | 
                             <a href="mb-lostpassword.php">Lost Password</a>
                         </span>
         </section>
