@@ -108,14 +108,20 @@ if (isset($_GET['id'])) {
         <table>
             <tr>
                 <?php
-                if ($user['access'] >= 15) {
-                    echo ("<td><img src='images/badges/badge-bt.png' /></td>");
-                }
                 if ($user['access'] >= 25) {
-                    echo ("<td><img src='images/badges/badge-mod.png' /></td>");
+                    echo ("<td><img src='images/badges/moderator.png' /></td>");
                 }
-                if ($user['dragon_amulet'] == 1 || $char['dragon_amulet'] == 1) {
-                    echo ("<td><img src='images/badges/badge-vip.png' /></td>");
+                if ($user['access'] >= 20) {
+                    echo ("<td><img src='images/badges/alphatest.png' /></td>");
+                }
+                 if ($user['access'] >= 15) {
+                    echo ("<td><img src='images/badges/betatest.png' /></td>");
+                }
+                if ($user['upgrade'] == 1 || $char['dragon_amulet'] == 1) {
+                    echo ("<td><img src='images/badges/dragonlord.png' /></td>");
+                }
+                if ($user['access'] >= 5) {
+                    echo ("<td><img src='images/badges/guardian.png' /></td>");
                 }
                 ?>
             </tr>

@@ -35,9 +35,9 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
             </tr>
             <?php
             if ($order == "name" || $order == "classid" || $order == "dragon_amulet" || $order == "userid") {
-                $character = $MySQLi->query("SELECT * FROM df_characters ORDER BY " . $order . " ASC LIMIT 100");
+                $character = $MySQLi->query("SELECT * FROM df_characters WHERE classid != 42 && classid != 71 ORDER BY ".$order." ASC LIMIT 100");
             } else {
-                $character = $MySQLi->query("SELECT * FROM df_characters ORDER BY " . $order . " DESC LIMIT 100");
+                $character = $MySQLi->query("SELECT * FROM df_characters WHERE classid != 42 && classid != 71 ORDER BY ".$order." DESC LIMIT 100");
             }
 
             $i = 0;
