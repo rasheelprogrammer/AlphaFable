@@ -68,7 +68,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
 
             $zones = explode(";", $result[5]['Extra']);
             for ($i = 0; $i <= count($zones); $i++) {
-                if (isset($extra)) {
+                if (!empty($extra)) {
                     $extra = $extra . $zones[$i] . "\n";
                 } else {
                     $extra = $zones[$i] . "\n";

@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php #REDO
 
 /*
  * AlphaFable (DragonFable Private Server) 
@@ -9,7 +9,7 @@
 include ("../includes/classes/GameFunctions.class.php");
 include ('../includes/config.php');
 
-if (isset($_POST['strCharacterName'])) {
+if (!empty($_POST['strCharacterName'])) {
     $sign = array(
         'Char' => array(
             'Name' => $MySQLi->real_escape_string($_POST['strCharacterName']),

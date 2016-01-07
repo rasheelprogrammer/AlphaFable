@@ -1,6 +1,6 @@
 <?php
 
-#FILE NEEDS REDO
+#REDO
 /*
  * AlphaFable (DragonFable Private Server)
  * Made by MentalBlank
@@ -11,8 +11,7 @@ require("../includes/classes/Core.class.php");
 require("../includes/classes/Security.class.php");
 require('../includes/config.php');
 
-if (isset($_POST['strUserName'])) {
-    //REPLACE ISSET
+if (!empty($_POST['strUserName'])) {
     $sign = array(
         'User' => array(
             'Name' => $MySQLi->real_escape_string($_POST['strUserName']),
