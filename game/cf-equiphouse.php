@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php
 
 /*
  * AlphaFable (DragonFable Private Server)
@@ -6,10 +6,10 @@
  * File: cf-equiphouse - v0.0.1
  */
 
-include("../includes/classes/GameFunctions.class.php");
+include("../includes/classes/Core.class.php");
 include('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -37,9 +37,9 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                 $removedefault = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '0' WHERE `StartingItem` = '1' AND House = 1");
                 $setdefault = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '1' WHERE `ItemID` = '{$item_id}' AND House = 1 AND CharID = {$CharID}");
                 if ($MySQLi->affected_rows > 0) {
-                    $Game->returnCustomXMLMessage("status", "status", "SUCCESS");
+                    $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
                 } else {
-                    $Game->returnXMLError('Error!', 'There was an updating your character information.');
+                    $Core->returnXMLError('Error!', 'There was an updating your character information.');
                 }
             } else {
                 $Core->returnXMLError('Error!', 'No house found in character inventory.');
@@ -52,7 +52,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

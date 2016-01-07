@@ -1,4 +1,6 @@
-<?php #FILE NEEDS REDO
+<?php
+#Needs Redo - Grab current war data from database
+
 /*
  * AlphaFable (DragonFable Private Server)
  * Made by MentalBlank
@@ -12,20 +14,20 @@ $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
-    
+
     $charID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
-    $token  = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
-    
-    $query  = array();
+    $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
+
+    $query = array();
     $result = array();
-    
-    $dom     = new DOMDocument();
-    $XML     = $dom->appendChild($dom->createElement('warvars'));
+
+    $dom = new DOMDocument();
+    $XML = $dom->appendChild($dom->createElement('warvars'));
     $warvars = $XML->appendChild($dom->createElement('warvars'));
     $warvars->setAttribute('intTotal', "100");
     $warvars->setAttribute('intWar1', "50");
     $warvars->setAttribute('intWar2', "900");
-    $warvars->setAttribute('intGold', "7966849785?");
+    $warvars->setAttribute('intGold', "7966849785");
     $query[0] = $MySQLi->query("SELECT * FROM df_wars");
     if ($query[0]->num_rows > 0) {
         while ($result[0] = $query[0]->fetch_assoc()) {

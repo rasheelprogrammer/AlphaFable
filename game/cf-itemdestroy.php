@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php
 
 /*
  * AlphaFable (DragonFable Private Server) 
@@ -6,10 +6,10 @@
  * File: cf-itemdestroy - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -22,38 +22,42 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     $query = array();
     $result = array();
 
-    $result[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$CharID}'");
+    $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$CharID}'");
     $result[0] = $result[0]->fetch_assoc();
-    $userQuery = $MySQLi->query("SELECT * FROM df_users WHERE id = '{$result[0]['userid']}' AND LoginToken = '{$token}' LIMIT 1");
-    $user = $userQuery->fetch_assoc();
+    $query[1] = $MySQLi->query("SELECT * FROM df_users WHERE id = '{$result[0]['userid']}' AND LoginToken = '{$token}' LIMIT 1");
+    $result[1] = $result[1]->fetch_assoc();
 
-    if($userQuery->num_rows > 0 && $result[0]->num_rows > 0) {
-        $item_result = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = '{$item_id}' LIMIT 1");
-        $item = $item_result->fetch_assoc();
+    if ($result[1]->num_rows > 0) {
+        if ($result[0]->num_rows > 0) {
+            $query[2] = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = '{$item_id}' LIMIT 1");
+            $result[2] = $query[2]->fetch_assoc();
 
-        $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
-        if ($query->num_rows == 1) {
-            $query_fetched = $query->fetch_assoc();
-            if ($query_fetched['count'] > 1) {
-                $newcount = $query_fetched['count'] - 1;
-                $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$query_fetched['id']}'");
+            $query[3] = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+            if ($query[3]->num_rows == 1) {
+                $result[3] = $query[3]->fetch_assoc();
+                if ($result[3]['count'] > 1) {
+                    $newcount = $result[3]['count'] - 1;
+                    $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$result[3]['id']}'");
+                } else {
+                    $MySQLi->query("DELETE FROM `df_equipment` WHERE `CharID` = {$CharID} AND `ItemID` = {$item_id} AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+                }
+                if ($MySQLi->affected_rows > 0) {
+                    $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
+                } else {
+                    $Core->returnXMLError('Error!', 'There was an updating your character information.');
+                }
+                echo $dom->saveXML();
             } else {
-                $MySQLi->query("DELETE FROM `df_equipment` WHERE `CharID` = {$CharID} AND `ItemID` = {$item_id} AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+                $Core->returnXMLError('Error!', 'Character information was unable to be requested.');
             }
-            if ($MySQLi->affected_rows > 0) {
-                $Game->returnCustomXMLMessage("status", "status", "SUCCESS");
-            } else {
-                $Game->returnXMLError('Error!', 'There was an updating your character information.');
-            }
-            echo $dom->saveXML();
         } else {
-            $Game->returnXMLError('Error!', 'Character information was unable to be requested.');
+            $Core->returnXMLError('Error!', 'Character information was unable to be requested.');
         }
     } else {
-        $Game->returnXMLError('Error!', 'Character information was unable to be requested.');
+        $Core->returnXMLError('Error!', 'User information was unable to be requested.');
     }
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

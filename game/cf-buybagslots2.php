@@ -3,13 +3,13 @@
 /*
  * AlphaFable (DragonFable Private Server)
  * Made by MentalBlank
- * File: cf-buybagslots - v0.0.2
+ * File: cf-buybagslots - v0.0.3
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -49,11 +49,9 @@ if (!empty($HTTP_RAW_POST_DATA)) {
             $newslots = $result[0]['MaxBagSlots'] + $NumSlots;
             $addslots = $MySQLi->query("UPDATE df_characters SET MaxBagSlots='{$newslots}' WHERE ID='{$CharID}'");
             if ($MySQLi->affected_rows > 0) {
-                $Game->returnCustomXMLMessage("status", "status", "SUCCESS");
+                $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
             } else {
-                $reason = "Error!";
-                $message = "There was an issue updating your character information.";
-                $Game->returnXMLError("{$reason}", "{$message}");
+                $Core->returnXMLError("Error!", "There was an issue updating your character information.");
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');
@@ -62,7 +60,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         $Core->returnXMLError('Error!', 'Character not found in the database.');
     }
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

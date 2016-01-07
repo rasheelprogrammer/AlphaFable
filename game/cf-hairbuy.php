@@ -6,10 +6,10 @@
  * File: cf-hairbuy - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -49,11 +49,9 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                 $setColorHair = $MySQLi->query("UPDATE df_characters SET colorhair='{$ColorHair}' WHERE ID='{$CharID}'");
                 $setColorSkin = $MySQLi->query("UPDATE df_characters SET colorskin='{$ColorSkin}' WHERE ID='{$CharID}'");
                 $takegold = $MySQLi->query("UPDATE df_characters SET gold='{$newgold}' WHERE ID='{$CharID}'");
-                $Game->returnCustomXMLMessage("status", "status", "SUCCESS");
+                $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
             } else {
-                $reason = "Error!";
-                $message = "Insufficient Funds.";
-                $Game->returnXMLError("{$reason}", "{$message}");
+                $Core->returnXMLError("Error!", "Insufficient Funds.");
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');
@@ -62,7 +60,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         $Core->returnXMLError('Error!', 'Character not found in the database.');
     }
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

@@ -1,4 +1,7 @@
-<?php #FILE NEEDS REDO
+<?php
+
+#REDO
+#Needs Redo - Save current war data to database
 
 /*
  * AlphaFable (DragonFable Private Server)
@@ -116,9 +119,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                 $items->setAttribute('bitDestroyable', 1);
             }
         }
-        $status = $dom->appendChild($dom->createElement('status'));
-        $status->setAttribute('status', "SUCCESS");
-        echo $dom->saveXML();
+        $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
     } else {
         $Game->returnXMLError('Error!', "There was a problem loading the Quest");
     }

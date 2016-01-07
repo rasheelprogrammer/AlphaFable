@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php #REDO
 
 /*
  * AlphaFable (DragonFable Private Server) 

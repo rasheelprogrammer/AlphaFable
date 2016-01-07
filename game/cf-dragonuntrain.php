@@ -8,7 +8,7 @@
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -36,19 +36,19 @@ if (!empty($HTTP_RAW_POST_DATA)) {
             $MySQLi->query("UPDATE `df_characters` SET `gold` = '{$gold_left}' WHERE `id` = '{$charID}';");
             $MySQLi->query("UPDATE `df_dragons` SET `intTotalStats` = '{$newstats}', `intHeal` = '0', `intMagic` = '0', `intMelee` = '0', `intBuff` = '0', `intDebuff` = '0' WHERE `id` = 1");
             if ($MySQLi->affected_rows > 0) {
-                $Game->returnCustomXMLMessage("status", "status", "SUCCESS");
+                $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
             } else {
-                $Game->returnXMLError('Error!', 'There was an updating your character information.');
+                $Core->returnXMLError('Error!', 'There was an updating your character information.');
             }
             echo $dom->saveXML();
         } else {
-            $Game->returnXMLError('Error!', 'Character information was unable to be requested.');
+            $Core->returnXMLError('Error!', 'Character information was unable to be requested.');
         }
     } else {
-        $Game->returnXMLError('Error!', 'User information was unable to be requested.');
+        $Core->returnXMLError('Error!', 'User information was unable to be requested.');
     }
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 

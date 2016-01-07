@@ -6,10 +6,10 @@
  * File: cf-itembuy - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -60,14 +60,12 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                     $additem = $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`) VALUES ('', '{$CharID}', '{$item_id}')");
                 }
                 if ($MySQLi->affected_rows > 0) {
-                    $Game->returnCustomXMLMessage("status", "status", "SUCCESS");
+                    $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
                 } else {
-                    $Game->returnXMLError('Error!', 'There was an updating your character information.');
+                    $Core->returnXMLError('Error!', 'There was an updating your character information.');
                 }
             } else {
-                $reason = "Error!";
-                $message = "Insufficient Funds";
-                $Game->returnXMLError("{$reason}", "{$message}");
+                $Core->returnXMLError("Error!", "Insufficient Funds.");
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');
@@ -77,7 +75,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

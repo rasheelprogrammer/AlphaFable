@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php
 
 /*
  * AlphaFable (DragonFable Private Server) 
@@ -6,10 +6,10 @@
  * File: cf-hairshopload - v0.0.1
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (!empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -21,18 +21,18 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     $query = array();
     $result = array();
 
-    $vendor_result = $MySQLi->query("SELECT * FROM df_hair_vendors WHERE ShopID = '{$shop_id}'");
-    $vendor = $vendor_result->fetch_assoc();
+    $query[0] = $MySQLi->query("SELECT * FROM df_hair_vendors WHERE ShopID = '{$shop_id}'");
+    $vendor = $query[0]->fetch_assoc();
 
-    if ($vender_result->num_rows == 0) {
+    if ($query[0]->num_rows == 0) {
         $dom = new DOMDocument();
         $XML = $dom->appendChild($dom->createElement('HairShop'));
         $character = $XML->appendChild($dom->createElement('HairShop'));
-        $character->setAttribute('strHairShopName', $vendor['ShopName']);
-        $character->setAttribute('strFileName', $vendor['ShopName']);
+        $character->setAttribute('strHairShopName', $result[0]['ShopName']);
+        $character->setAttribute('strFileName', $result[0]['ShopName']);
         $character->setAttribute('HairShopID', $shop_id);
-        if ($vendor['ItemIDs'] != NULL && $vendor['ItemIDs'] != "None" && $vendor['ItemIDs'] != '0') {
-            $replaced = str_replace(",", " AND Gender = '{$gender}' OR HairID = ", $vendor['ItemIDs']);
+        if ($result[0]['ItemIDs'] != NULL && $result[0]['ItemIDs'] != "None" && $result[0]['ItemIDs'] != '0') {
+            $replaced = str_replace(",", " AND Gender = '{$gender}' OR HairID = ", $result[0]['ItemIDs']);
             $items = $MySQLi->query("SELECT * FROM df_hairs WHERE Gender = '{$gender}' AND HairID = {$replaced}");
             if ($items->num_rows >= 1) {
                 while ($item = $items->fetch_assoc()) {
@@ -49,11 +49,11 @@ if (!empty($HTTP_RAW_POST_DATA)) {
             }
         }
     } else {
-        $Game->returnXMLError('Invalid Data!', 'Message');
+        $Core->returnXMLError('Invalid Data!', 'Message');
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

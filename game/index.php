@@ -24,7 +24,7 @@ if ($size == "huge") {
 $query = $MySQLi->query("SELECT * FROM df_settings LIMIT 1");
 $fetch = $query->fetch_assoc();
 $loaderSWF = $fetch['loaderSWF'];
-$gameSWF = $fetch['gameSWF'];
+$CoreSWF = $fetch['gameSWF'];
 $sitename = $fetch['DFSitename'];
 $MySQLi->close();
 ?>
@@ -60,13 +60,13 @@ $MySQLi->close();
                         <param name="allowFullScreen" value="true" />
 
                         <param name="flashvars" value="strFileName=<?php
-                        echo $gameSWF;
+                        echo $CoreSWF;
                         ?>" />
                         <param name="bgcolor" value="#530000" />
                         <embed src="gamefiles/<?php
                         echo $loaderSWF;
                         ?>" FLASHVARS="strFileName=<?php
-                               echo $gameSWF;
+                               echo $CoreSWF;
                                ?>" name="FFable" bgcolor="#530000" menu="false"  allowFullScreen="true" width="<?php
                                echo $width;
                                ?>" height="<?php

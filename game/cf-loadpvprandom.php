@@ -293,10 +293,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                 }
             }
         } else {
-            $dom = new DOMDocument();
-            $XML = $dom->appendChild($dom->createElement('character'));
-            $character = $XML->appendChild($dom->createElement('character'));
-            $character->setAttribute('CharID', NULL);
+            $Core->returnCustomXMLMessage("character", "CharID", NULL);
         }
     } else {
         $Core->returnXMLError('Error!', 'There was an error communicating with the database.');
