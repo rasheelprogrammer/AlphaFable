@@ -11,9 +11,9 @@ require ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
-    if (!empty($xml->intInterfaceID)) {
+    if (isset($xml->intInterfaceID)) {
         $interfaceID = $xml->intInterfaceID;
 
         $query = array();

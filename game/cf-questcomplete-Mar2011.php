@@ -6,12 +6,12 @@
  * File: cf-questcomplete - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -33,7 +33,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         $quest = $quest_result->fetch_assoc();
 
         $gold_total = $char['gold'] + $gold;
-        $exptolevel = $Game->calcEXPtoLevel($char['level'], $exp_total);
+        $exptolevel = $Core->calcEXPtoLevel($char['level'], $exp_total);
         $levelCap = $caps[0];
 
         if ($gold != 0) {
@@ -120,10 +120,10 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         $status->setAttribute('status', "SUCCESS");
         echo $dom->saveXML();
     } else {
-        $Game->returnXMLError('Error!', "There was a problem loading the Quest");
+        $Core->returnXMLError('Error!', "There was a problem loading the Quest");
     }
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

@@ -1,4 +1,4 @@
-<?php #REDO
+<?php #FILE NEEDS REDO
 
 /*
  * AlphaFable (DragonFable Private Server) 
@@ -6,12 +6,12 @@
  * File: cf-expsave - v0.0.4
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -32,7 +32,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     if ($userQuery->num_rows > 0 && $charQuery->num_rows > 0) {
         $gold_total = $char['gold'] + $gold;
         $exp_total = $char['exp'] + $exp;
-        $exptolevel = $Game->calcEXPtoLevel($char['level'], $exp_total);
+        $exptolevel = $Core->calcEXPtoLevel($char['level'], $exp_total);
 
         $levelCap = $caps[0];
         if ($char['level'] >= $levelCap) {
@@ -49,7 +49,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         $questreward = $XML->appendChild($dom->createElement('questreward'));
         if ($exp_total >= $exptolevel) {
             if ($intLevel < $levelCap) {
-                $exptolevel = $Game->calcEXPtoLevel($intLevel, $exp_total);
+                $exptolevel = $Core->calcEXPtoLevel($intLevel, $exp_total);
                 $questreward->setAttribute("intEarnedExp", 0);
                 $questreward->setAttribute("intEarnedGold", $gold);
                 $questreward->setAttribute("intEarnedGems", 0);
@@ -105,11 +105,11 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         $status = $XML->appendChild($dom->createElement('status'));
         $status->setAttribute("status", "SUCCESS");
     } else {
-        $Game->returnXMLError('Error!', 'Character information was unable to be requested.');
+        $Core->returnXMLError('Error!', 'Character information was unable to be requested.');
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

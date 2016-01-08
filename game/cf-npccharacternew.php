@@ -9,7 +9,7 @@
 include("../includes/classes/Core.class.php");
 include('../includes/config.php');
 
-if (!empty($_POST['intUserID']) && !empty($_POST['strToken'])) {
+if (isset($_POST['intUserID']) && isset($_POST['strToken'])) {
     $sign = array(
         'intUserID' => $MySQLi->real_escape_string($_POST['intUserID']),
         'strUsername' => $MySQLi->real_escape_string($_POST['strUsername']),

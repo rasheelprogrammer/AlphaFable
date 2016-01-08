@@ -160,6 +160,37 @@ class Core {
         return $result;
     }
 
+    function elementCheck($value) {
+        switch ($value) {
+            case 5:
+                $result = "Fire";
+                break;
+            case 6:
+                $result = "Water";
+                break;
+            case 7:
+                $result = "Ice";
+                break;
+            case 8:
+                $result = "Wind";
+                break;
+            case 9:
+                $result = "Energy";
+                break;
+            case 10:
+                $result = "Light";
+                break;
+            case 11:
+                $result = "Darkness";
+                break;
+            default:
+            case 18:
+                $result = "Nature";
+                break;
+        }
+        return $result;
+    }
+
 }
 
 ?>

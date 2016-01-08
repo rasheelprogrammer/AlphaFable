@@ -13,10 +13,10 @@ $Core->makeXML();
 
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
 
-    if (!empty($xml->intCharID) && !empty($xml->strToken)) {
+    if (isset($xml->intCharID) && isset($xml->strToken)) {
         $charID = $xml->intCharID;
         $token = $xml->strToken;
 
@@ -75,7 +75,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
 
                 $zones = explode(";", $result[5]['Extra']);
                 for ($i = 0; $i <= count($zones); $i++) {
-                    if (!empty($extra)) {
+                    if (isset($extra)) {
                         $extra = $extra . $zones[$i] . "\n";
                     } else {
                         $extra = $zones[$i] . "\n";

@@ -1,4 +1,4 @@
-<?php #REDO
+<?php #FILE NEEDS REDO
 
 /*
  * AlphaFable (DragonFable Private Server) 
@@ -6,10 +6,10 @@
  * File: cf-characternew - v0.0.4
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-if (!empty($_POST['strCharacterName'])) {
+if (isset($_POST['strCharacterName'])) {
     $sign = array(
         'Char' => array(
             'Name' => $MySQLi->real_escape_string($_POST['strCharacterName']),
@@ -44,15 +44,15 @@ if (!empty($_POST['strCharacterName'])) {
         $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`, `StartingItem`, `count`, `Level`, `Exp`, `House`, `HouseItem`, `intEquipSlotPos`) VALUES (NULL, '{$char['id']}', '3613', '0', '1', '1', '0', '0', '0', '0');");
 
         if ($MySQLi->affected_rows > 0) {
-            $Game->sendVar('code', 0);
+            $Core->sendVar('code', 0);
         } else {
-            $Game->sendErrorVar('Unknown Error!', "There has been an error in one or more MySQL Queries; to resolve this issue, please contact the AlphaFable team and include following error.");
+            $Core->sendErrorVar('Unknown Error!', "There has been an error in one or more MySQL Queries; to resolve this issue, please contact the AlphaFable team and include following error.");
         }
     } else {
-        $Game->sendErrorVar('Unknown Error!', "There has been an error in one or more MySQL Queries; to resolve this issue, please contact the AlphaFable team and include following error.");
+        $Core->sendErrorVar('Unknown Error!', "There has been an error in one or more MySQL Queries; to resolve this issue, please contact the AlphaFable team and include following error.");
     }
 } else {
-    $Game->sendErrorVar('Invalid Data!', 'none');
+    $Core->sendErrorVar('Invalid Data!', 'none');
 }
 $MySQLi->close();
 ?>

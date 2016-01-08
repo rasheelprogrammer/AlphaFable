@@ -10,9 +10,9 @@
 
     $Core->makeXML();
     $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-    if(!empty($HTTP_RAW_POST_DATA)){
+    if(isset($HTTP_RAW_POST_DATA)){
         $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
-		if(!empty($xml->intCharID) && !empty($xml->strToken) && !empty($xml->intGold)){
+		if(isset($xml->intCharID) && isset($xml->strToken) && isset($xml->intGold)){
 			$charID = $xml->intCharID;
 			$token = $xml->strToken;
 			$gold = $xml->intGold;

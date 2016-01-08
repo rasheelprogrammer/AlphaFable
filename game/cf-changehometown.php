@@ -1,16 +1,17 @@
-<?php #FILE NEEDS REDO
+<?php
+
 /*
  * AlphaFable (DragonFable Private Server)
  * Made by MentalBlank
  * File: cf-changehometown - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -32,23 +33,21 @@ if (!empty($HTTP_RAW_POST_DATA)) {
 
     if ($query[1]->num_rows > 0) {
         if ($query[0]->num_rows > 0) {
-            $query = $MySQLi->query("SELECT * FROM `df_quests` WHERE QuestID = '{$TownID}' LIMIT 1");
-            $db_town = $query->fetch_assoc();
-            $addexp = $MySQLi->query("UPDATE df_characters SET HomeTownID='{$TownID}' WHERE ID='{$CharID}'");
+            $query[2] = $MySQLi->query("SELECT * FROM `df_quests` WHERE QuestID = '{$TownID}' LIMIT 1");
+            $result[2] = $query[2]->fetch_assoc();
+            $MySQLi->query("UPDATE df_characters SET HomeTownID='{$TownID}' WHERE ID='{$CharID}'");
             if ($MySQLi->affected_rows > 0) {
                 $dom = new DOMDocument();
                 $XML = $dom->appendChild($dom->createElement('newTown'));
                 $character = $XML->appendChild($dom->createElement('newTown'));
                 $character->setAttribute('intTownID', $TownID);
-                $character->setAttribute('strQuestFileName', $db_town['FileName']);
-                $character->setAttribute('strQuestXFileName', $db_town['XFileName']);
-                $character->setAttribute('strExtra', $db_town['Extra']);
+                $character->setAttribute('strQuestFileName', $result[2]['FileName']);
+                $character->setAttribute('strQuestXFileName', $result[2]['XFileName']);
+                $character->setAttribute('strExtra', $result[2]['Extra']);
                 $status = $XML->appendChild($dom->createElement('status'));
                 $status->setAttribute("status", "SUCCESS");
             } else {
-                $reason = "Error!";
-                $message = "There was an issue updating your character information.";
-                $Game->returnXMLError("{$reason}", "{$message}");
+                $Core->returnXMLError("Error!", "There was an issue updating your character information.");
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');
@@ -58,7 +57,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

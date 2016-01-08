@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php
 
 /*
  * AlphaFable (DragonFable Private Server)
@@ -6,71 +6,71 @@
  * File: cf-buyHouse - v0.0.1
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
     $charID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
 
-    $char_result = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
-    $char = $char_result->fetch_assoc();
-    $user_result = $MySQLi->query("SELECT * FROM df_users WHERE id = '{$char['userid']}' AND LoginToken = '{$token}'");
+    $query = array();
+    $result = array();
 
-    if ($user_result->num_rows > 0 && $char_result->num_rows > 0) {
-        $item_id = $doc->getElementsByTagName('intHouseID')->item(0)->nodeValue;
+    $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
+    $result[0] = $query[0]->fetch_assoc();
+    $query[1] = $MySQLi->query("SELECT * FROM df_users WHERE id = '{$result[0]['userid']}' AND LoginToken = '{$token}'");
+    $result[1] = $query[1]->num_rows;
 
-        $item_result = $MySQLi->query("SELECT * FROM df_houses WHERE HouseID = '{$item_id}'");
-        $item = $item_result->fetch_assoc();
+    if ($query[1]->num_rows > 0) {
+        if ($query[0]->num_rows > 0) {
+            $ItemID = $doc->getElementsByTagName('intHouseID')->item(0)->nodeValue;
 
-        $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$item_id}' AND CharID = '{$charID}' AND House = 1 AND HouseItem = 0 LIMIT 1");
-        $query_rows = $query->num_rows;
-        $query_fetched = $query->fetch_assoc();
+            $query[2] = $MySQLi->query("SELECT * FROM df_houses WHERE HouseID = '{$ItemID}'");
+            $result[2] = $query[2]->fetch_assoc();
 
-        if ($item['intCurrency'] == 2) {
-            $newgold = $char['gold'] - $item['intCost'];
-            if ($newgold < 0) {
-                $error = 1;
-            } else {
-                $takegold = $MySQLi->query("UPDATE df_characters SET gold='{$newgold}' WHERE ID='{$charID}'");
+            if ($result[2]['intCurrency'] == 2) {
+                $newgold = $char['gold'] - $result[2]['intCost'];
+                if ($newgold < 0) {
+                    $error = 1;
+                } else {
+                    $MySQLi->query("UPDATE df_characters SET gold='{$newgold}' WHERE ID='{$charID}'");
+                }
+            } else if ($result[2]['intCurrency'] == 1) {
+                $newgold = $char['Coins'] - $result[2]['intCost'];
+                if ($newgold < 0) {
+                    $error = 1;
+                } else {
+                    $MySQLi->query("UPDATE df_characters SET Coins='{$newgold}' WHERE ID='{$charID}'");
+                }
             }
-        } else if ($item['intCurrency'] == 1) {
-            $newgold = $char['Coins'] - $item['intCost'];
-            if ($newgold < 0) {
-                $error = 1;
+            if ($error != 1 && $MySQLi->affected_rows > 0) {
+                $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '0' WHERE `StartingItem` = '1' AND House = 1");
+                $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`, `StartingItem`, `count`, `Level`, `Exp`, `House`, `HouseItem`, `intEquipSlotPos`) VALUES (NULL, '{$charID}', '{$ItemID}', '1', '1', '1', '0', '1', '0', '')");
+                if ($MySQLi->affected_rows > 0) {
+                    $dom = new DOMDocument();
+                    $XML = $dom->appendChild($dom->createElement('buyMech'));
+                    $character = $XML->appendChild($dom->createElement('buyMech'));
+                    $character->setAttribute('CharHouseID', $ItemID);
+                } else {
+                    $Core->returnXMLError('Error!', 'There was an updating your character information.');
+                }
             } else {
-                $takegold = $MySQLi->query("UPDATE df_characters SET Coins='{$newgold}' WHERE ID='{$charID}'");
-            }
-        }
-        if ($error != 1) {
-            $removedefault = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '0' WHERE `StartingItem` = '1' AND House = 1");
-            $additem = $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`, `StartingItem`, `count`, `Level`, `Exp`, `House`, `HouseItem`, `intEquipSlotPos`) VALUES (NULL, '{$charID}', '{$item_id}', '1', '1', '1', '0', '1', '0', '')");
-            if ($MySQLi->affected_rows > 0) {
-                $dom = new DOMDocument();
-                $XML = $dom->appendChild($dom->createElement('buyMech'));
-                $character = $XML->appendChild($dom->createElement('buyMech'));
-                $character->setAttribute('CharHouseID', $item_id);
-            } else {
-                $Game->returnXMLError('Error!', 'There was an updating your character information.');
+                $Core->returnXMLError("Error!", "Insufficient Funds.");
             }
         } else {
-            $reason = "Error!";
-            $message = "Insufficient Funds";
-            $Game->returnXMLError("{$reason}", "{$message}");
+            $Core->returnXMLError('Error!', 'User not found in the database.');
         }
     } else {
-        $reason = "Error!";
-        $message = "There was an issue with your account... Please Login and try again";
-        $Game->returnXMLError("{$reason}", "{$message}");
+        $Core->returnXMLError('Error!', 'Character not found in the database.');
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

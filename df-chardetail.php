@@ -37,13 +37,13 @@ if (isset($_GET['id'])) {
                 }
             }
         }
-        if (!isset($wepFile)) {
+        if (empty($wepFile)) {
             $wepFile = "none";
         }
-        if (!isset($backFile)) {
+        if (empty($backFile)) {
             $backFile = "none";
         }
-        if (!isset($helmFile)) {
+        if (empty($helmFile)) {
             $helmFile = "none";
         }
         if ($char['HasDragon'] == 1) {

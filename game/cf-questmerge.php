@@ -6,12 +6,12 @@
  * File: cf-questmerge - v0.0.1
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -29,7 +29,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
 
     if ($userQuery->num_rows > 0 && $charQuery->num_rows > 0 && $mergeQuery->num_rows > 0) {
         $index = $merge['index'];
-        $newval = $Game->valueCheck($merge['value']);
+        $newval = $Core->valueCheck($merge['value']);
         if ($merge['string'] == 0) {
             $quests = $char['strQuests'];
             $result = array();
@@ -78,7 +78,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
 
             $savestring = $MySQLi->query("UPDATE df_characters SET strArmor='{$newqstr}' WHERE ID='{$charID}'");
         } else {
-            $Game->returnXMLError('Error!', 'Invalid Data Given.');
+            $Core->returnXMLError('Error!', 'Invalid Data Given.');
         }
         if ($query->num_rows >= 1) {
             $newcount = $query_fetched['count'] - $merge['itemQty'];
@@ -98,14 +98,14 @@ if (!empty($HTTP_RAW_POST_DATA)) {
             $quest->setAttribute("CharItemID", $merge['itemID']);
             $quest->setAttribute("intQty", $merge['itemQty']);
         } else {
-            $Game->returnXMLError('Error!', 'There was an updating your character information.' . $mergeID);
+            $Core->returnXMLError('Error!', 'There was an updating your character information.' . $mergeID);
         }
     } else {
-        $Game->returnXMLError('Error!', 'Character information was unable to be requested.' . $mergeID);
+        $Core->returnXMLError('Error!', 'Character information was unable to be requested.' . $mergeID);
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

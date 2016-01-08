@@ -6,12 +6,12 @@
  * File: cf-buyhouseitem - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -59,21 +59,21 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                 $character = $XML->appendChild($dom->createElement('buyMech'));
                 $character->setAttribute('CharHouseItemID', $item_id);
             } else {
-                $Game->returnXMLError('Error!', 'There was an updating your character information.');
+                $Core->returnXMLError('Error!', 'There was an updating your character information.');
             }
         } else {
             $reason = "Error!";
             $message = "Insufficient Funds";
-            $Game->returnXMLError("{$reason}", "{$message}");
+            $Core->returnXMLError("{$reason}", "{$message}");
         }
     } else {
         $reason = "Error!";
         $message = "There was an issue with your account... Please Login and try again";
-        $Game->returnXMLError("{$reason}", "{$message}");
+        $Core->returnXMLError("{$reason}", "{$message}");
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

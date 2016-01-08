@@ -31,7 +31,7 @@ if ($_GET['func'] < 2) {
     session_unset();
     header("Location: df-upgrade.php");
 } else {
-    if (!isset($_SESSION["afname"]) || !isset($_SESSION["afname"])) {
+    if (empty($_SESSION["afname"]) || empty($_SESSION["afname"])) {
             header("Location: /df-upgrade.php");
     }
 }

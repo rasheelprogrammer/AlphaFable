@@ -1,4 +1,4 @@
-<?php #FILE NEEDS REDO
+<?php
 
 /*
  * AlphaFable (DragonFable Private Server)
@@ -6,12 +6,12 @@
  * File: cf-changearmor - v0.0.2
  */
 
-include ("../includes/classes/GameFunctions.class.php");
+include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
-$Game->makeXML();
+$Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -33,15 +33,14 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$CharID}'");
     $result[0] = $query[0]->fetch_assoc();
     $query[1] = $MySQLi->query("SELECT * FROM df_users WHERE id = '{$result[0]['userid']}' AND LoginToken = '{$token}'");
-    $user = $query[1]->num_rows;
 
     if ($query[1]->num_rows > 0) {
         if ($query[0]->num_rows > 0) {
             $cost = 100;
             $gold_left = $result[0]['gold'] - $cost;
             if ($gold_left >= 0) {
-                $ChangeColors = $MySQLi->query("UPDATE df_characters SET colorbase = '{$ColorBase}', colortrim = '{$ColorTrim}' WHERE id = '{$CharID}'");
-                $ChangeGold = $MySQLi->query("UPDATE df_characters SET gold='{$gold_left}' WHERE ID='{$CharID}'");
+                $MySQLi->query("UPDATE df_characters SET colorbase = '{$ColorBase}', colortrim = '{$ColorTrim}' WHERE id = '{$CharID}'");
+                $MySQLi->query("UPDATE df_characters SET gold='{$gold_left}' WHERE ID='{$CharID}'");
                 if ($MySQLi->affected_rows > 0) {
                     $dom = new DOMDocument();
                     $XML = $dom->appendChild($dom->createElement('character'));
@@ -51,14 +50,10 @@ if (!empty($HTTP_RAW_POST_DATA)) {
                     $status = $XML->appendChild($dom->createElement('status'));
                     $status->setAttribute("status", "SUCCESS");
                 } else {
-                    $reason = "Error!";
-                    $message = "There was an issue updating your character information.";
-                    $Game->returnXMLError("{$reason}", "{$message}");
+                    $Core->returnXMLError("Error!", "There was an issue updating your character information.");
                 }
             } else {
-                $reason = "Error!";
-                $message = "Insufficient funds.";
-                $Game->returnXMLError("{$reason}", "{$message}");
+                $Core->returnXMLError("Error!", "Insufficient Funds.");
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');
@@ -68,7 +63,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
     }
     echo $dom->saveXML();
 } else {
-    $Game->returnXMLError('Invalid Data!', 'Message');
+    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

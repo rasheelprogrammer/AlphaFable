@@ -11,9 +11,9 @@ require('../includes/config.php');
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
-if (!empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
-    if (!empty($xml->intTownID)) {
+    if (isset($xml->intTownID)) {
         $TownID = $xml->intTownID;
         
         $query  = array();
@@ -24,7 +24,7 @@ if (!empty($HTTP_RAW_POST_DATA)) {
         
         $zones = explode(";", $result[0]['Extra']);
         for ($i = 0; $i <= count($zones); $i++) {
-            if (!empty($extra)) {
+            if (isset($extra)) {
                 $extra = $extra . $zones[$i] . "\n";
             } else {
                 $extra = $zones[$i] . "\n";
