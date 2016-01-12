@@ -6,8 +6,6 @@ RewriteRule ^(.*)\.asp$ $1.php
 RewriteRule ^(.*)\.aspx$ $1.php
 
 # Redirect AF Client
-Redirect /af/df-chardetail.asp /df-chardetail.php
-Redirect /af/df-signup.asp /game/df-signup.php
-Redirect /af/df-lostpassword.aspx /game/mb-lostpassword.php
 Redirect /af/amulet/ /
 Redirect /af/ /
+Redirect /game/df-signup.php /df-signup.php

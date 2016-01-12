@@ -1,2 +1,6 @@
 *.swf
 *.swf_v=2
+/account/*
+/game/todo/*
+/nbproject/*
+mb-charTransfer.php

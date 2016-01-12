@@ -7,9 +7,9 @@
  * File: cf-usersignup.php - v0.0.1
  */
 
-require("../includes/classes/Core.class.php");
-require("../includes/classes/Security.class.php");
-require('../includes/config.php');
+require("includes/classes/Core.class.php");
+require("includes/classes/Security.class.php");
+require('includes/config.php');
 
 if (isset($_POST['strUserName'])) {
     $sign = array(
