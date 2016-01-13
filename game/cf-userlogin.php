@@ -15,7 +15,7 @@ $Core->makeXML();
 
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
-if (isset($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
 
     if (isset($xml->strUsername) && isset($xml->strPassword)) {

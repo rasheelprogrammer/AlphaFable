@@ -11,12 +11,13 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
     $CharID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
+    $item_id = $doc->getElementsByTagName('intItemID')->item(0)->nodeValue;
 
     $query = array();
     $result = array();
@@ -27,45 +28,55 @@ if (isset($HTTP_RAW_POST_DATA)) {
 
     if ($query[1]->num_rows > 0) {
         if ($query[0]->num_rows > 0) {
-            $intItemID = $doc->getElementsByTagName('intItemID');
-            $item_id = $intItemID->item(0)->nodeValue;
-
-            $item_result = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = '{$item_id}'");
-            $item = $item_result->fetch_assoc();
-
-            $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$item_id}' AND House = 0 AND HouseItem = 0");
-            $query_rows = $query->num_rows;
-            $query_fetched = $query->fetch_assoc();
-
-            if ($item['Currency'] == 2) {
-                $newgold = $result[0]['gold'] - $item['Cost'];
-                if ($newgold < 0) {
-                    $error = 1;
-                } else {
-                    $takegold = $MySQLi->query("UPDATE df_characters SET gold='{$newgold}' WHERE ID='{$CharID}'");
-                }
-            } else if ($item['Currency'] == 1) {
-                $newgold = $result[0]['Coins'] - $item['Cost'];
-                if ($newgold < 0) {
-                    $error = 1;
-                } else {
-                    $takegold = $MySQLi->query("UPDATE df_characters SET Coins='{$newgold}' WHERE ID='{$CharID}'");
-                }
-            }
-            if ($error != 1) {
-                if ($query_fetched['count'] > 0 && $item['MaxStackSize'] > 0) {
-                    $newcount = $query_fetched['count'] + 1;
-                    $query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$query_fetched['id']}'");
-                } else {
-                    $additem = $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`) VALUES ('', '{$CharID}', '{$item_id}')");
-                }
-                if ($MySQLi->affected_rows > 0) {
-                    $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
-                } else {
-                    $Core->returnXMLError('Error!', 'There was an updating your character information.');
-                }
+            $query[2] = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = '{$item_id}'");
+            $result[2] = $query[2]->fetch_assoc();
+			if ($query[2]->num_rows > 0) {
+				switch($result[2]['Currency']){
+					case 1:
+						$currency = "coins";
+						break;
+					case 2:
+					default:
+						$currency = "gold";
+						break;
+					break;
+				}
+				$newVAL = $result[0][$currency] - $result[2]['Cost'];
+				if($newVAL < 0 ){
+					$query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$item_id}' AND House = 0 AND HouseItem = 0");
+					$query_fetched = $query->fetch_assoc();
+					
+					$MySQLi->query("UPDATE df_characters SET {$currency}='{$newgold}' WHERE ID='{$CharID}'");
+					if ($query->num_rows > 0) {
+						if ($query_fetched['count'] > 0 && $result[2]['MaxStackSize'] > 0) {
+							$newcount = $query_fetched['count'] + 1;
+							$query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$query_fetched['id']}'");
+							if ($MySQLi->affected_rows > 0) {
+								$Core->returnCustomXMLMessage("status", "status", "SUCCESS");
+							} else {
+								$Core->returnXMLError('Error!', 'There was updating your item stack count.');
+							}
+						} else {
+							$additem = $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`) VALUES ('', '{$CharID}', '{$item_id}')");
+							if ($MySQLi->affected_rows > 0) {
+								$Core->returnCustomXMLMessage("status", "status", "SUCCESS");
+							} else {
+								$Core->returnXMLError('Error!', 'There was adding the item to your inventory.');
+							}
+						}
+					} else {
+						$additem = $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`) VALUES ('', '{$CharID}', '{$item_id}')");
+						if ($MySQLi->affected_rows > 0) {
+							$Core->returnCustomXMLMessage("status", "status", "SUCCESS");
+						} else {
+							$Core->returnXMLError('Error!', 'There was adding the item to your inventory2.');
+						}
+					}
+				} else {
+					$Core->returnXMLError("Error!", "Insufficient Funds.");
+				}
             } else {
-                $Core->returnXMLError("Error!", "Insufficient Funds.");
+                $Core->returnXMLError("Error!", "Item not found in database.");
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');

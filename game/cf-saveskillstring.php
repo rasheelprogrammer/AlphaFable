@@ -9,7 +9,7 @@
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 
-if (empty($HTTP_RAW_POST_DATA)) {
+if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
     $HTTP_RAW_POST_DATA = file_get_contents("php://input");
 
     $doc = new DOMDocument();
