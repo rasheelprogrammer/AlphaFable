@@ -24,9 +24,10 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
 
         $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}' LIMIT 1");
         $result[0] = $query[0]->fetch_assoc();
-        $level = $result[0]['level'] - 10;
+        $levelMin = $result[0]['level'] - 10;
+        $levelMax = $result[0]['level'] + 10;
 
-        $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id != '{$charID}' AND level >= '{$level}' AND classid != 42 AND classid != 71 ORDER BY RAND() LIMIT 1");
+        $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id != '{$charID}' AND LEVEL BETWEEN '{$levelMin}' AND '{$levelMax}' AND classid != 42 AND classid != 71 ORDER BY RAND() LIMIT 1");
         $result[0] = $query[0]->fetch_assoc();
 
         if ($query[0]->num_rows != 0) {

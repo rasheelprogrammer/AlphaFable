@@ -2,5 +2,6 @@
 *.swf_v=2
 /account/*
 /game/todo/*
+/private/*
 /nbproject/*
 mb-charTransfer.php
