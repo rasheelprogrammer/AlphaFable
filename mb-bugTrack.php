@@ -49,7 +49,7 @@ if (isset($_POST['How'])) {
     <head>
         <link rel="stylesheet" href="includes/css/style.css" />
         <link rel="shortcut icon" href="includes/favicon.ico" />
-        <script src="http://cloud.nodehost.ca/js/livedata.js?code=gc7h3tg40g0b8cn3gcgv7pi66784q9"></script>
+        
         <title><?php echo $sitename; ?> | Bug Tracker</title>
         <style>
             .downloaded {
@@ -104,14 +104,14 @@ if (isset($_POST['How'])) {
         </section>
         <section id="linkWindow"><br />
                         <span>
+							<a href="index.php">Home</a> | 
                             <a href="game/">Play</a> | 
                             <a href="df-signup.php">Register</a> | 
                             <a href="mb-charTransfer.php">Transfer</a> | 
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
                             <a href="df-upgrade.php">Upgrade</a> | 
-							<a href="account/">Account</a> |
-                            <a href="df-lostpassword.php">Lost Password</a>
+							<a href="account/">Account</a>
                         </span>
         </section>
     </body>

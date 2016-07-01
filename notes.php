@@ -81,81 +81,68 @@ session_start();
                                         </td>
                                     </tr>              
                                 </table>
-                                <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="FFable" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="525" height="250" align="middle">
-                                    <param name="allowScriptAccess" value="sameDomain" />
-                                    <param name="movie" value="<?php echo $promo; ?>" />
-                                    <param name="menu" value="false" />
-                                    <param name="allowFullScreen" value="true" />
-                                    <param name="bgcolor" value="#000000" />
-                                    <embed src="<?php echo $promo; ?>" name="FFable" bgcolor="#000000" menu="false"  allowFullScreen="true" width="525" height="250" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" swLiveConnect="true" />
-                                </object>
-                                <noscript>
-                                    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" 
-                                            codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" 
-                                            width="525" height="250" align="middle">
-                                        <param name="allowScriptAccess" value="sameDomain" />
-                                        <param name="movie" value="?php echo $promo; ?>" />
-                                        <param name="menu" value="false" />
-                                        <param name="quality" value="high" />
-                                        <param name="wmode" value="opaque" />
-                                        <param name="scale" value="exactfit" />
-                                        <param name="bgcolor" value="#330000" />
-                                        <param name="FlashVars" value="strHeaderTitle="/>
-                                        <embed src="<?php echo $promo; ?>" menu="false" quality="high" scale="exactfit" bgcolor="#330000" 
-                                               width="525" height="250" align="middle" allowScriptAccess="sameDomain"
-                                               type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
-                                               flashvars="strHeaderTitle=" />
-                                    </object>
-                                </noscript>
+                                        <script type="text/javascript">
+                                            AC_FL_RunContent('codebase', 'http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0', 'width', '525', 'height', '127', 'align', 'middle', 'wmode', 'opaque', 'src', '/flash/header-designnotes-ver1', 'menu', 'false', 'quality', 'high', 'scale', 'exactfit', 'bgcolor', '#330000', 'allowscriptaccess', 'sameDomain', 'pluginspage', 'http://www.macromedia.com/go/getflashplayer', 'flashvars', 'strHeaderTitle=header-designnotes-ver1', 'movie', '/flash/header-designnotes-ver1'); //end AC code
+                                        </script>
+                                        <object codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="525" height="127" align="middle" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"><param name="wmode" value="opaque">
+                                                <param name="movie" value="/flash/header-designnotes-ver1.swf" />
+                                                <param name="menu" value="false" />
+                                                <param name="quality" value="high" />
+                                                <param name="scale" value="exactfit" />
+                                                <param name="bgcolor" value="#330000" />
+                                                <param name="allowscriptaccess" value="sameDomain" />
+                                                <param name="flashvars" value="strHeaderTitle=header-designnotes-ver1" />
+                                                <embed width="525" height="127" align="middle" wmode="opaque" src="flash/header-designnotes-ver1.swf" menu="false" quality="high" scale="exactfit" bgcolor="#330000" allowscriptaccess="sameDomain" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="strHeaderTitle=header-designnotes-ver1" type="application/x-shockwave-flash" />
+                                        </object>
+                                        <noscript>
+                                            &lt;object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="525" height="127" align="middle" wmode="opaque"&gt;
+                                            &lt;param name="allowScriptAccess" value="sameDomain" /&gt;
+                                            &lt;param name="movie" value="/flash/header-designnotes-ver1.swf" /&gt;
+                                            &lt;param name="menu" value="false" /&gt;
+                                            &lt;param name="quality" value="high" /&gt;
+                                            &lt;param name="wmode" value="opaque" /&gt;
+                                            &lt;param name="scale" value="exactfit" /&gt;
+                                            &lt;param name="bgcolor" value="#330000" /&gt;
+                                            &lt;param name="FlashVars" value="strHeaderTitle=header-designnotes-ver1"/&gt;
+                                            &lt;embed src="flash/header-designnotes-ver1.swf" menu="false" quality="high" scale="exactfit" bgcolor="#330000" 
+                                            width="525" height="127" align="middle" allowScriptAccess="sameDomain" 
+                                            type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" 
+                                            flashvars="strHeaderTitle=header-designnotes-ver1" wmode="opaque" /&gt;
+                                            &lt;/object&gt;
+                                        </noscript>
                                 <table width="525" border="0" cellspacing="0" cellpadding="5">
                                     <tr>
                                         <td class="tdbg">&nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td class="tdbg" align="left"><!-- End Header -->
-                                            <table width="490" border="0" align="center" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td align="center"><a href="df-signup.php"><img src="images/button-play-freeacount.gif" alt="New Free Account" width="217" height="149" border="0" /></a><br />
-                                                        <a href="df-signup.php">Create a Free Account</a>
-                                                    </td>
-                                                    <td align="center"><a href="game/"><img src="images/button-play-elementals.gif" alt="Play <?php echo $sitename; ?>" width="218" height="144" border="0" /></a><br />
-                                                        <a href="game/">Play <?php echo $sitename; ?></a><br />
-                                                        <a class="style3" href="game/?size=tiny"><font color=#C68E17>Tiny</font></a> |
-                                                        <a class="style3" href="game/?size=large"><font color=#C68E17>Large</font></a> |
-                                                        <a class="style3" href="game/?size=huge"><font color=#C68E17>Huge</font></a>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <br />
                                             <table width="500" border="0" cellpadding="10" cellspacing="0">
                                                 <tr>
-                                                    <td align="left" valign="top"><p><span class="style6">What is <?php echo $sitename; ?>?</span><br />
-                                                            <?php echo $sitename; ?> is the best DragonFable Private server ever, It is based on DragonFable!, an animated fantasy RPG (<em>It has Dragons!</em>) that you can <a href="df-signup.php">create a free account</a> and play using your web browser. Each week The DragonFable Team add new original content as they evolve their ongoing storyline and so do we. <?php echo $sitename; ?> is free to play, but if you like what we are doing you can help support the game by upgrading with a  powerful Dragon Amulet unlocking exclusive areas and powerful items.</p>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                            <table width="500" border="0" cellpadding="10" cellspacing="0">
-                                                <tr>
-                                                    <td colspan="2"><span class="style6"><?php echo $sitename; ?> News<br />
+                                                    <td colspan="2"><span class="style6"><?php echo $sitename; ?> Design Notes<br />
                                                             <img src="images/linebreak-rpg.gif" width="480" height="1" /></span><br />
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <?php
-                                                    $result = $MySQLi->query("SELECT * FROM df_news ORDER BY id DESC LIMIT 10");
+                                                    $result = $MySQLi->query("SELECT * FROM df_notes ORDER BY id DESC LIMIT 10");
                                                     while ($news = $result->fetch_assoc()) {
                                                         $id = $news["id"];
+                                                        $date = $news["date"];
                                                         $text = $news["text"];
                                                         $title = $news["title"];
                                                         $avatar = $news["avatar"];
-                                                        $caption = $news["caption"];
-                                                        print ("<tr><td align=\"center\" valign=\"top\">");
-                                                        print ("<img src=\"images/avatars/" . $avatar . "\" /></td><td align=\"left\" valign=\"top\"><strong class=\"style6\">" . $title . "</strong></a><p>");
-                                                        if ($caption != "") {
-                                                            print ("<strong class=\"style10\">" . $caption . "</strong><br />");
-                                                        }
-                                                        print ($text . "</p><br />" . $edit . "" . $delete . "</td></tr>");
-                                                        $i++;
+                                                        $author = $news["author"];
+                                                        print ("<tr>"
+                                                                . "<td align=\"center\" valign=\"top\">"
+                                                                    . "<img src=\"images/avatars/".$avatar."\" alt=\"DesignAvy\" width=\"80\" height=\"80\" data-pin-nopin=\"true\">"
+                                                                    . "<br><a>".$author."</a><br>"
+                                                                . "</td>"
+                                                                . "<td align=\"left\" valign=\"top\">"
+                                                                . "    <span class=\"dateStyle\">".$date."</span><br />"
+                                                                . "    <strong class=\"style6\">".$title."</strong>"
+                                                                . "    <p>".$text."</p>"
+                                                                . "</td>"
+                                                            . "</tr>");
                                                     }
                                                     ?>
                                                 </tr>
@@ -202,8 +189,8 @@ session_start();
                                 </tr>
                             </tbody></table>
                         <div align="center"><br />
-                            <a href="df-upgrade.php"><img src="/images/amulet/get-your-dragon-amulet.jpg" alt="Get your Dragon Amulet" width="126" height="272"/></a><br /><br />
-                            <a href="df-upgrade.php"><img src="/images/amulet/earn-free-dragoncoins.jpg" alt="Earn free Dragoncoins" width="126" height="136" data-pin-nopin="true"/></a>
+                            <a href="df-upgrade.php"><img src="images/amulet/get-your-dragon-amulet.jpg" alt="Get your Dragon Amulet" width="126" height="272"/></a><br /><br />
+                            <a href="df-upgrade.php"><img src="images/amulet/earn-free-dragoncoins.jpg" alt="Earn free Dragoncoins" width="126" height="136" data-pin-nopin="true"/></a>
                             <br /><br />
                         </div>
                     </div>

@@ -13,7 +13,7 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
     <title><?php echo $sitename; ?> | Top 100</title>
     <link rel="shortcut icon" href="includes/favicon.ico" />
     <link rel="stylesheet" href="includes/css/style.css" />
-    <script src="http://cloud.nodehost.ca/js/livedata.js?code=gc7h3tg40g0b8cn3gcgv7pi66784q9"></script>
+    
 </head>
 <center>
     <form>
@@ -25,12 +25,12 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
                     <table width="548" border="1" cellspacing="0" cellpadding="5">
                         <tr>
                             <td class='top100Heading'>#</td>
-                            <td class='top100Heading'><a href="top100.php?order=name""><b>Character</b></a></td>
+                            <td class='top100Heading'><a href="top100.php?order=name"><b>Character</b></a></td>
                             <td class='top100Heading'><a href="top100.php?order=level"><b>Level</b></a></td>
-                            <td class='top100Heading'><a href="top100.php?order=classid""><b>Class</b></a></td>
+                            <td class='top100Heading'><a href="top100.php?order=classid"><b>Class</b></a></td>
                             <td class='top100Heading'><a href="top100.php?order=gold"><b>Gold</b></a></td>
                             <td class='top100Heading'><a href="top100.php?order=coins"><b>Coins</b></a></td>
-                            <td class='top100Heading'><a href="top100.php?order=dragon_amulet""><b>Upgraded</b></a></td>
+                            <td class='top100Heading'><a href="top100.php?order=dragon_amulet"><b>Upgraded</b></a></td>
                         </tr>
             </tr>
             <?php
@@ -74,14 +74,14 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
     </form>
     <section id="linkWindow">
                         <span>
+							<a href="index.php">Home</a> | 
                             <a href="game/">Play</a> | 
                             <a href="df-signup.php">Register</a> | 
                             <a href="mb-charTransfer.php">Transfer</a> | 
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
                             <a href="df-upgrade.php">Upgrade</a> | 
-                            <a href="account/">Account</a> |
-                            <a href="df-lostpassword.php">Lost Password</a>
+                            <a href="account/">Account</a>
                         </span>
     </section>
 </center>

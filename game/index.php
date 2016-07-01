@@ -35,7 +35,7 @@ $MySQLi->close();
         <link rel="shortcut icon" href="../includes/favicon.ico" />
         <script src="../includes/scripts/AC_RunActiveContent.js" type="text/javascript"></script>
         <script src="../includes/scripts/extra.js" type="text/javascript"></script>
-        <script src="http://cloud.nodehost.ca/js/livedata.js?code=gc7h3tg40g0b8cn3gcgv7pi66784q9"></script>
+        
         <meta charset="utf-8" />
         <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
     </head>
@@ -75,14 +75,14 @@ $MySQLi->close();
                     </object>
                     <section id="linkWindow">
                         <span>
+                            <a href="../">Home</a> | 
                             <a href="index.php">Play</a> | 
                             <a href="../df-signup.php">Register</a> | 
                             <a href="../mb-charTransfer.php">Transfer</a> | 
                             <a href="../top100.php">Top100</a> | 
                             <a href="../mb-bugTrack.php">Submit Bug</a> | 
                             <a href="../df-upgrade.php">Upgrade</a> | 
-                            <a href="../account/">Account</a> |
-                            <a href="../df-lostpassword.php">Lost Password</a>
+                            <a href="../account/">Account</a>
                         </span>
                     </section>
                 </section>

@@ -1,7 +1,11 @@
 *.swf
 *.swf_v=2
 /account/*
+/cms/*
+/includes/config.php
+/includes/classes/Security.class.php
 /game/todo/*
 /private/*
 /nbproject/*
 mb-charTransfer.php
+game/chars/

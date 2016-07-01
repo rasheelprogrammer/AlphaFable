@@ -13,7 +13,7 @@ $sitename = $fetch['DFSitename'];
 
 $CharID = filter_input(INPUT_GET, 'CharID');
 if ($CharID == NULL) {
-    header('Location: /game/');
+    header('Location: df-upgrade.php');
 }
 ?>
 
@@ -202,14 +202,14 @@ if ($CharID == NULL) {
         </form><br />
     <section id="linkWindow">
                         <span>
+							<a href="index.php">Home</a> | 
                             <a href="game/">Play</a> | 
                             <a href="df-signup.php">Register</a> | 
                             <a href="mb-charTransfer.php">Transfer</a> | 
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
                             <a href="df-upgrade.php">Upgrade</a> | 
-                            <a href="account/">Account</a> |
-                            <a href="df-lostpassword.php">Lost Password</a>
+                            <a href="account/">Account</a>
                         </span>
     </section>
     <script type="text/javascript">
