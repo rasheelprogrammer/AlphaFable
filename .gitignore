@@ -3,6 +3,7 @@
 /account/*
 /cms/*
 /includes/config.php
+/includes/classes/Security.class.php
 /game/todo/*
 /private/*
 /nbproject/*
