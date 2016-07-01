@@ -2,7 +2,16 @@
 
 ## What is this? ##
 
-These are files needed in the creation of a DragonFable private server
+This is a repository containing the files required for making a DragonFable Private Server.
+
+## Credits & Thanks ##
+* MentalBlank
+* HellFire
+* KimChoJapFan
+* Misaki
+* The AlphaEvolution Team
+* Artix Entertainment
+* and the users of NothingIllegal.com, Hobo-Studios.org, AlphaHub.org & Trilliux.me.
 
 ## How do I get set up? ##
 
@@ -86,13 +95,3 @@ http://i.imgur.com/GTBOCRi.png
 Apparently If you're using this with the latest version of XAMPP, you'll face far more problems than UwAmp.
 Don't forget to enable the rewrite_module in the Apache Modules tab.
 Use this Apache setting for UwAmp: http://i.imgur.com/41TI2RL.png
-
-
-## Credits & Thanks ##
-* MentalBlank
-* HellFire
-* KimChoJapFan
-* Misaki
-* The AlphaEvolution Team
-* Artix Entertainment
-* and the users of NothingIllegal.com, Hobo-Studios.org, AlphaHub.org & Trilliux.me.
