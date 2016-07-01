@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -33,21 +33,21 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
             if ($query[2]->num_rows > 0) {
                 switch ($result[2]['Currency']) {
                     case 1:
-                        $currency = "coins";
+                        $currency = "Coins";
+                        $newVAL = $result[0]["Coins"] - $result[2]['Cost'];
                         break;
                     case 2:
                     default:
                         $currency = "gold";
-                        break;
+                        $newVAL = $result[0]["gold"] - $result[2]['Cost'];
                         break;
                 }
-                $newVAL = $result[0][$currency] - $result[2]['Cost'];
-                if ($newVAL < 0) {
+                if ($newVAL >= 0) {
                     $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$item_id}' AND House = 0 AND HouseItem = 0");
                     $query_fetched = $query->fetch_assoc();
 
-                    $MySQLi->query("UPDATE df_characters SET {$currency}='{$newgold}' WHERE ID='{$CharID}'");
-                    if ($query->num_rows > 0) {
+                    $MySQLi->query("UPDATE df_characters SET {$currency}='{$newVAL}' WHERE ID='{$CharID}'");
+                    if ($query->num_rows > 0 && $MySQLi->affected_rows > 0) {
                         if ($query_fetched['count'] > 0 && $result[2]['MaxStackSize'] > 0) {
                             $newcount = $query_fetched['count'] + 1;
                             $query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$query_fetched['id']}'");
@@ -73,7 +73,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
                         }
                     }
                 } else {
-                    $Core->returnXMLError("Error!", "Insufficient Funds.");
+                    $Core->returnXMLError("Error!", "Insufficient Funds");
                 }
             } else {
                 $Core->returnXMLError("Error!", "Item not found in database.");

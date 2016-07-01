@@ -11,8 +11,9 @@ include ("../includes/classes/Security.class.php");
 include ('../includes/config.php');
 
 $Core->makeXML();
+
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -40,9 +41,9 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
                     $Core->returnXMLError('Invalid Rank!', 'Sorry, this action is currently unavailable for your account. If you believe this is a mistake, please contact the <b>AlphaFable</b> Staff.');
                     break;
                 case ("OK"):
-                    $query = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '0' WHERE `CharID` = {$CharID} AND `StartingItem` = '1' AND HouseID = 0 AND HouseItem = 0");
+                    $query = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '0' WHERE `CharID` = {$CharID} AND `StartingItem` = '1' AND House = 0 AND HouseItem = 0");
                     for ($a = 0; $a < count($Items); $a++) {
-                        $query2 = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '1' WHERE `ItemID` = {$Items[$a]} AND HouseID = 0 AND HouseItem = 0");
+                        $query2 = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '1' WHERE `ItemID` = {$Items[$a]} AND House = 0 AND HouseItem = 0");
                     }
                     $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
                 default:

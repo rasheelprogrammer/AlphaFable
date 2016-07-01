@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -24,7 +24,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
     $userQuery = $MySQLi->query("SELECT * FROM df_users WHERE id = '{$char['userid']}' AND LoginToken = '{$token}' LIMIT 1");
     $mergeQuery = $MySQLi->query("SELECT * FROM `df_quest_merge` WHERE mergeID = '{$mergeID}' LIMIT 1");
     $merge = $mergeQuery->fetch_assoc();
-    $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merge['itemID']}' AND HouseID = 0 AND HouseItem = 0 AND count >= '{$merge['itemQty']}'");
+    $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merge['itemID']}' AND House = 0 AND HouseItem = 0 AND count >= '{$merge['itemQty']}'");
     $query_fetched = $query->fetch_assoc();
 
     if ($userQuery->num_rows > 0 && $charQuery->num_rows > 0 && $mergeQuery->num_rows > 0) {

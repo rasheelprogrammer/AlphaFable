@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -52,6 +52,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
                 $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
             } else {
                 $Core->returnXMLError("Error!", "There was an issue updating your character information.");
+				//Dump Log
+				file_put_contents("logs/Character Error/BANK - Character: {$CharID}.txt", "cf-buybagslots.php - User: {$result[0]['userid']}", FILE_APPEND | LOCK_EX);
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');

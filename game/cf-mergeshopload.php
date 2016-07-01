@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -29,7 +29,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
         $character->setAttribute('MSID', $shop_id);
         if ($vendor['ItemIDs'] != NULL && $vendor['ItemIDs'] != "None" && $vendor['ItemIDs'] != '0') {
             $replaced = str_replace(",", " OR ItemID = ", $vendor['ItemIDs']);
-            $items = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = {$replaced}");
+            $items = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = {$replaced} ORDER BY `Level` DESC");
             if ($items->num_rows >= 1) {
                 while ($item = $items->fetch_assoc()) {
                     $merges_result = $MySQLi->query("SELECT * FROM df_merges WHERE ResultID = '{$item['ItemID']}'");

@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
     $shop_id = $doc->getElementsByTagName('intHouseItemShopID')->item(0)->nodeValue;
@@ -26,7 +26,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
         $character->setAttribute('intCount', -100);
         if ($vendor['ItemIDs'] != NULL && $vendor['ItemIDs'] != "None" && $vendor['ItemIDs'] != '0') {
             $replaced = str_replace(",", " OR HouseItemID = ", $vendor['ItemIDs']);
-            $items = $MySQLi->query("SELECT * FROM df_house_items WHERE HouseItemID = {$replaced}");
+            $items = $MySQLi->query("SELECT * FROM df_house_items WHERE HouseItemID = {$replaced} ORDER BY `intLevel` DESC");
             if ($items->num_rows >= 1) {
                 while ($item = $items->fetch_assoc()) {
                     $shop = $character->appendChild($dom->createElement('houseitems'));

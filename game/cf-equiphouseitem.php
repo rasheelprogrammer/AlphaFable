@@ -11,7 +11,7 @@ require ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
 
     $CharID = $xml->intCharID;
@@ -32,7 +32,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
     if ($query[1]->num_rows > 0) {
         if ($query[0]->num_rows > 0) {
             if ($query[2]->num_rows > 0) {
-                $MySQLi->query("UPDATE `df_equipment` SET `intEquipSlotPos` = '{$equipSlot}' WHERE ItemID =  '{$ItemID}' AND HouseItem = 1;");
+                $MySQLi->query("UPDATE `df_equipment` SET `intEquipSlotPos` = '{$equipSlot}' WHERE CharID = '{$CharID}' AND ItemID = '{$ItemID}' AND HouseItem = 1;");
                 if ($MySQLi->affected_rows > 0) {
                     $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
                 } else {

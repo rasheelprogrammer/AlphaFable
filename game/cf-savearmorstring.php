@@ -9,8 +9,8 @@
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
-    $HTTP_RAW_POST_DATA = file_get_contents("php://input");
+$HTTP_RAW_POST_DATA = file_get_contents("php://input");
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
 
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);

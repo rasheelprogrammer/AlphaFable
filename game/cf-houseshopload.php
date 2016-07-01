@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -32,7 +32,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
         $character->setAttribute('intCount', -100);
         if ($vendor['ItemIDs'] != NULL && $vendor['ItemIDs'] != "None" && $vendor['ItemIDs'] != '0') {
             if ($char['HasHouse'] != 0 && $char['HasHouse'] != NULL) {
-                $items = $MySQLi->query("SELECT * FROM df_equipment WHERE House = 1");
+                $items = $MySQLi->query("SELECT * FROM df_equipment WHERE House = 1 AND CharID = {$charID}");
                 if ($items->num_rows >= 1) {
                     while ($item = $items->fetch_assoc()) {
                         $items2 = $MySQLi->query("SELECT * FROM df_houses WHERE HouseID = {$item['ItemID']} LIMIT 1");
@@ -75,7 +75,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
                 }
             }
             $replaced = str_replace(",", " OR HouseID = ", $vendor['ItemIDs']);
-            $items = $MySQLi->query("SELECT * FROM df_houses WHERE HouseID = {$replaced}");
+            $items = $MySQLi->query("SELECT * FROM df_houses WHERE HouseID = {$replaced} ORDER BY `strHouseName` DESC");
             if ($items->num_rows >= 1) {
                 while ($item = $items->fetch_assoc()) {
                     $shop = $character->appendChild($dom->createElement('sHouses'));

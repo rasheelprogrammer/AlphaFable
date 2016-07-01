@@ -21,7 +21,7 @@ if (isset($_POST['strUserName'])) {
         )
     );
 
-    $query = $MySQLi->query("SELECT * FROM df_users WHERE name = '{$username}' LIMIT 1");
+    $query = $MySQLi->query("SELECT * FROM df_users WHERE name = '{$sign['User']['Name']}' LIMIT 1");
 
     if ($query->num_rows == 0) {
         $MySQLi->query("INSERT INTO df_users (name, pass, email, dob, date_created, lastLogin) VALUES ('{$sign['User']['Name']}', '{$Security->encode($sign['User']['Password'])}', '{$sign['User']['Email']}', '{$sign['User']['Birth']}', '{$dateToday}' , 'Never')");

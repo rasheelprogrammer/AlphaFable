@@ -10,7 +10,7 @@
 
     $Core->makeXML();
     $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-    if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+    if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
 		if(isset($xml->intInterfaceID)){
 			$interfaceID = $xml->intInterfaceID;
@@ -87,7 +87,9 @@
 						$status->setAttribute("status","SUCCESS");
 					}
 			} else {
-				   $Core->returnXMLError('Error!', 'Character information was unable to be requested.');
+					$Core->returnXMLError('Error!', 'Character information was unable to be requested.');
+					//Dump Log
+					file_put_contents("logs/Character Error/BANK - Character: {$charID}.txt", "cf-bankload.php - User: {$result[0]['userid']}", FILE_APPEND | LOCK_EX);
 			}
 			echo $dom->saveXML();
 		} else {

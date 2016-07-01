@@ -11,7 +11,7 @@ if ($MySQLi->connect_errno) {
 }
 error_reporting(0);
 $rangeMin = 1;
-$rangeMax = 15000;
+$rangeMax = 50000;
 ?>
 
 <html>
@@ -251,7 +251,7 @@ $rangeMax = 15000;
                             }
                             break;
                         case 'maps':
-                            $itemQuery = $MySQLi->query("SELECT FileName, Name, Extra FROM df_quests WHERE `QuestID` BETWEEN {$rangeMin} AND {$rangeMax}");
+                            $itemQuery = $MySQLi->query("SELECT FileName, Name FROM df_quests WHERE `QuestID` BETWEEN {$rangeMin} AND {$rangeMax}");
                             while ($item = $itemQuery->fetch_assoc()) {
                                 $item['FileName'] = trim($item['FileName']);
                                 CheckCreateDir($urlDF, $item['FileName'], 0);
@@ -266,27 +266,6 @@ $rangeMax = 15000;
                                     }
                                 }
                                 chdir("../");
-                                $zones = explode(";", $item['Extra']);
-                                for ($i = 0; $i <= count($zones); $i++) {
-                                    $zone2 = explode("=", $zones[$i]);
-                                    if (strpos($zone2[1], ".swf")) {
-                                        $zone2[1] = trim($zone2[1]);
-                                        CheckCreateDir($urlDF, $zone2[1], 0);
-                                        if (!file_exists("maps/{$zone2[1]}")) {
-                                            copy($urlDF . "maps/" . $zone2[1], "maps/{$zone2[1]}");
-                                            if (file_exists("maps/{$zone2[1]}")) {
-                                                echo ("Downloaded: {$zone2[1]}<br>");
-                                            } else {
-                                                echo ("ERROR: {$zone2[1]}<br>");
-                                            }
-                                        } else {
-                                            echo ("Exists: {$zone2[1]}<br>");
-                                        }
-                                        chdir("../");
-                                    } else {
-                                        echo ("ERROR: {$zone2[1]}<br>");
-                                    }
-                                }
                             }
                             if (isset($failedItems)) {
                                 foreach ($failedItems as $fileURL => $fileName) {

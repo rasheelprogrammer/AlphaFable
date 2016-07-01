@@ -13,7 +13,7 @@ $Core->makeXML();
 
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
 
     if (isset($xml->intCharID) && isset($xml->strToken)) {
@@ -32,7 +32,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
             if ($query[1]->num_rows != 0) {
                 $query[2] = $MySQLi->query("SELECT * FROM df_equipment WHERE CharID = '{$charID}' AND intEquipSlotPos = '{$equipSlot}' AND HouseItem = '1'");
                 if ($query[2]->num_rows > 0) {
-                    $equipitem = $MySQLi->query("UPDATE `df_equipment` SET `intEquipSlotPos` = '0' WHERE intEquipSlotPos =  '{$equipSlot}' AND HouseItem = 1 AND CharID = {$charID};");
+                    $equipitem = $MySQLi->query("UPDATE `df_equipment` SET `intEquipSlotPos` = '0' WHERE intEquipSlotPos = '{$equipSlot}' AND HouseItem = 1 AND CharID = {$charID};");
                     if ($MySQLi->affected_rows > 0) {
                         $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
                     } else {

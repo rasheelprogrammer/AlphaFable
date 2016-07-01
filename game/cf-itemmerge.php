@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -34,14 +34,14 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
         $item_result = $MySQLi->query("SELECT * FROM df_items WHERE ItemID = '{$merges['ResultID']}'");
         $item = $item_result->fetch_assoc();
 
-        $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merges['RequiredID1']}' AND count >= '{$merges['RequiredQTY1']} AND HouseID = 0 AND HouseItem = 0 '");
+        $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merges['RequiredID1']}' AND count >= '{$merges['RequiredQTY1']} AND House = 0 AND HouseItem = 0 '");
         $q = $query->fetch_assoc();
-        $query2 = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merges['RequiredID2']}' AND count >= '{$merges['RequiredQTY2']} AND HouseID = 0 AND HouseItem = 0 '");
+        $query2 = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merges['RequiredID2']}' AND count >= '{$merges['RequiredQTY2']} AND House = 0 AND HouseItem = 0 '");
         $q2 = $query->fetch_assoc();
         $newcount1 = $q['count'] - $merges['RequiredQTY1'];
         $newcount2 = $q2['count'] - $merges['RequiredQTY2'];
         if ($newcount1 >= 0 || $newcount2 >= 0) {
-            $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merges['ResultID']}' AND count > '0' AND HouseID = 0 AND HouseItem = 0");
+            $query = $MySQLi->query("SELECT * FROM df_equipment WHERE ItemID = '{$merges['ResultID']}' AND count > '0' AND House = 0 AND HouseItem = 0");
             $query_rows = $query->num_rows;
             $query_fetched = $query->fetch_assoc();
 
@@ -54,18 +54,18 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
             }
 
             if ($newcount1 > 0) {
-                $query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount1}' WHERE ItemID = '{$merges['RequiredID1']}' AND HouseID = 0 AND HouseItem = 0 AND count >= '{$merges['RequiredQTY1']}' LIMIT 1");
+                $query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount1}' WHERE ItemID = '{$merges['RequiredID1']}' AND House = 0 AND HouseItem = 0 AND count >= '{$merges['RequiredQTY1']}' LIMIT 1");
             } else {
                 $removeitem = $MySQLi->query("DELETE FROM `df_equipment` WHERE `CharID` = " . $charID . " AND `ItemID` = '{$merges['RequiredID1']}' LIMIT 1");
             }
             if ($newcount2 > 0) {
-                $query2 = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount2}' WHERE ItemID = '{$merges['RequiredID2']}' AND HouseID = 0 AND HouseItem = 0 AND count >= '{$merges['RequiredQTY2']}' LIMIT 1");
+                $query2 = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount2}' WHERE ItemID = '{$merges['RequiredID2']}' AND House = 0 AND HouseItem = 0 AND count >= '{$merges['RequiredQTY2']}' LIMIT 1");
             } else {
-                $removeitem2 = $MySQLi->query("DELETE FROM `df_equipment` WHERE `CharID` = " . $charID . " AND `ItemID` = '{$merges['RequiredID2']}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+                $removeitem2 = $MySQLi->query("DELETE FROM `df_equipment` WHERE `CharID` = " . $charID . " AND `ItemID` = '{$merges['RequiredID2']}' AND House = 0 AND HouseItem = 0 LIMIT 1");
             }
             if ($query_rows == 1 && $item['MaxStackSize'] > 1) {
                 $newcount = $query_fetched['count'] + 1;
-                $query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$query_fetched['id']}'AND HouseID = 0 AND HouseItem = 0 ");
+                $query = $MySQLi->query("UPDATE df_equipment SET count = '{$newcount}' WHERE id = '{$query_fetched['id']}'AND House = 0 AND HouseItem = 0 ");
             } else {
                 $additem = $MySQLi->query("INSERT INTO `df_equipment` (`id`, `CharID`, `ItemID`) VALUES ('', '{$charID}', '{$merges['ResultID']}')");
             }

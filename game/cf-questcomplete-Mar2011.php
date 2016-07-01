@@ -3,7 +3,7 @@
 /*
  * AlphaFable (DragonFable Private Server)
  * Made by MentalBlank
- * File: cf-questcomplete - v0.0.2
+ * File: cf-questcomplete - v0.0.3
  */
 
 include ("../includes/classes/Core.class.php");
@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -120,10 +120,11 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
         $status->setAttribute('status', "SUCCESS");
         echo $dom->saveXML();
     } else {
-        $Core->returnXMLError('Error!', "There was a problem loading the Quest");
+		//Dump Log
+		file_put_contents("logs/Quest Error/Quest {$QuestID} - {$charID} - {$char['userid']}.txt", $result, FILE_APPEND | LOCK_EX);
+		$Core->returnXMLError('Error!', "There was a problem updating your character info. Bug Report Sent to Admin.");
     }
 } else {
-    $Core->returnXMLError('Invalid Data!', 'Message');
 }
 $MySQLi->close();
 ?>

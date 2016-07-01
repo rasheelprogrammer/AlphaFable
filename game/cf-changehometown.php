@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -36,7 +36,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
             $query[2] = $MySQLi->query("SELECT * FROM `df_quests` WHERE QuestID = '{$TownID}' LIMIT 1");
             $result[2] = $query[2]->fetch_assoc();
             $MySQLi->query("UPDATE df_characters SET HomeTownID='{$TownID}' WHERE ID='{$CharID}'");
-            if ($MySQLi->affected_rows > 0) {
+            if ($MySQLi->affected_rows > 0 || $result[0]['HomeTownID'] == $TownID) {
                 $dom = new DOMDocument();
                 $XML = $dom->appendChild($dom->createElement('newTown'));
                 $character = $XML->appendChild($dom->createElement('newTown'));

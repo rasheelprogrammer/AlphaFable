@@ -11,7 +11,7 @@ include ('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
 
@@ -26,7 +26,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
     $user = $user_result->num_rows;
 
     if ($user_result->num_rows == 1 && $char_result->num_rows == 1) {
-        $item_result = $MySQLi->query("SELECT * FROM df_equipment WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+        $item_result = $MySQLi->query("SELECT * FROM df_equipment WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND House = 0 AND HouseItem = 0 LIMIT 1");
         $item = $item_result->fetch_assoc();
 
         $exp_total = $item['Exp'] + $exp;
@@ -35,14 +35,14 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
 
         if ($exp_total == $exptolevel) {
             $exp_total2 = 0;
-            $levelup = $MySQLi->query("UPDATE df_equipment SET Level='{$intLevel}' WHERE CharID='{$charID}' AND CharItemID='{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
-            $addexp = $MySQLi->query("UPDATE df_equipment SET Exp='{$exp_total2}' WHERE CharID='{$charID}' AND CharItemID='{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+            $levelup = $MySQLi->query("UPDATE df_equipment SET Level='{$intLevel}' WHERE CharID='{$charID}' AND CharItemID='{$item_id}' AND House = 0 AND HouseItem = 0 LIMIT 1");
+            $addexp = $MySQLi->query("UPDATE df_equipment SET Exp='{$exp_total2}' WHERE CharID='{$charID}' AND CharItemID='{$item_id}' AND House = 0 AND HouseItem = 0 LIMIT 1");
         } else if ($exp_total > $exptolevel) {
             $exp_total2 = $exp_total - $exptolevel;
-            $levelup = $MySQLi->query("UPDATE df_equipment SET Level = '{$intLevel}' WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
-            $addexp = $MySQLi->query("UPDATE df_equipment SET Exp = '{$exp_total2}' WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+            $levelup = $MySQLi->query("UPDATE df_equipment SET Level = '{$intLevel}' WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND House = 0 AND HouseItem = 0 LIMIT 1");
+            $addexp = $MySQLi->query("UPDATE df_equipment SET Exp = '{$exp_total2}' WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND House = 0 AND HouseItem = 0 LIMIT 1");
         } else {
-            $addexp = $MySQLi->query("UPDATE df_equipment SET Exp = '{$exp_total}' WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND HouseID = 0 AND HouseItem = 0 LIMIT 1");
+            $addexp = $MySQLi->query("UPDATE df_equipment SET Exp = '{$exp_total}' WHERE CharID = '{$charID}' AND CharItemID = '{$item_id}' AND House = 0 AND HouseItem = 0 LIMIT 1");
         }
         if ($MySQLi->affected_rows > 0) {
             $dom = new DOMDocument();

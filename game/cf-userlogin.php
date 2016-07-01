@@ -15,7 +15,7 @@ $Core->makeXML();
 
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
-if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
+if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
 
     if (isset($xml->strUsername) && isset($xml->strPassword)) {
@@ -99,6 +99,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty(file_get_contents('php://input'))) {
                 }
             } else {
                 $Core->returnXMLError('Error!', 'There was an issue updating your account information.');
+				//Dump Log
+				file_put_contents("logs/Login Error/User: {$result[0]['id']}.txt", $token, FILE_APPEND | LOCK_EX);
             }
         } else {
             $Core->returnXMLError('User Not Found', 'Your username or password was incorrect, Please check your spelling and try again.');
