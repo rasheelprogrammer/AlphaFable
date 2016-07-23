@@ -29,6 +29,7 @@ This is a repository containing the files required for making a DragonFable Priv
 
 
 ### Server Files: ###
+* Github: https://github.com/MentalBlank/AlphaFable/
 
 * BitBucket: https://bitbucket.org/MentalBlank/alphafable
 
