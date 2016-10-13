@@ -30,8 +30,6 @@ This is a repository containing the files required for making a DragonFable Priv
 
 ### Server Files: ###
 * Core Files (No Gamefiles Included): https://bitbucket.org/MentalBlank/alphafable/get/c8d96b62bab4.zip
-- OR -
-git clone https://MentalBlank@bitbucket.org/MentalBlank/alphafable.git
 
 * KimChoJapFan's Compressed Files (Gamefiles Included): https://mega.nz/#!0QFHESwR!IWnty5cVymhpg0IH2k7bTbAot3Wf0RS0wxuV_QggFG4
 
