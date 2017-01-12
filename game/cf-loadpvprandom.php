@@ -19,8 +19,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     if (isset($xml->intCharID)) {
         $charID = $xml->intCharID;
 
-        $query = array();
-        $result = array();
+        $query = [];
+        $result = [];
 
         $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}' LIMIT 1");
         $result[0] = $query[0]->fetch_assoc();
@@ -34,7 +34,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
             $query[1] = $MySQLi->query("SELECT LevelCap FROM df_settings LIMIT 1");
             $result[1] = $query[1]->fetch_array();
 
-            $exptolevel = $Core->calcEXPtoLevel($result[0]['level'], $result[0]['exp']);
+            $exptolevel = $Core->calcEXPtoLevel($result[0]['level']);
             $levelCap = $result[1][0];
             if ($result[0]['level'] >= $levelCap) {
                 $newEXP = 0;

@@ -20,8 +20,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $charID = $xml->intCharID;
         $token = $xml->strToken;
 
-        $query = array();
-        $result = array();
+        $query = [];
+        $result = [];
 
         $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}' LIMIT 1");
         $result[0] = $query[0]->fetch_assoc();
@@ -33,7 +33,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
             $result[2] = $query[2]->fetch_assoc();
 
             if ($query[2]->num_rows != 0) {
-                $exptolevel = $Core->calcEXPtoLevel($result[0]['level'], $result[0]['exp']);
+                $exptolevel = $Core->calcEXPtoLevel($result[0]['level']);
                 $levelCap = $result[1][0];
                 if ($result[0]['level'] >= $levelCap) {
                     $newEXP = 0;

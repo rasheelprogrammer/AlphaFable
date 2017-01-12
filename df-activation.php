@@ -137,7 +137,7 @@ if ($_POST["btnResend"] == "Resend Email") {
             .panelMsg { background-color: #EEEEEE; width: 400px; margin: auto auto; padding: 20px;}
         </style>
     </head>
-    <body style="color:000;">
+    <body style="color:#000;">
         <form name="Form1" method="post" id="Form1">
             <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjA2NjUyNDI2ZGRX3PMl+cJyne7ujtuE9Evk/qu6n+ClVmaLUCsoYB+Xnw==" />
 
@@ -149,7 +149,7 @@ if ($_POST["btnResend"] == "Resend Email") {
             <?php if ($msg == 1) { ?>
                 <div id="panelSuccess" class="panelMsg" style="width:400px;text-align:center;">
                     <h2>Account Activated</h2>
-                    <h3><a href="game/" style="color:000;">Click here to play <?php echo $sitename; ?></a></h3>
+                    <h3><a href="game/" style="color:#000;">Click here to play <?php echo $sitename; ?></a></h3>
                 </div>
             <?php } else if ($msg == 2) { ?>
                 <div id="panelSuccess" class="panelMsg" style="width:400px;text-align:center;">
@@ -161,7 +161,7 @@ if ($_POST["btnResend"] == "Resend Email") {
             <?php } else if ($msg == 3) { ?>
                 <div id="panelSuccess" class="panelMsg" style="width:400px;text-align:center;">
                     <h2>Already Activated</h2>
-                    <h3><a href="game/" style="color:000;">Click here to play <?php echo $sitename; ?></a></h3>
+                    <h3><a href="game/" style="color:#000;">Click here to play <?php echo $sitename; ?></a></h3>
                 </div>
              <?php } else { ?>
                 <div id="panelSuccess" class="panelMsg" style="width:400px;text-align:center;">

@@ -32,7 +32,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $newval = $Core->valueCheck($merge['value']);
         if ($merge['string'] == 0) {
             $quests = $char['strQuests'];
-            $result = array();
+            $result = [];
             for ($i = 0; $i < strlen($quests); $i += 1) {
                 $result[] = substr($quests, $i, 1);
             }
@@ -47,7 +47,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
             $savestring = $MySQLi->query("UPDATE df_characters SET strQuests='{$newqstr}' WHERE ID='{$charID}'");
         } else if ($merge['string'] == 1) {
             $quests = $char['strSkills'];
-            $result = array();
+            $result = [];
             for ($i = 0; $i < strlen($quests); $i += 1) {
                 $result[] = substr($quests, $i, 1);
             }
@@ -63,7 +63,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
             $savestring = $MySQLi->query("UPDATE df_characters SET strSkills='{$newqstr}' WHERE ID='{$charID}'");
         } else if ($merge['string'] == 2) {
             $quests = $char['strArmor'];
-            $result = array();
+            $result = [];
             for ($i = 0; $i < strlen($quests); $i += 1) {
                 $result[] = substr($quests, $i, 1);
             }

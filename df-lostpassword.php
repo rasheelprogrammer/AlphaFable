@@ -29,7 +29,6 @@ if (isset($Email) && filter_var($Email, FILTER_VALIDATE_EMAIL)) {
                 <p>";
                 while ($result = $query->fetch_assoc()) {
                     $lastPlayed = explode('T', $result['lastLogin']);
-                    $lastPlayed = $lastPlayed;
                     $message .= "<strong>{$result['name']}</strong><br>
                     Password: {$Security->decode($result['pass'])}<br>
                     Last Activity: {$lastPlayed[0]}<br><br>";
@@ -77,7 +76,7 @@ if (isset($Email) && filter_var($Email, FILTER_VALIDATE_EMAIL)) {
             .panelMsg { background-color: #EEEEEE; width: 400px; margin: auto auto; padding: 20px;}
         </style>
     </head>
-    <body style="color:000;">
+    <body style="color:#000;">
         <form name="Form1" method="post" id="Form1">
             <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUJNjA2NjUyNDI2ZGRX3PMl+cJyne7ujtuE9Evk/qu6n+ClVmaLUCsoYB+Xnw==" />
 

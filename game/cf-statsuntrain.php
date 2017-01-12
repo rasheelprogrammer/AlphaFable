@@ -14,8 +14,8 @@ $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $charID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;

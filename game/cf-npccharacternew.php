@@ -10,16 +10,16 @@ include("../includes/classes/Core.class.php");
 include('../includes/config.php');
 
 if (isset($_POST['intUserID']) && isset($_POST['strToken'])) {
-    $sign = array(
+    $sign = [
         'intUserID' => $MySQLi->real_escape_string($_POST['intUserID']),
         'strUsername' => $MySQLi->real_escape_string($_POST['strUsername']),
         'strPassword' => $MySQLi->real_escape_string($_POST['strPassword']),
         'strToken' => $MySQLi->real_escape_string($_POST['strToken']),
         'intNPC' => $MySQLi->real_escape_string($_POST['intNPC'])
-    );
+    ];
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM `df_users` WHERE id = '{$sign['intUserID']}' AND LoginToken = '{$sign['strToken']}' ORDER BY id DESC LIMIT 1");
     $result[0] = $query[0]->fetch_assoc();

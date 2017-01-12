@@ -9,7 +9,7 @@
 
 	class Ninja {
 		public function removeNinjaTags($theText) {
-			$RemoveNinjaTag1 = str_replace("<ninja2>","",file_get_contents('php://input'));
+            $RemoveNinjaTag1 = str_replace("<ninja2>","",$theText);
 			$RemoveNinjaTag2 = str_replace("</ninja2>","",$RemoveNinjaTag1);
 			return($RemoveNinjaTag2);
 		}

@@ -80,7 +80,7 @@ if (isset($_POST['character'])) {
         <br /><a href="index.php"><img src="images/logo.png" width="300px"/></a><br />
         <section class="downloaded">
             <?php
-            switch (strToLower($_GET['func'])) {
+            switch (strtolower($_GET['func'])) {
                 case '2':
                     $userQuery = $MySQLi->query("SELECT * FROM df_users WHERE name = '{$_SESSION["afname"]}' and pass = '{$Security->encode($_SESSION["afpass"])}' LIMIT 1");
                     $user = $userQuery->fetch_assoc();

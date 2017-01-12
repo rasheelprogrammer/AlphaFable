@@ -18,8 +18,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $shop_id = $doc->getElementsByTagName('intHairShopID')->item(0)->nodeValue;
     $gender = $doc->getElementsByTagName('strGender')->item(0)->nodeValue;
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM df_hair_vendors WHERE ShopID = '{$shop_id}'");
     $vendor = $query[0]->fetch_assoc();

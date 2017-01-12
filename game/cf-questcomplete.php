@@ -33,7 +33,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $quest = $quest_result->fetch_assoc();
 
         $gold_total = $char['gold'] + $gold;
-        $exptolevel = $Core->calcEXPtoLevel($char['level'], $exp_total);
+        $exptolevel = $Core->calcEXPtoLevel($char['level']);
         $levelCap = $caps[0];
 
         if ($gold != 0) {

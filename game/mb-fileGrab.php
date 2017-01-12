@@ -43,7 +43,7 @@ $rangeMax = 50000;
                     <?php
 
                     function CheckCreateDir($urlBase, $urlFile, $class) {
-                        switch (strToLower($_GET['m'])) {
+                        switch (strtolower($_GET['m'])) {
                             case 'items':
                                 $urlComplete = $urlBase . $urlFile;
                                 $urlFull = str_replace("game/", "", $urlComplete);
@@ -95,7 +95,6 @@ $rangeMax = 50000;
                                 mkdir($urlPath[$a]);
                                 chdir($urlPath[$a]);
                             } else {
-                                echo ("Changing Directory: " . $urlPath[$a] . "<br />");
                                 chdir($urlPath[$a]);
                             }
                         }
@@ -104,7 +103,7 @@ $rangeMax = 50000;
                         }
                     }
 
-                    switch (strToLower($_GET['m'])) {
+                    switch (strtolower($_GET['m'])) {
                         case 'items':
                             $itemQuery = $MySQLi->query("SELECT FileName, ItemName FROM df_items WHERE `ItemID` BETWEEN {$rangeMin} AND {$rangeMax}");
                             while ($item = $itemQuery->fetch_assoc()) {
@@ -119,19 +118,12 @@ $rangeMax = 50000;
                                         }
                                         $str = str_replace(" ", "%20", $str);
                                         copy($urlDF . $str, "{$str}");
-                                        if (file_exists("{$str}")) {
-                                            echo ("Downloaded: {$item['ItemName']}<br>");
-                                        } else {
-                                            $failedItems[$str] = $item['ItemName'];
+                                        if (!file_exists("{$str}")) {
+											$failedItems[$str] = $item['ItemName'];
                                             array_unique($failedItems);
-                                            echo "Error:<a href='" . $urlDF . $str . "'>" . $item['ItemName'] . "</a><br>";
                                         }
-                                    } else {
-                                        echo "Exists: {$item['ItemName']}<br>";
                                     }
                                     chdir("../");
-                                } else {
-                                    echo ("Downloaded: {$item['ItemName']}<br>");
                                 }
                             }
                             if (isset($failedItems)) {
@@ -156,19 +148,12 @@ $rangeMax = 50000;
                                         }
                                         $str = str_replace(" ", "%20", $str);
                                         copy($urlDF . $str, "{$str}");
-                                        if (file_exists("{$str}")) {
-                                            echo ("Downloaded: {$item['strItemName']}<br>");
-                                        } else {
+                                        if (!file_exists("{$str}")) {
                                             $failedItems[$str] = $item['strItemName'];
                                             array_unique($failedItems);
-                                            echo "Error:<a href='" . $urlDF . $str . "'>" . $item['strItemName'] . "</a><br>";
                                         }
-                                    } else {
-                                        echo "Exists: {$item['strItemName']}<br>";
                                     }
                                     chdir("../");
-                                } else {
-                                    echo ("Downloaded: {$item['strItemName']}<br>");
                                 }
                             }
                             if (isset($failedItems)) {
@@ -192,12 +177,9 @@ $rangeMax = 50000;
                                     }
                                     $str = str_replace(" ", "%20", $str);
                                     copy($urlDF . $str, "{$str}");
-                                    if (file_exists("{$item['InterfaceSWF']}")) {
-                                        echo ("Downloaded: {$item['InterfaceName']}<br>");
-                                    } else {
+                                    if (!file_exists("{$item['InterfaceSWF']}")) {
                                         $failedItems[$item['InterfaceSWF']] = $item['InterfaceName'];
                                         array_unique($failedItems);
-                                        echo ("ERROR: {$item['InterfaceName']}<br>");
                                     }
                                 }
                                 chdir("../");
@@ -217,24 +199,18 @@ $rangeMax = 50000;
                                 CheckCreateDir($urlDF, $item['ClassSWF'], 1);
                                 if (!file_exists("classes/M/{$item['ClassSWF']}")) {
                                     copy("{$urlDF}classes/M/{$item['ClassSWF']}", "classes/M/{$item['ClassSWF']}");
-                                    if (file_exists("classes/M/{$item['ClassSWF']}")) {
-                                        echo ("Downloaded: {$item['ClassName']}(M)<br>");
-                                    } else {
+                                    if (!file_exists("classes/M/{$item['ClassSWF']}")) {
                                         $failedClasses[$item['ClassSWF']] = $item['ClassName'];
                                         array_unique($failedClasses);
-                                        echo ("ERROR: {$item['ClassName']}(M)<br>");
                                     }
                                 }
                                 chdir("../");
                                 CheckCreateDir($urlDF, $item['ClassSWF'], 2);
                                 if (!file_exists("classes/F/{$item['ClassSWF']}")) {
                                     copy("{$urlDF}classes/F/{$item['ClassSWF']}", "classes/F/{$item['ClassSWF']}");
-                                    if (file_exists("classes/F/{$item['ClassSWF']}")) {
-                                        echo ("Downloaded: {$item['ClassName']}(F)<br>");
-                                    } else {
+                                    if (!file_exists("classes/F/{$item['ClassSWF']}")) {
                                         $failedClasses2[$item['ClassSWF']] = $item['ClassName'];
                                         array_unique($failedClasses2);
-                                        echo ("ERROR: {$item['ClassName']}(F)<br>");
                                     }
                                 }
                                 chdir("../");
@@ -251,21 +227,33 @@ $rangeMax = 50000;
                             }
                             break;
                         case 'maps':
-                            $itemQuery = $MySQLi->query("SELECT FileName, Name FROM df_quests WHERE `QuestID` BETWEEN {$rangeMin} AND {$rangeMax}");
+                            $itemQuery = $MySQLi->query("SELECT FileName, Name, Extra FROM df_quests WHERE `QuestID` BETWEEN {$rangeMin} AND {$rangeMax}");
                             while ($item = $itemQuery->fetch_assoc()) {
                                 $item['FileName'] = trim($item['FileName']);
                                 CheckCreateDir($urlDF, $item['FileName'], 0);
                                 if (!file_exists("maps/{$item['FileName']}")) {
                                     copy($urlDF . "maps/" . $item['FileName'], "maps/{$item['FileName']}");
-                                    if (file_exists("maps/{$item['FileName']}")) {
-                                        echo ("Downloaded: {$item['Name']}<br>");
-                                    } else {
+                                    if (!file_exists("maps/{$item['FileName']}")) {
                                         $failedItems[$item['FileName']] = $item['Name'];
                                         array_unique($failedItems);
-                                        echo ("ERROR: {$item['Name']}<br>");
                                     }
                                 }
                                 chdir("../");
+                                $zones = explode(";", $item['Extra']);
+                                for ($i = 0; $i <= count($zones); $i++) {
+                                    $zone2 = explode("=", $zones[$i]);
+                                    if (strpos($zone2[1], ".swf")) {
+                                        $zone2[1] = trim($zone2[1]);
+                                        CheckCreateDir($urlDF, $zone2[1], 0);
+                                        if (!file_exists("maps/{$zone2[1]}")) {
+                                            copy($urlDF . "maps/" . $zone2[1], "maps/{$zone2[1]}");
+                                            if (!file_exists("maps/{$zone2[1]}")) {
+                                                echo ("Downloaded: {$zone2[1]}<br>");
+                                            }
+                                        }
+                                        chdir("../");
+                                    }
+                                }
                             }
                             if (isset($failedItems)) {
                                 foreach ($failedItems as $fileURL => $fileName) {
@@ -282,12 +270,9 @@ $rangeMax = 50000;
                                 CheckCreateDir($urlDF, $item['strFileName'], 0);
                                 if (!file_exists("maps/{$item['strFileName']}")) {
                                     copy($urlDF . "maps/" . $item['strFileName'], "maps/{$item['strFileName']}");
-                                    if (file_exists("maps/{$item['strFileName']}")) {
-                                        echo ("Downloaded: {$item['strHouseName']}<br>");
-                                    } else {
+                                    if (!file_exists("maps/{$item['strFileName']}")) {
                                         $failedItems[$item['strFileName']] = $item['strHouseName'];
                                         array_unique($failedItems);
-                                        echo ("ERROR: {$item['strHouseName']}<br>");
                                     }
                                 }
                                 chdir("../");
@@ -307,12 +292,9 @@ $rangeMax = 50000;
                                 CheckCreateDir($urlDF, $item['MonsterGroupFileName'], 0);
                                 if (!file_exists("monsters/{$item['MonsterGroupFileName']}")) {
                                     copy($urlDF . "monsters/" . $item['MonsterGroupFileName'], "monsters/{$item['MonsterGroupFileName']}");
-                                    if (file_exists("monsters/{$item['MonsterGroupFileName']}")) {
-                                        echo ("Downloaded: {$item['MonsterGroupFileName']}<br>");
-                                    } else {
+                                    if (!file_exists("monsters/{$item['MonsterGroupFileName']}")) {
                                         $failedItems[$item['MonsterGroupFileName']] = $item['MonsterGroupFileName'];
                                         array_unique($failedItems);
-                                        echo ("ERROR: {$item['MonsterGroupFileName']}<br>");
                                     }
                                 }
                                 chdir("../");
@@ -332,17 +314,13 @@ $rangeMax = 50000;
                                 CheckCreateDir($urlDF, $item['HairSWF'], 0);
                                 if (!file_exists("{$item['HairSWF']}")) {
                                     copy("{$urlDF}{$item['HairSWF']}", "{$item['HairSWF']}");
-                                    if (file_exists("{$item['HairSWF']}")) {
-                                        echo ("Downloaded: {$item['HairName']} ({$item['Gender']})<br>");
-                                    } else {
+                                    if (!file_exists("{$item['HairSWF']}")) {
                                         if ($item['Gender'] == "F") {
                                             $failedItems2[$item['HairSWF']] = $item['HairName'];
                                             array_unique($failedItems2);
-                                            echo ("ERROR: {$item['HairName']} ({$item['Gender']})<br>");
                                         } else {
                                             $failedItems[$item['HairSWF']] = $item['HairName'];
                                             array_unique($failedItems);
-                                            echo ("ERROR: {$item['HairName']} ({$item['Gender']})<br>");
                                         }
                                     }
                                 }

@@ -52,7 +52,11 @@ class Core {
         exit;
     }
 
-    function calcEXPtoLevel($level, $exp) {
+    /**
+     * @param $level
+     * @return int|number|string
+     */
+    function calcEXPtoLevel($level) {
         switch ($level) {
             case ($level < 10):
                 $exptolevel = pow(2, $level) * 10;

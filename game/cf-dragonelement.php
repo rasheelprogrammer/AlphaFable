@@ -23,8 +23,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $intElement = $doc->getElementsByTagName('intElement');
     $element = $Core->elementCheck($intElement->item(0)->nodeValue);
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$CharID}'");
     $result[0] = $query[0]->fetch_assoc();

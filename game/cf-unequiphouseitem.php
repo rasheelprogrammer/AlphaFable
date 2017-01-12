@@ -21,8 +21,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $token = $xml->strToken;
         $equipSlot = $xml->intEquipSlot;
 
-        $query = array();
-        $result = array();
+        $query = [];
+        $result = [];
 
         $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
         $result[0] = $query[0]->fetch_assoc();

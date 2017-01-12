@@ -32,7 +32,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     if ($userQuery->num_rows > 0 && $charQuery->num_rows > 0) {
         $gold_total = $char['gold'] + $gold;
         $exp_total = $char['exp'] + $exp;
-        $exptolevel = $Core->calcEXPtoLevel($char['level'], $exp_total);
+        $exptolevel = $Core->calcEXPtoLevel($char['level']);
 
         $levelCap = $caps[0];
         if ($char['level'] >= $levelCap) {
@@ -49,7 +49,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $questreward = $XML->appendChild($dom->createElement('questreward'));
         if ($exp_total >= $exptolevel) {
             if ($intLevel < $levelCap) {
-                $exptolevel = $Core->calcEXPtoLevel($intLevel, $exp_total);
+                $exptolevel = $Core->calcEXPtoLevel($intLevel);
                 $questreward->setAttribute("intEarnedExp", 0);
                 $questreward->setAttribute("intEarnedGold", $gold);
                 $questreward->setAttribute("intEarnedGems", 0);

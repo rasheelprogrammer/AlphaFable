@@ -71,7 +71,8 @@ session_start();
                                     </tr>
                                     <tr>
                                         <td height="25" align="right" valign="middle"><img src="images/clear.gif" width="1" height="25" align="left"></td>
-                                        <td align="right" valign="middle"><span class="server"><strong class="style2">Server Status:</strong> <font color=white>Online</font>. &nbsp;&nbsp;&nbsp;<strong class="style2">[<?php echo $time; ?>] &nbsp;</strong>
+                                        <td align="right" valign="middle"><span class="server"><strong class="style2">Server Status:</strong> <span
+                                                        style="color: white; ">Online</span>. &nbsp;&nbsp;&nbsp;<strong class="style2">[<?php echo $time; ?>] &nbsp;</strong>
                                                 <?php
                                                 if (isset($_SESSION['afname'])) {
                                                     $name = $_SESSION['afname'];
@@ -120,9 +121,12 @@ session_start();
                                                     </td>
                                                     <td align="center"><a href="game/"><img src="images/button-play-elementals.gif" alt="Play <?php echo $sitename; ?>" width="218" height="144" border="0" /></a><br />
                                                         <a href="game/">Play <?php echo $sitename; ?></a><br />
-                                                        <a class="style3" href="game/?size=tiny"><font color=#C68E17>Tiny</font></a> |
-                                                        <a class="style3" href="game/?size=large"><font color=#C68E17>Large</font></a> |
-                                                        <a class="style3" href="game/?size=huge"><font color=#C68E17>Huge</font></a>
+                                                        <a class="style3" href="game/?size=tiny"><span
+                                                                    style="color: #C68E17; ">Tiny</span></a> |
+                                                        <a class="style3" href="game/?size=large"><span
+                                                                    style="color: #C68E17; ">Large</span></a> |
+                                                        <a class="style3" href="game/?size=huge"><span
+                                                                    style="color: #C68E17; ">Huge</span></a>
                                                     </td>
                                                 </tr>
                                             </table>
@@ -170,10 +174,10 @@ session_start();
                                                 should help you get back into the game. Note: No Guardian accounts were deleted!
                                                 All Beta characters were converted into live characters. </p>
                                             <ul>
-                                                <li><b>Account Manager</b> - Edit your existing account with the <a href="account/">Account
+                                                <li><span style="font-weight: bold;">Account Manager</span> - Edit your existing account with the <a href="account/">Account
                                                         Manager </a>
                                                 </li>
-                                                <li><b>Lost your Password?</b> - Use the <a href="df-lostpassword.php">Password
+                                                <li><span style="font-weight: bold;">Lost your Password?</span> - Use the <a href="df-lostpassword.php">Password
                                                         Recovery</a> page.
                                                 </li>
                                             </ul>
@@ -193,7 +197,7 @@ session_start();
                                             <tbody>
                                                 <tr>
                                                     <td align="center" bgcolor="#000000">
-                                                        <font size="-1" color="#FFFFFF">Links</font>
+                                                        <span style="font-size: smaller; color: #FFFFFF; ">Links</span>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -211,7 +215,7 @@ session_start();
             </tr>
             <tr>
                 <td colspan="2" align="center" class="tdbase">
-                    <p align="center"><em>AlphaFable 2010 - 2015.</em><br />&quot;AdventureQuest&quot;,  &quot;DragonFable&quot;, &quot;MechQuest&quot;, &quot;ArchKnight&quot;, &quot;BattleOn.com&quot;,  &quot;AdventureQuest Worlds&quot;, &quot;Artix Entertainment&quot;<br />and all game  character names are either trademarks or registered trademarks of Artix  Entertainment, LLC. All rights are reserved.</p>
+                    <p align="center"><em>AlphaFable 2010 - 2017.</em><br />&quot;AdventureQuest&quot;,  &quot;DragonFable&quot;, &quot;MechQuest&quot;, &quot;ArchKnight&quot;, &quot;BattleOn.com&quot;,  &quot;AdventureQuest Worlds&quot;, &quot;Artix Entertainment&quot;<br />and all game  character names are either trademarks or registered trademarks of Artix  Entertainment, LLC. All rights are reserved.</p>
                 </td>
             </tr>
         </table>

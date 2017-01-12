@@ -79,7 +79,7 @@ $IE = "100";
                 <h2>AlphaFable Data Grabber / Updater</h2>
                 <section class="downloaded">
                     <?php
-                    switch (strToLower($_GET['m'])) {
+                    switch (strtolower($_GET['m'])) {
                         case 'quests2':
                             $XML_PAYLOAD = $Ninja->encryptNinja("<flash><strToken>DMHCFNATQBDKXVJMA</strToken><intCharID>44527593</intCharID></flash>");
                             $XML_POST_URL = "http://dragonfable.battleon.com/game/cf-characterload.asp";
@@ -173,9 +173,13 @@ $IE = "100";
                                             $items = $MySQLi->query("SELECT * FROM df_monsters WHERE MonsterID = '{$MonsterID}'");
                                             if ($items->num_rows == 0) {
                                                 $MySQLi->query("INSERT INTO `df_monsters` VALUES ('{$MonsterID}', '{$strCharacterName}', '{$intLevel}', '{$intExp}', '{$intHP}', '{$intMP}', '{$intSilver}', '{$intGold}', '{$intGems}', '{$intDragonCoins}', '{$strGender}', '{$intHairStyle}', '{$intColorHair}', '{$intColorSkin}', '{$intColorBase}', '{$intColorTrim}', '{$intStr}', '{$intDex}', '{$intInt}', '{$intLuk}', '{$intCha}', '{$intEnd}', '{$intWis}', '{$strArmorName}', '{$strArmorDescription}', '{$strArmorDesignInfo}', '{$strArmorResists}', '{$intDefMelee}', '{$intDefPierce}', '{$intDefMagic}', '{$intParry}', '{$intDodge}', '{$intBlock}', '{$strWeaponName}', '{$strWeaponDescription}', '{$strWeaponDesignInfo}', '{$strWeaponResists}', '{$strType}', '{$intCrit}', '{$intDmgMin}', '{$intDmgMax}', '{$intBonus}', '{$strElement}', '{$strWeaponFile}', '{$strMovName}', '{$strMonsterFileName}', '{$RaceID}', '{$strRaceName}');");
-                                            } else {
+												$grabbedItems++;
+											} else {
                                                 $MySQLi->query("UPDATE `df_monsters` SET `Name` = '{$strCharacterName}', `Level` = '{$intLevel}', `Exp` = '{$intExp}', `HP` = '{$intHP}', `MP` = '{$intMP}', `Silver` = '{$intSilver}', `Gold` = '{$intGold}', `Gems` = '{$intGems}', `Coins` = '{$intDragonCoins}', `Gender` = '{$strGender}', `HairStyle` = '{$intHairStyle}', `ColorHair` = '{$intColorHair}', `ColorSkin` = '{$intColorSkin}', `ColorBase` = '{$intColorBase}', `ColorTrim` = '{$intColorTrim}', `STR` = '{$intStr}', `DEX` = '{$intDex}', `INT` = '{$intInt}', `LUK` = '{$intLuk}', `CHA` = '{$intCha}', `END` = '{$intEnd}', `WIS` = '{$intWis}', `ArmorName` = '{$strArmorName}', `ArmorDesc` = '{$strArmorDescription}', `ArmorDesignInfo` = '{$strArmorDesignInfo}', `ArmorResists` = '{$strArmorResists}', `DefMelee` = '{$intDefMelee}', `DefPierce` = '{$intDefPierce}', `DefMagic` = '{$intDefMagic}', `Parry` = '{$intParry}', `Dodge` = '{$intDodge}', `Block` = '{$intBlock}', `WeaponName` = '{$strWeaponName}', `WeaponDesc` = '{$strWeaponDescription}', `WeaponDesignInfo` = '{$strWeaponDesignInfo}', `WeaponResists` = '{$strWeaponResists}', `Type` = '{$strType}', `Crit` = '{$intCrit}', `DmgMin` = '{$intDmgMin}', `DmgMax` = '{$intDmgMax}', `Bonus` = '{$intBonus}', `Element` = '{$strElement}', `WepFile` = '{$strWeaponFile}', `MovName` = '{$strMovName}', `MonFile` = '{$strMonsterFileName}', `RaceID` = '{$RaceID}', `RaceName` = '{$strRaceName}' WHERE `MonsterID` = {$MonsterID};");
-                                            }
+												if ($MySQLi->affected_rows > 0) {
+													$updatedItems++;
+												}
+											}
                                         }
                                     }
                                     if ($intQuestID == $QuestID) {
@@ -183,13 +187,30 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_quests` (`id`, `QuestID`, `Name`, `Description`, `Complete`, `FileName`, `XFileName`, `MaxSilver`, `MaxGold`, `MaxGems`, `MaxExp`, `MinTime`, `Counter`, `Extra`, `MonsterMinLevel`, `MonsterMaxLevel`, `MonsterType`, `MonsterGroupFileName`, `MonsterIDs`, `MonsterRefs`, `Rewards`) VALUES (NULL, '{$QuestID}', '{$strName}', '{$strDescription}', '{$strComplete}', '{$strFileName}', '{$strXFileName}', '{$intMaxSilver}', '{$intMaxGold}', '{$intMaxGems}', '{$intMaxExp}', '{$intMinTime}', '{$intCounter}', '{$strExtra}', '{$intMonsterMinLevel}', '{$intMonsterMaxLevel}', '{$strMonsterType}', '{$strMonsterGroupFileName}', '{$monids}', '{$monrefs}', '0');");
                                             echo("Quest {$QuestID}: Quest Data Added to Database<br />");
+											$grabbedItems2++;
                                         } else {
                                             $MySQLi->query("UPDATE `df_quests` SET `Name` = '{$strName}', `Description` = '{$strDescription}', `Complete` = '{$strComplete}', `FileName` = '{$strFileName}', `XFileName` = '{$strXFileName}', `MaxSilver` = '{$intMaxSilver}', `MaxGold` = '{$intMaxGold}', `MaxGems` = '{$intMaxGems}', `MaxExp` = '{$intMaxExp}', `MinTime` = '{$intMinTime}', `Counter` = '{$intCounter}', `Extra` = '{$strExtra}', `MonsterMinLevel` = '{$intMonsterMinLevel}', `MonsterMaxLevel` = '{$intMonsterMaxLevel}', `MonsterType` = '{$strMonsterType}', `MonsterGroupFileName` = '{$strMonsterGroupFileName}', `MonsterIDs` = '{$monids}', `MonsterRefs` = '{$monrefs}' WHERE `QuestID` = '{$intQuestID}'");
-                                            echo("Quest {$QuestID}: Quest Data Updated<br />");
+                                            if ($MySQLi->affected_rows > 0) {
+												echo("Quest {$QuestID}: Quest Data Updated<br />");
+												$updatedItems2++;
+											}
                                         }
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Monsters Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Quests Downloaded: {$grabbedItems2}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Monsters Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Quests Updated: {$updatedItems2}<br />";
+							}
                             break;
                         case 'towns': //TEST - DO NOT USER
                             for ($intQuestID = $T2S; $intQuestID <= $T2E; $intQuestID++) {
@@ -208,12 +229,23 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_quests` (`id`, `QuestID`, `Name`, `Description`, `Complete`, `FileName`, `XFileName`, `MaxSilver`, `MaxGold`, `MaxGems`, `MaxExp`, `MinTime`, `Counter`, `Extra`, `MonsterMinLevel`, `MonsterMaxLevel`, `MonsterType`, `MonsterGroupFileName`, `MonsterIDs`, `MonsterRefs`, `Rewards`) VALUES (NULL, '{$QuestID}', '{$strName}', '{$strDescription}', '{$strComplete}', '{$strFileName}', '{$strXFileName}', '{$intMaxSilver}', '{$intMaxGold}', '{$intMaxGems}', '{$intMaxExp}', '{$intMinTime}', '{$intCounter}', '{$strExtra}', '{$intMonsterMinLevel}', '{$intMonsterMaxLevel}', '{$strMonsterType}', '{$strMonsterGroupFileName}', '{$monids}', '{$monrefs}', '0');");
                                         echo("Quest {$QuestID}: Quest Data Added to Database<br />");
+										$grabbedItems++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_quests` SET `Name` = '{$strName}', `Description` = '{$strDescription}', `Complete` = '{$strComplete}', `FileName` = '{$strFileName}', `XFileName` = '{$strXFileName}', `MaxSilver` = '{$intMaxSilver}', `MaxGold` = '{$intMaxGold}', `MaxGems` = '{$intMaxGems}', `MaxExp` = '{$intMaxExp}', `MinTime` = '{$intMinTime}', `Counter` = '{$intCounter}', `Extra` = '{$strExtra}', `MonsterMinLevel` = '{$intMonsterMinLevel}', `MonsterMaxLevel` = '{$intMonsterMaxLevel}', `MonsterType` = '{$strMonsterType}', `MonsterGroupFileName` = '{$strMonsterGroupFileName}', `MonsterIDs` = '{$monids}', `MonsterRefs` = '{$monrefs}' WHERE `QuestID` = '{$intQuestID}'");
-                                        echo("Quest {$QuestID}: Quest Data Updated<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Quest {$QuestID}: Quest Data Updated<br />");
+											$updatedItems++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Downloaded: {$grabbedItems}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Updated: {$updatedItems}<br />";
+							}
                             break;
                         case 'quests':
                             for ($intQuestID = $TS; $intQuestID <= $TE; $intQuestID++) {
@@ -304,9 +336,13 @@ $IE = "100";
                                         $items = $MySQLi->query("SELECT * FROM df_monsters WHERE MonsterID = '{$MonsterID}'");
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_monsters` VALUES ('{$MonsterID}', '{$strCharacterName}', '{$intLevel}', '{$intExp}', '{$intHP}', '{$intMP}', '{$intSilver}', '{$intGold}', '{$intGems}', '{$intDragonCoins}', '{$strGender}', '{$intHairStyle}', '{$intColorHair}', '{$intColorSkin}', '{$intColorBase}', '{$intColorTrim}', '{$intStr}', '{$intDex}', '{$intInt}', '{$intLuk}', '{$intCha}', '{$intEnd}', '{$intWis}', '{$strArmorName}', '{$strArmorDescription}', '{$strArmorDesignInfo}', '{$strArmorResists}', '{$intDefMelee}', '{$intDefPierce}', '{$intDefMagic}', '{$intParry}', '{$intDodge}', '{$intBlock}', '{$strWeaponName}', '{$strWeaponDescription}', '{$strWeaponDesignInfo}', '{$strWeaponResists}', '{$strType}', '{$intCrit}', '{$intDmgMin}', '{$intDmgMax}', '{$intBonus}', '{$strElement}', '{$strWeaponFile}', '{$strMovName}', '{$strMonsterFileName}', '{$RaceID}', '{$strRaceName}');");
-                                        } else {
+											$grabbedItems++;
+										} else {
                                             $MySQLi->query("UPDATE `df_monsters` SET `Name` = '{$strCharacterName}', `Level` = '{$intLevel}', `Exp` = '{$intExp}', `HP` = '{$intHP}', `MP` = '{$intMP}', `Silver` = '{$intSilver}', `Gold` = '{$intGold}', `Gems` = '{$intGems}', `Coins` = '{$intDragonCoins}', `Gender` = '{$strGender}', `HairStyle` = '{$intHairStyle}', `ColorHair` = '{$intColorHair}', `ColorSkin` = '{$intColorSkin}', `ColorBase` = '{$intColorBase}', `ColorTrim` = '{$intColorTrim}', `STR` = '{$intStr}', `DEX` = '{$intDex}', `INT` = '{$intInt}', `LUK` = '{$intLuk}', `CHA` = '{$intCha}', `END` = '{$intEnd}', `WIS` = '{$intWis}', `ArmorName` = '{$strArmorName}', `ArmorDesc` = '{$strArmorDescription}', `ArmorDesignInfo` = '{$strArmorDesignInfo}', `ArmorResists` = '{$strArmorResists}', `DefMelee` = '{$intDefMelee}', `DefPierce` = '{$intDefPierce}', `DefMagic` = '{$intDefMagic}', `Parry` = '{$intParry}', `Dodge` = '{$intDodge}', `Block` = '{$intBlock}', `WeaponName` = '{$strWeaponName}', `WeaponDesc` = '{$strWeaponDescription}', `WeaponDesignInfo` = '{$strWeaponDesignInfo}', `WeaponResists` = '{$strWeaponResists}', `Type` = '{$strType}', `Crit` = '{$intCrit}', `DmgMin` = '{$intDmgMin}', `DmgMax` = '{$intDmgMax}', `Bonus` = '{$intBonus}', `Element` = '{$strElement}', `WepFile` = '{$strWeaponFile}', `MovName` = '{$strMovName}', `MonFile` = '{$strMonsterFileName}', `RaceID` = '{$RaceID}', `RaceName` = '{$strRaceName}' WHERE `MonsterID` = {$MonsterID};");
-                                        }
+											if ($MySQLi->affected_rows > 0) {
+												$updatedItems++;
+											}
+										}
                                     }
                                 }
                                 if ($intQuestID == $QuestID) {
@@ -314,12 +350,29 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_quests` (`id`, `QuestID`, `Name`, `Description`, `Complete`, `FileName`, `XFileName`, `MaxSilver`, `MaxGold`, `MaxGems`, `MaxExp`, `MinTime`, `Counter`, `Extra`, `MonsterMinLevel`, `MonsterMaxLevel`, `MonsterType`, `MonsterGroupFileName`, `MonsterIDs`, `MonsterRefs`, `Rewards`) VALUES (NULL, '{$QuestID}', '{$strName}', '{$strDescription}', '{$strComplete}', '{$strFileName}', '{$strXFileName}', '{$intMaxSilver}', '{$intMaxGold}', '{$intMaxGems}', '{$intMaxExp}', '{$intMinTime}', '{$intCounter}', '{$strExtra}', '{$intMonsterMinLevel}', '{$intMonsterMaxLevel}', '{$strMonsterType}', '{$strMonsterGroupFileName}', '{$monids}', '{$monrefs}', '0');");
                                         echo("Quest {$QuestID}: Quest Data Added to Database<br />");
+										$grabbedItems2++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_quests` SET `Name` = '{$strName}', `Description` = '{$strDescription}', `Complete` = '{$strComplete}', `FileName` = '{$strFileName}', `XFileName` = '{$strXFileName}', `MaxSilver` = '{$intMaxSilver}', `MaxGold` = '{$intMaxGold}', `MaxGems` = '{$intMaxGems}', `MaxExp` = '{$intMaxExp}', `MinTime` = '{$intMinTime}', `Counter` = '{$intCounter}', `Extra` = '{$strExtra}', `MonsterMinLevel` = '{$intMonsterMinLevel}', `MonsterMaxLevel` = '{$intMonsterMaxLevel}', `MonsterType` = '{$strMonsterType}', `MonsterGroupFileName` = '{$strMonsterGroupFileName}', `MonsterIDs` = '{$monids}', `MonsterRefs` = '{$monrefs}' WHERE `QuestID` = '{$intQuestID}'");
-                                        echo("Quest {$QuestID}: Quest Data Updated<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Quest {$QuestID}: Quest Data Updated<br />");
+											$updatedItems2++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Monsters Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Quests Downloaded: {$grabbedItems2}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Monsters Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Quests Updated: {$updatedItems2}<br />";
+							}
                             break;
                         case 'class':
                             for ($intClass = $CS; $intClass <= $CE; $intClass++) {
@@ -359,12 +412,23 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_class` (`id`, `ClassID`, `ClassName`, `ClassSWF`, `ArmorName`, `ArmorDescription`, `ArmorResists`, `DefMelee`, `DefPierce`, `DefMagic`, `Parry`, `Dodge`, `Block`, `WeaponName`, `WeaponDescription`, `WeaponDesignInfo`, `WeaponResists`, `WeaponLevel`, `WeaponIcon`, `Type`, `ItemType`, `Crit`, `DmgMin`, `DmgMax`, `Bonus`, `Element`, `Save`) VALUES (NULL, '{$ClassID}', '{$strClassName}', '{$strClassFileName}', '{$strArmorName}', '{$strArmorDescription}', '{$strArmorResists}', '{$intDefMelee}', '{$intDefRange}', '{$intDefMagic}', '{$intParry}', '{$intDodge}', '{$intBlock}', '{$strWeaponName}', '{$strWeaponDescription}', '{$strWeaponDesignInfo}', '{$strWeaponResists}', '{$intWeaponLevel}', '{$strWeaponIcon}', '{$strType}', '{$strItemType}', '{$intCrit}', '{$intDmgMin}', '{$intDmgMax}', '{$intBonus}', '{$strElement}', '1');");
                                         echo("Class {$ClassID}: Added to Database<br />");
+										$grabbedItems++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_class` SET `ClassName` = '{$strClassName}', `ClassSWF` = '{$strClassFileName}', `ArmorName` = '{$strArmorName}', `ArmorDescription` = '{$strArmorDescription}', `ArmorResists` = '{$strArmorResists}', `DefMelee` = '{$intDefMelee}', `DefPierce` = '{$intDefRange}', `DefMagic` = '{$intDefMagic}', `Parry` = '{$intParry}', `Dodge` = '{$intDodge}', `Block` = '{$intBlock}', `WeaponName` = '{$strWeaponName}', `WeaponDescription` = '{$strWeaponDescription}', `WeaponDesignInfo` = '{$strWeaponDesignInfo}', `WeaponResists` = '{$strWeaponResists}', `WeaponLevel` = '{$intWeaponLevel}', `WeaponIcon` = '{$strWeaponIcon}', `Type` = '{$strType}', `ItemType` = '{$strItemType}', `Crit` = '{$intCrit}', `DmgMin` = '{$intDmgMin}', `DmgMax` = '{$intDmgMax}', `Bonus` = '{$intBonus}', `Element` = '{$strElement}' WHERE `df_class`.`ClassID` = {$ClassID};");
-                                        echo("Class {$ClassID}: Updated in Database<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Class {$ClassID}: Updated in Database<br />");
+											$updatedItems++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Downloaded: {$grabbedItems}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Updated: {$updatedItems}<br />";
+							}
                             break;
                         case 'shops':
                             for ($intShopID = $SS; $intShopID <= $SE; $intShopID++) {
@@ -435,23 +499,45 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_items` (`id`, `ItemID`, `ItemName`, `Currency`, `Cost`, `Level`, `hp`, `mp`, `ItemDescription`, `DragonAmulet`, `EquipSpot`, `Category`, `ItemType`, `Type`, `FileName`, `Min`, `Max`, `Bonus`, `Rarity`, `Resists`, `Element`, `MaxStackSize`, `Icon`, `Sellable`, `Destroyable`, `Used`, `intCrit`, `intDefMelee`, `intDefRange`, `intDodge`, `intParry`, `intDefMagic`, `intDefPierce`, `intBonus`, `intBlock`, `intStr`, `intDex`, `intInt`, `intLuk`, `intCha`, `intEnd`, `intWis`) VALUES (NULL, '{$i1}', '{$i2}', '{$i9}', '{$i10}', '{$i12}', '{$i38}', '{$i5}', '{$i13}', '{$i14}', '{$i15}', '{$i16}', '{$i17}', '{$i18}', '{$i19}', '{$i20}', '{$i29}', '{$i30}', '{$i33}', '{$i31}', '{$i32}', '{$i34}', '{$i35}', '{$i36}', '{$i37}', 'false', '{$i21}', '{$i22}', '{$i28}', '{$i24}', '{$i25}', '{$i26}', '{$i23}', '{$i30}', '{$i27}', '{$i39}', '{$i40}', '{$i41}', '{$i42}', '{$i43}', '{$i44}', '{$i45}');");
                                             echo("Item {$i1}: Data Added to Database<br />");
+											$grabbedItems++;
                                         } else {
-                                                $MySQLi->query("UPDATE `df_items` SET `ItemName` = '{$i2}', `Currency` = '{$i9}', `Cost` = '{$i10}', `Level` = '{$i12}', `hp` = '{$i38}', `mp` = '{$i5}', `ItemDescription` = '{$i13}', `DragonAmulet` = '{$i14}', `EquipSpot` = '{$i15}', `Category` = '{$i16}', `ItemType` = '{$i17}', `Type` = '{$i18}', `FileName` = '{$i19}', `Min` = '{$i20}', `Max` = '{$i29}', `Bonus` = '{$i30}', `Rarity` = '{$i33}', `Resists` = '{$i31}', `Element` = '{$i32}', `Icon` = '{$i35}', `Sellable` = '{$i36}', `Destroyable` = '{$i37}', `Used` = 'false', `intCrit` = '{$i21}', `intDefMelee` = '{$i22}', `intDefRange` = '{$i28}', `intDodge` = '{$i24}', `intParry` = '{$i25}', `intDefMagic` = '{$i26}', `intDefPierce` = '{$i23}', `intBonus` = '{$i30}', `intBlock` = '{$i27}', `intStr` = '{$i39}', `intDex` = '{$i40}', `MaxStackSize` = '{$i34}', `intInt` = '{$i41}', `intLuk` = '{$i42}', `intCha` = '{$i43}', `intEnd` = '{$i44}', `intWis` = '{$i45}' WHERE `ItemID` = {$i1};");
-                                                echo("Item {$i1}: Data Updated in Database<br />");
+                                               $MySQLi->query("UPDATE `df_items` SET `ItemName` = '{$i2}', `Currency` = '{$i9}', `Cost` = '{$i10}', `Level` = '{$i12}', `hp` = '{$i38}', `mp` = '{$i5}', `ItemDescription` = '{$i13}', `DragonAmulet` = '{$i14}', `EquipSpot` = '{$i15}', `Category` = '{$i16}', `ItemType` = '{$i17}', `Type` = '{$i18}', `FileName` = '{$i19}', `Min` = '{$i20}', `Max` = '{$i29}', `Bonus` = '{$i30}', `Rarity` = '{$i33}', `Resists` = '{$i31}', `Element` = '{$i32}', `Icon` = '{$i35}', `Sellable` = '{$i36}', `Destroyable` = '{$i37}', `Used` = 'false', `intCrit` = '{$i21}', `intDefMelee` = '{$i22}', `intDefRange` = '{$i28}', `intDodge` = '{$i24}', `intParry` = '{$i25}', `intDefMagic` = '{$i26}', `intDefPierce` = '{$i23}', `intBonus` = '{$i30}', `intBlock` = '{$i27}', `intStr` = '{$i39}', `intDex` = '{$i40}', `MaxStackSize` = '{$i34}', `intInt` = '{$i41}', `intLuk` = '{$i42}', `intCha` = '{$i43}', `intEnd` = '{$i44}', `intWis` = '{$i45}' WHERE `ItemID` = {$i1};");
+                                               if ($MySQLi->affected_rows > 0) {
+												echo("Item {$i1}: Data Updated in Database<br />");
+												$updatedItems++;
+											}
                                         }
                                     }
                                 }
                                 if ($intShopID == $ShopID) {
+									echo("Checking Shop {$ShopID}<br />");
                                     $items = $MySQLi->query("SELECT * FROM df_vendors WHERE ShopID = '{$ShopID}'");
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_vendors` (`id`, `ShopID`, `ShopName`, `ItemIDs`) VALUES (NULL, '{$ShopID}', '{$strName}', '{$itemList}');");
                                         echo("Shop {$ShopID}: Shop Data Added to Database<br />");
+										$grabbedItems2++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_vendors` SET `ShopName` = '{$strName}', `ItemIDs` = '{$itemList}' WHERE `ShopID` = {$ShopID};");
-                                        echo("Shop {$ShopID}: Shop Data Updated in Database<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Shop {$ShopID}: Shop Data Updated in Database<br />");
+											$updatedItems2++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Items Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Shops Downloaded: {$grabbedItems2}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Items Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Shops Updated: {$updatedItems2}<br />";
+							}
                             break;
                         case 'houseshops':
                             for ($intShopID = $HS; $intShopID <= $HE; $intShopID++) {
@@ -507,9 +593,12 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_houses` (`HouseID`, `strHouseName`, `strHouseDescription`, `bitVisible`, `bitDestroyable`, `bitEquippable`, `bitRandomDrop`, `bitSellable`, `bitDragonAmulet`, `bitEnc`, `intCost`, `intCurrency`, `intRarity`, `intLevel`, `intCategory`, `intEquipSpot`, `intType`, `bitRandom`, `intElement`, `strType`, `strIcon`, `strDesignInfo`, `strFileName`, `intRegion`, `intTheme`, `intSize`, `intBaseHP`, `intStorageSize`, `intMaxGuards`, `intMaxRooms`, `intMaxExtItems`) VALUES ('{$i1}', '{$i2}', '{$i3}', '{$i4}', '{$i5}', '{$i6}', '{$i7}', '{$i8}', '{$i9}', '{$i10}', '{$i11}', '{$i12}', '{$i13}', '{$i14}', '{$i15}', '{$i16}', '{$i17}', '{$i18}', '{$i19}', '{$i20}', '{$i21}', '{$i22}', '{$i23}', '{$i24}', '{$i25}', '{$i26}', '{$i27}', '{$i28}', '{$i29}', '{$i30}', '{$i31}');");
                                             echo("Item {$i1}: Item Data Added to Database<br />");
+											$grabbedItems++;
                                         } else {
-                                            //todo
-                                            echo("Item {$i1}: Data Updated in Database<br />");
+                                            if ($MySQLi->affected_rows > 0) {
+												echo("Item {$i1}: Data Updated in Database<br />");
+												$updatedItems++;
+											}
                                         }
                                     }
                                 }
@@ -518,12 +607,29 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_house_vendors` (`ShopID`, `ShopName`, `ItemIDs`) VALUES ('{$ShopID}', '{$strName}', '{$itemList}');");
                                         echo("Shop {$ShopID}: Shop Data Added to Database<br />");
+										$grabbedItems2++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_house_vendors` SET `ShopName` = '{$strName}', `ItemIDs` = '{$itemList}' WHERE `ShopID` = {$ShopID};");
-                                        echo("Shop {$ShopID}: Shop Data Updated in Database<br />");
+										if ($MySQLi->affected_rows > 0) {
+											echo("Shop {$ShopID}: Shop Data Updated in Database<br />");
+											$updatedItems2++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Items Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Shops Downloaded: {$grabbedItems2}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Items Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Shops Updated: {$updatedItems2}<br />";
+							}
                             break;
                         case 'houseitems':
                             for ($intShopID = $HIS; $intShopID <= $HIE; $intShopID++) {
@@ -569,9 +675,13 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_house_items` (`HouseItemID`, `strItemName`, `strItemDescription`, `bitVisible`, `bitDestroyable`, `bitEquippable`, `bitRandomDrop`, `bitSellable`, `bitDragonAmulet`, `intCost`, `intCurrency`, `intMaxStackSize`, `intRarity`, `intLevel`, `intMaxlevel`, `intCategory`, `intEquipSpot`, `intType`, `bitRandom`, `intElement`, `strType`, `strFileName`) VALUES ('{$i1}', '{$i2}', '{$i3}', '{$i4}', '{$i5}', '{$i6}', '{$i7}', '{$i8}', '{$i9}', '{$i10}', '{$i11}', '{$i12}', '{$i13}', '{$i14}', '{$i15}', '{$i16}', '{$i17}', '{$i18}', '{$i19}', '{$i20}', '{$i21}', '{$i22}');");
                                             echo("Item {$i1}: Item Data Added to Database<br />");
+											$grabbedItems++;
                                         } else {
-                                            //todo
-                                            echo("Item {$i1}: Data Updated in Database<br />");
+											/* TODO: UPDATE QUERY */
+                                            //if ($MySQLi->affected_rows > 0) {
+											//	echo("Item {$i1}: Data Updated in Database<br />");
+											//	$updatedItems++;
+											//}
                                         }
                                     }
                                 }
@@ -580,12 +690,29 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_house_item_vendors` (`ShopID`, `ShopName`, `ItemIDs`) VALUES ('{$ShopID}', '{$strName}', '{$itemList}');");
                                         echo("Shop {$ShopID}: Shop Data Added to Database<br />");
+										$grabbedItems2++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_house_item_vendors` SET `ShopName` = '{$strName}', `ItemIDs` = '{$itemList}' WHERE `ShopID` = {$ShopID};");
-                                        echo("Shop {$ShopID}: Shop Data Updated in Database<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Shop {$ShopID}: Shop Data Updated in Database<br />");
+											$updatedItems2++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Items Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Shops Downloaded: {$grabbedItems2}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Items Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Shops Updated: {$updatedItems2}<br />";
+							}
                             break;
                         case 'merges':
                             for ($intMergeShop = $MSS; $intMergeShop <= $MSE; $intMergeShop++) {
@@ -664,16 +791,24 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_items` (`id`, `ItemID`, `ItemName`, `Currency`, `Cost`, `Level`, `hp`, `mp`, `ItemDescription`, `DragonAmulet`, `EquipSpot`, `Category`, `ItemType`, `Type`, `FileName`, `Min`, `Max`, `Bonus`, `Rarity`, `Resists`, `Element`, `MaxStackSize`, `Icon`, `Sellable`, `Destroyable`, `Used`, `intCrit`, `intDefMelee`, `intDefRange`, `intDodge`, `intParry`, `intDefMagic`, `intDefPierce`, `intBonus`, `intBlock`, `intStr`, `intDex`, `intInt`, `intLuk`, `intCha`, `intEnd`, `intWis`) VALUES (NULL, '{$m1}', '{$i2}', '{$i9}', '{$i10}', '{$i12}', '{$i38}', '{$i5}', '{$i13}', '{$i14}', '{$i15}', '{$i16}', '{$i17}', '{$i18}', '{$i19}', '{$i20}', '{$i29}', '{$i30}', '{$i33}', '{$i31}', '{$i32}', '{$i34}', '{$i35}', '{$i36}', '{$i37}', 'false', '{$i21}', '{$i22}', '{$i28}', '{$i24}', '{$i25}', '{$i26}', '{$i23}', '{$i30}', '{$i27}', '{$i39}', '{$i40}', '{$i41}', '{$i42}', '{$i43}', '{$i44}', '{$i45}');");
                                             echo("Item {$i1}: Data Added to Database<br />");
-                                        } else {
+											$grabbedItems++;
+										} else {
                                             $MySQLi->query("UPDATE `df_items` SET `ItemName` = '{$i2}', `Currency` = '{$i9}', `Cost` = '{$i10}', `Level` = '{$i12}', `hp` = '{$i38}', `mp` = '{$i5}', `ItemDescription` = '{$i13}', `DragonAmulet` = '{$i14}', `EquipSpot` = '{$i15}', `Category` = '{$i16}', `ItemType` = '{$i17}', `Type` = '{$i18}', `FileName` = '{$i19}', `Min` = '{$i20}', `Max` = '{$i29}', `Bonus` = '{$i30}', `Rarity` = '{$i33}', `Resists` = '{$i31}', `Element` = '{$i32}', `Icon` = '{$i35}', `MaxStackSize` = '{$i34}', `Sellable` = '{$i36}', `Destroyable` = '{$i37}', `Used` = 'false', `intCrit` = '{$i21}', `intDefMelee` = '{$i22}', `intDefRange` = '{$i28}', `intDodge` = '{$i24}', `intParry` = '{$i25}', `intDefMagic` = '{$i26}', `intDefPierce` = '{$i23}', `intBonus` = '{$i30}', `intBlock` = '{$i27}', `intStr` = '{$i39}', `intDex` = '{$i40}', `intInt` = '{$i41}', `intLuk` = '{$i42}', `intCha` = '{$i43}', `intEnd` = '{$i44}', `intWis` = '{$i45}' WHERE `ItemID` = {$i1};");
-                                            echo("Item {$i1}: Data Updated in Database<br />");
+                                            if ($MySQLi->affected_rows > 0) {
+												echo("Item {$i1}: Data Updated in Database<br />");
+												$updatedItems++;
+											}
                                         }
                                         $items = $MySQLi->query("SELECT * FROM df_merges WHERE ResultID = '{$m1}'");
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_merges` (`id`, `ResultID`, `RequiredID1`, `RequiredQTY1`, `RequiredID2`, `RequiredQTY2`) VALUES (NULL, '{$m1}', '{$m2}', '{$m4}', '{$m5}', '{$m7}');");
-                                        } else {
+											$grabbedItems2++;
+										} else {
                                             $MySQLi->query("UPDATE `df_merges` SET `RequiredID1` = '{$m2}', `RequiredQTY1` = '{$m4}', `RequiredID2` = '{$m5}', `RequiredQTY2` = '{$m7}' WHERE `df_merges`.`ResultID` = {$m1}");
-                                        }
+											if ($MySQLi->affected_rows > 0) {
+												$updatedItems2++;
+											}
+										}
                                     }
                                 }
                                 if ($intMergeShop == $MergeShop) {
@@ -681,12 +816,35 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_merge_vendors` (`id`, `ShopID`, `ShopName`, `ItemIDs`) VALUES (NULL, '{$MergeShop}', '{$strName}', '{$itemList}');");
                                         echo("Merge Shop {$MergeShop}: Shop Data Added to Database<br />");
+										$grabbedItems3++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_merge_vendors` SET `ShopName` = '{$strName}', `ItemIDs` = '{$itemList}' WHERE `ShopID` = {$MergeShop};");
-                                        echo("Merge Shop {$MergeShop}: Shop Data Updated Database<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Merge Shop {$MergeShop}: Shop Data Updated Database<br />");
+											$updatedItems3++;
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Items Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Merges Downloaded: {$grabbedItems2}<br />";
+							}
+							if($grabbedItems3 > 0){
+								echo "Shops Downloaded: {$grabbedItems3}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Merges Updated: {$updatedItems2}<br />";
+							}
+							if($updatedItems3 > 0){
+								echo "Shops Updated: {$updatedItems3}<br />";
+							}
                             break;
                         case 'hairs':
                             for ($intHairShop = $HSS; $intHairShop <= $HSE; $intHairShop++) {
@@ -721,9 +879,13 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_hairs` (`id`, `HairID`, `HairSWF`, `HairName`, `EarVisible`, `Gender`, `Price`, `Frame`, `RaceID`) VALUES (NULL, '{$i1}', '{$i3}', '{$i2}', '{$i7}', '{$i5}', '{$i4}', '{$i8}', '{$i6}');");
                                             echo("Hair {$i1}: Added to database<br />");
+											$grabbedItems++;
                                         } else {
                                             $MySQLi->query("UPDATE `df_hairs` SET `HairSWF` = '{$i3}', `HairName` = '{$i2}', `EarVisible` = '{$i7}', `Gender` = '{$i5}', `Price` = '{$i4}', `Frame` = '{$i8}', `RaceID` = '{$i6}' WHERE `df_hairs`.`HairID` = {$i1};");
-                                            echo("Hair {$i1}: Updated in database<br />");
+                                            if ($MySQLi->affected_rows > 0) {
+												echo("Hair {$i1}: Updated in database<br />");
+												$updatedItems++;
+											}
                                         }
                                     }
                                 }
@@ -759,9 +921,13 @@ $IE = "100";
                                         if ($items->num_rows == 0) {
                                             $MySQLi->query("INSERT INTO `df_hairs` (`id`, `HairID`, `HairSWF`, `HairName`, `EarVisible`, `Gender`, `Price`, `Frame`, `RaceID`) VALUES (NULL, '{$i1}', '{$i3}', '{$i2}', '{$i7}', '{$i5}', '{$i4}', '{$i8}', '{$i6}');");
                                             echo("Hair {$i1}: Added to database<br />");
+											$grabbedItems++;
                                         } else {
                                             $MySQLi->query("UPDATE `df_hairs` SET `HairSWF` = '{$i3}', `HairName` = '{$i2}', `EarVisible` = '{$i7}', `Gender` = '{$i5}', `Price` = '{$i4}', `Frame` = '{$i8}', `RaceID` = '{$i6}' WHERE `df_hairs`.`HairID` = {$i1};");
-                                            echo("Hair {$i1}: Updated in database<br />");
+                                            if ($MySQLi->affected_rows > 0) {
+												echo("Hair {$i1}: Updated in database<br />");
+												$updatedItems++;
+											}
                                         }
                                     }
                                 }
@@ -770,12 +936,31 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_hair_vendors` (`id`, `ShopID`, `ShopName`, `SwfFile`, `ItemIDs`) VALUES (NULL, '{$intHairShop}', '{$strName}', '{$strFile}', '{$itemList}');");
                                         echo("Hair Shop {$intHairShop}: Shop Data Added to Database<br />");
+										$grabbedItems2++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_hair_vendors` SET `ShopName` = '{$strName}', `SwfFile` = '{$strFile}', `ItemIDs` = '{$itemList}' WHERE `ShopID` = {$intHairShop};");
-                                        echo("Hair Shop {$intHairShop}: Shop Data Updated in Database<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											if ($MySQLi->affected_rows > 0) {
+												echo("Hair Shop {$intHairShop}: Shop Data Updated in Database<br />");
+												$updatedItems2++;
+											}
+										}
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Items Downloaded: {$grabbedItems}<br />";
+							}
+							if($grabbedItems2 > 0){
+								echo "Shops Downloaded: {$grabbedItems2}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Items Updated: {$updatedItems}<br />";
+							}
+							if($updatedItems2 > 0){
+								echo "Shops Updated: {$updatedItems2}<br />";
+							}
                             break;
                         case 'chars':
                             for ($intChars = $CharS; $intChars <= $CharS; $intChars++) {
@@ -850,7 +1035,7 @@ $IE = "100";
                                                 if ($items->num_rows == 0) {
                                                     $MySQLi->query("INSERT INTO `df_items` (`id`, `ItemID`, `ItemName`, `Currency`, `Cost`, `Level`, `hp`, `mp`, `ItemDescription`, `DragonAmulet`, `EquipSpot`, `Category`, `ItemType`, `Type`, `FileName`, `Min`, `Max`, `Bonus`, `Rarity`, `Resists`, `Element`, `MaxStackSize`, `Icon`, `Sellable`, `Destroyable`, `Used`, `intCrit`, `intDefMelee`, `intDefRange`, `intDodge`, `intParry`, `intDefMagic`, `intDefPierce`, `intBonus`, `intBlock`, `intStr`, `intDex`, `intInt`, `intLuk`, `intCha`, `intEnd`, `intWis`) VALUES (NULL, '{$i1}', '{$i2}', '{$i9}', '{$i10}', '{$i12}', '{$i38}', '{$i5}', '{$i13}', '{$i14}', '{$i15}', '{$i16}', '{$i17}', '{$i18}', '{$i19}', '{$i20}', '{$i29}', '{$i30}', '{$i33}', '{$i31}', '{$i32}', '{$i34}', '{$i35}', '{$i36}', '{$i37}', 'false', '{$i21}', '{$i22}', '{$i28}', '{$i24}', '{$i25}', '{$i26}', '{$i23}', '{$i30}', '{$i27}', '{$i39}', '{$i40}', '{$i41}', '{$i42}', '{$i43}', '{$i44}', '{$i45}');");
                                                     $itemFile = $xml->character->items[$a]['strFileName'];
-                                                    $Files->CheckCreateDir($urlDF, $itemFile, 0);
+                                                    $Files->CheckCreateDir($urlDF, $itemFile);
                                                     if (!file_exists("{$itemFile}")) {
                                                         copy($urlDF . $itemFile, "{$itemFile}");
                                                         if (file_exists("{$itemFile}")) {
@@ -875,6 +1060,7 @@ $IE = "100";
                                     }
                                 }
                             }
+                            echo "Search Complete.<br />";
                             break;
                         case 'interfaces':
                             for ($intInterface = $IS; $intInterface <= $IE; $intInterface++) {
@@ -893,12 +1079,23 @@ $IE = "100";
                                     if ($items->num_rows == 0) {
                                         $MySQLi->query("INSERT INTO `df_interface` (`ID`, `InterfaceID`, `InterfaceSWF`, `InterfaceName`, `bitLoadUnder`) VALUES (NULL, '{$InterfaceID}', '{$strFileName}', '{$strName}' , '{$bitLoadUnder}');");
                                         echo("Interface {$intInterface}: Added to Database<br />");
+										$grabbedItems++;
                                     } else {
                                         $MySQLi->query("UPDATE `df_interface` SET `InterfaceSWF` = '{$strFileName}', `InterfaceName` = '{$strName}', `bitLoadUnder` = '{$bitLoadUnder}' WHERE `InterfaceID` = {$InterfaceID};");
-                                        echo("Interface {$intInterface}: Updated in Database<br />");
+                                        if ($MySQLi->affected_rows > 0) {
+											echo("Interface {$intInterface}: Updated in Database<br />");
+											$updatedItems++;
+										}
                                     }
                                 }
                             }
+							echo "Search Complete.<br />";
+							if($grabbedItems > 0){
+								echo "Downloaded: {$grabbedItems}<br />";
+							}
+							if($updatedItems > 0){
+								echo "Updated: {$updatedItems}<br />";
+							}
                             break;
                         default:
                             echo('<a href="?m=quests">Download Town/Quest Data</a><br>');

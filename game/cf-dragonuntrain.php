@@ -17,8 +17,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $charID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
     $token  = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
     
-    $query  = array();
-    $result = array();
+    $query  = [];
+    $result = [];
     
     $query[0]  = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
     $result[0] = $query[0]->fetch_assoc();
@@ -31,7 +31,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     
     if ($result[2]->num_rows > 0) {
         if ($result[0]->num_rows > 0) {
-            $gold_left = $$result[0]['gold'] - 1000;
+            $gold_left = $result[0]['gold'] - 1000;
             $newstats  = $result[1]['intHeal'] + $result[1]['intMagic'] + $result[1]['intMelee'] + $result[1]['intBuff'] + $result[1]['intDebuff'];
             $MySQLi->query("UPDATE `df_characters` SET `gold` = '{$gold_left}' WHERE `id` = '{$charID}';");
             $MySQLi->query("UPDATE `df_dragons` SET `intTotalStats` = '{$newstats}', `intHeal` = '0', `intMagic` = '0', `intMelee` = '0', `intBuff` = '0', `intDebuff` = '0' WHERE `id` = 1");

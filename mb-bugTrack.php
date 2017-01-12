@@ -23,7 +23,7 @@ if (isset($_POST['How'])) {
     $string_exp = "/^[A-Za-z .'-]+$/";
 
     function clean_string($string) {
-        $bad = array("content-type", "bcc:", "to:", "cc:", "href");
+        $bad = ["content-type", "bcc:", "to:", "cc:", "href"];
         return str_replace($bad, "", $string);
     }
 

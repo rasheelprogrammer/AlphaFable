@@ -15,8 +15,8 @@
 		if(isset($xml->intInterfaceID)){
 			$interfaceID = $xml->intInterfaceID;
 			
-			$query = array();
-			$result = array();
+			$query = [];
+			$result = [];
 
 			$charID = $xml->intCharID;
 			$token = $xml->strToken;
@@ -87,9 +87,7 @@
 						$status->setAttribute("status","SUCCESS");
 					}
 			} else {
-					$Core->returnXMLError('Error!', 'Character information was unable to be requested.');
-					//Dump Log
-					file_put_contents("logs/Character Error/BANK - Character: {$charID}.txt", "cf-bankload.php - User: {$result[0]['userid']}", FILE_APPEND | LOCK_EX);
+				   $Core->returnXMLError('Error!', 'Character information was unable to be requested.');
 			}
 			echo $dom->saveXML();
 		} else {

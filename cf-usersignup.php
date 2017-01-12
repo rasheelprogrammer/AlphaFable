@@ -12,14 +12,14 @@ require("includes/classes/Security.class.php");
 require('includes/config.php');
 
 if (isset($_POST['strUserName'])) {
-    $sign = array(
-        'User' => array(
+    $sign = [
+        'User' => [
             'Name' => $MySQLi->real_escape_string($_POST['strUserName']),
             'Password' => $MySQLi->real_escape_string($_POST['strPassword']),
-            'Email' => $MySQLi->real_escape_string(rawURLDecode($_POST['strEmail'])),
-            'Birth' => $MySQLi->real_escape_string(rawURLDecode($_POST['strDOB']))
-        )
-    );
+            'Email' => $MySQLi->real_escape_string(rawurldecode($_POST['strEmail'])),
+            'Birth' => $MySQLi->real_escape_string(rawurldecode($_POST['strDOB']))
+        ]
+    ];
 
     $query = $MySQLi->query("SELECT * FROM df_users WHERE name = '{$sign['User']['Name']}' LIMIT 1");
 

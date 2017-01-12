@@ -15,7 +15,7 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
     <link rel="stylesheet" href="includes/css/style.css" />
     
 </head>
-<center>
+<div style="text-align: center;">
     <form>
         <table width="548" border="0" cellspacing="0" cellpadding="0" align="center">
             <tr> 
@@ -84,4 +84,4 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
                             <a href="account/">Account</a>
                         </span>
     </section>
-</center>
+</div>

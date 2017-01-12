@@ -18,8 +18,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $charID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $dom = new DOMDocument();
     $XML = $dom->appendChild($dom->createElement('warvars'));

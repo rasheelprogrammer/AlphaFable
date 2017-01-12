@@ -21,8 +21,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     if (isset($xml->strUsername) && isset($xml->strPassword)) {
         $username = $xml->strUsername;
         $password = $Security->encode($xml->strPassword);
-        $query = array();
-        $result = array();
+        $query = [];
+        $result = [];
 
         $query[0] = $MySQLi->query("SELECT * FROM df_users WHERE name = '{$username}' AND pass = '{$password}' LIMIT 1");
         $result[0] = $query[0]->fetch_array();
@@ -31,7 +31,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
             $query[1] = $MySQLi->query("SELECT * FROM df_settings LIMIT 1");
             $result[1] = $query[1]->fetch_assoc();
 
-            $CanPlay = $Security->CheckAccessLevel($result[0]['access'], $result[1]['minAccess']);
+            $CanPlay = $Security->checkAccessLevel($result[0]['access'], $result[1]['minAccess']);
             switch ($CanPlay) {
                 case ("Banned"):
                     $Core->returnXMLError('Banned!', 'You have been <b>banned</b> from <b>AlphaFable</b>. If you believe this is a mistake, please contact the <b>AlphaFable</b> Staff.');
@@ -99,8 +99,6 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
                 }
             } else {
                 $Core->returnXMLError('Error!', 'There was an issue updating your account information.');
-				//Dump Log
-				file_put_contents("logs/Login Error/User: {$result[0]['id']}.txt", $token, FILE_APPEND | LOCK_EX);
             }
         } else {
             $Core->returnXMLError('User Not Found', 'Your username or password was incorrect, Please check your spelling and try again.');

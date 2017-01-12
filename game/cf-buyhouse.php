@@ -18,8 +18,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $charID = $doc->getElementsByTagName('intCharID')->item(0)->nodeValue;
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
     $result[0] = $query[0]->fetch_assoc();

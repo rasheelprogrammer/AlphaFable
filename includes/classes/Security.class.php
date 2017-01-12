@@ -8,16 +8,16 @@
 	$Security = new Security();
 
 	class Security {
-		var $key = 'RandomKeyBitchesL0043l1';
+		var $key = 'AlphaFable1337';
 
 		public function safe_b64encode($string){
 			$data = base64_encode($string);
-			$data = str_replace(array('+', '/', '='),array('-', '_', ''), $data);
+			$data = str_replace(['+', '/', '='], ['-', '_', ''], $data);
 			return $data;
 		}
 
 		public function safe_b64decode($string){
-			$data = str_replace(array('-', '_'), array('+', '/'), $string);
+			$data = str_replace(['-', '_'], ['+', '/'], $string);
 			$mod4 = strlen($data) % 4;
 			if($mod4){
 				$data .= substr('====', $mod4);
@@ -30,7 +30,7 @@
 		}
 		
 		public function checkAccessLevel($userAccess, $requiredAccess){
-			$status = array(
+			$status = [
 				0  => 'Normal Player',
 				5  => 'Guardian',
 				10 => 'DragonLord',
@@ -42,7 +42,7 @@
 				40 => 'Programmer',
 				45 => 'Administrator',
 				50 => 'Owner'
-			);
+            ];
 				
 			switch($status[$userAccess]){
 				case ($userAccess < 0):

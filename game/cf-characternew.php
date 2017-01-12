@@ -10,26 +10,26 @@ include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 
 if (isset($_POST['strCharacterName'])) {
-    $sign = array(
-        'Char' => array(
+    $sign = [
+        'Char' => [
             'Name' => $MySQLi->real_escape_string($_POST['strCharacterName']),
             'Gender' => $MySQLi->real_escape_string($_POST['strGender']),
             'Class' => $MySQLi->real_escape_string($_POST['strClass']),
-            'ID' => array(
+            'ID' => [
                 'User' => $MySQLi->real_escape_string($_POST['intUserID']),
                 'Race' => $MySQLi->real_escape_string($_POST['intRaceID']),
                 'Hair' => $MySQLi->real_escape_string($_POST['intHairID']),
                 'Class' => $MySQLi->real_escape_string($_POST['intClassID']),
                 'HairFrame' => $MySQLi->real_escape_string($_POST['intHairFrame'])
-            ),
-            'Color' => array(
+            ],
+            'Color' => [
                 'Base' => $MySQLi->real_escape_string($_POST['intColorBase']),
                 'Skin' => $MySQLi->real_escape_string($_POST['intColorSkin']),
                 'Trim' => $MySQLi->real_escape_string($_POST['intColorTrim']),
                 'Hair' => $MySQLi->real_escape_string($_POST['intColorHair'])
-            )
-        )
-    );
+            ]
+        ]
+    ];
 
     $userQuery = $MySQLi->query("SELECT * FROM `df_users` WHERE id = '{$sign['Char']['ID']['User']}' ORDER BY id DESC LIMIT 1");
     $user = $userQuery->fetch_assoc();

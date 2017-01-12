@@ -52,8 +52,6 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
                 $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
             } else {
                 $Core->returnXMLError("Error!", "There was an issue updating your character information.");
-				//Dump Log
-				file_put_contents("logs/Character Error/BANK - Character: {$CharID}.txt", "cf-buybagslots.php - User: {$result[0]['userid']}", FILE_APPEND | LOCK_EX);
             }
         } else {
             $Core->returnXMLError('Error!', 'User not found in the database.');

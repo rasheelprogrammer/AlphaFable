@@ -11,7 +11,6 @@ include ("../includes/classes/Security.class.php");
 include ('../includes/config.php');
 
 $Core->makeXML();
-
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $doc = new DOMDocument();
@@ -21,8 +20,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $Items = $doc->getElementsByTagName('strItems')->item(0)->nodeValue;
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$CharID}'");
     $result[0] = $query[0]->fetch_assoc();
@@ -32,7 +31,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     if ($query[1]->num_rows > 0) {
         if ($query[0]->num_rows > 0) {
             $Items = explode(",", $Items);
-            $CanPlay = $Security->CheckAccessLevel($result[1]['access'], 5);
+            $CanPlay = $Security->checkAccessLevel($result[1]['access'], 5);
             switch ($CanPlay) {
                 case ("Banned"):
                     $Core->returnXMLError('Banned!', 'You have been <b>banned</b> from <b>AlphaFable</b>. If you believe this is a mistake, please contact the <b>AlphaFable</b> Staff.');
@@ -46,6 +45,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
                         $query2 = $MySQLi->query("UPDATE `df_equipment` SET `StartingItem` = '1' WHERE `ItemID` = {$Items[$a]} AND House = 0 AND HouseItem = 0");
                     }
                     $Core->returnCustomXMLMessage("status", "status", "SUCCESS");
+                    break;
                 default:
                     break;
             }

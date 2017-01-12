@@ -15,7 +15,7 @@
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_TIMEOUT, 4);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: close'));
+			curl_setopt($ch, CURLOPT_HTTPHEADER, ['Connection: close']);
 			$result = curl_exec($ch);
 			return $result;
 		}
@@ -36,8 +36,9 @@
 					chdir($urlPath[$a]);
 				}
 			}
-			if (!@file_exists($Path)) {
-				copy($urlFull, $FileName);   
+			//if (!@file_exists($Path)) {
+            if (!file_exists($FileName)) {
+					copy($urlFull, $FileName);
 				for ($a = 0; $a < count($urlPath) - 1; $a++) {
 					chdir("..\\");
 				}
@@ -47,7 +48,7 @@
 			}
 		}
 	
-		public function CheckCreateDir($urlBase, $urlFile, $class) {
+		public function CheckCreateDir($urlBase, $urlFile) {
 			$urlComplete = $urlBase.$urlFile;
 			$urlFull = str_replace("game/", "", $urlComplete);
 

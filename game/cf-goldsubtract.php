@@ -17,8 +17,8 @@
 			$token = $xml->strToken;
 			$gold = $xml->intGold;
 
-			$query = array();
-			$result = array();
+			$query = [];
+			$result = [];
 			
 			$query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
 			$result[0] = $query[0]->fetch_assoc();

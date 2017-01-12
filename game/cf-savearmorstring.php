@@ -9,8 +9,8 @@
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 
-$HTTP_RAW_POST_DATA = file_get_contents("php://input");
 if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
+    $HTTP_RAW_POST_DATA = file_get_contents("php://input");
 
     $doc = new DOMDocument();
     $doc->loadXML($HTTP_RAW_POST_DATA);
@@ -21,8 +21,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $newval = $Core->valueCheck($val);
     $token = $doc->getElementsByTagName('strToken')->item(0)->nodeValue;
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE id = '{$charID}'");
     $result[0] = $query[0]->fetch_assoc();
@@ -32,7 +32,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     if ($query[1]->num_rows > 0) {
         if ($query[0]->num_rows > 0) {
             $quests = $result[0]['strArmor'];
-            $result = array();
+            $result = [];
             for ($i = 0; $i < strlen($quests); $i += 1) {
                 $result[] = substr($quests, $i, 1);
             }

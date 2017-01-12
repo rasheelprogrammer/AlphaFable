@@ -18,8 +18,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
 	if (isset($xml->intQuestID)) {
 		$questID = $xml->intQuestID;
 		
-		$query = array();
-		$result = array();
+		$query = [];
+		$result = [];
 	
 		$query[0] = $MySQLi->query("SELECT * FROM df_quests WHERE QuestID = '{$questID}'");
 		$result[0] = $query[0]->fetch_assoc();

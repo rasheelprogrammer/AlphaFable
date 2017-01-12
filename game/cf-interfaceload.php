@@ -16,8 +16,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     if (isset($xml->intInterfaceID)) {
         $interfaceID = $xml->intInterfaceID;
 
-        $query = array();
-        $result = array();
+        $query = [];
+        $result = [];
 
         $query[0] = $MySQLi->query("SELECT * FROM df_interface WHERE InterfaceID = '{$interfaceID}'");
         $result[0] = $query[0]->fetch_assoc();

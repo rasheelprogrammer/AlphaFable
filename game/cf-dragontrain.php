@@ -23,8 +23,8 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $Buff = $doc->getElementsByTagName('intBuff')->item(0)->nodeValue;
     $Debuff = $doc->getElementsByTagName('intDebuff')->item(0)->nodeValue;
 
-    $query = array();
-    $result = array();
+    $query = [];
+    $result = [];
 
     $query[0] = $MySQLi->query("SELECT * FROM df_characters WHERE ID = '{$DragID}'");
     $result[0] = $query[0]->fetch_assoc();

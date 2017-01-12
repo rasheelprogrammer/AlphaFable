@@ -6,7 +6,7 @@ $promo = $fetch['promo'];
 $sitename = $fetch['DFSitename'];
 $skin = $fetch["backgrondSkin"];
 $facebook = $fetch["FaceBookUsername"];
-$Twitter = $fetch["TwitterUsername"];
+$twitter = $fetch["TwitterUsername"];
 $time = date(" g:i:s A ");
 session_start();
 ?>
@@ -71,7 +71,8 @@ session_start();
                                     </tr>
                                     <tr>
                                         <td height="25" align="right" valign="middle"><img src="images/clear.gif" width="1" height="25" align="left"></td>
-                                        <td align="right" valign="middle"><span class="server"><strong class="style2">Server Status:</strong> <font color=white>Online</font>. &nbsp;&nbsp;&nbsp;<strong class="style2">[<?php echo $time; ?>] &nbsp;</strong>
+                                        <td align="right" valign="middle"><span class="server"><strong class="style2">Server Status:</strong> <span
+                                                        style="color: white; ">Online</span>. &nbsp;&nbsp;&nbsp;<strong class="style2">[<?php echo $time; ?>] &nbsp;</strong>
                                                 <?php
                                                 if (isset($_SESSION['afname'])) {
                                                     $name = $_SESSION['afname'];
@@ -157,10 +158,10 @@ session_start();
                                                 should help you get back into the game. Note: No Guardian accounts were deleted!
                                                 All Beta characters were converted into live characters. </p>
                                             <ul>
-                                                <li><b>Account Manager</b> - Edit your existing account with the <a href="account/">Account
+                                                <li><span style="font-weight: bold;">Account Manager</span> - Edit your existing account with the <a href="account/">Account
                                                         Manager </a>
                                                 </li>
-                                                <li><b>Lost your Password?</b> - Use the <a href="df-lostpassword.php">Password
+                                                <li><span style="font-weight: bold;">Lost your Password?</span> - Use the <a href="df-lostpassword.php">Password
                                                         Recovery</a> page.
                                                 </li>
                                             </ul>
@@ -180,7 +181,7 @@ session_start();
                                             <tbody>
                                                 <tr>
                                                     <td align="center" bgcolor="#000000">
-                                                        <font size="-1" color="#FFFFFF">Links</font>
+                                                        <span style="font-size: smaller; color: #FFFFFF; ">Links</span>
                                                     </td>
                                                 </tr>
                                             </tbody>

@@ -13,7 +13,7 @@ $sitename = $fetch['DFSitename'];
 
 $CharID = filter_input(INPUT_GET, 'CharID');
 if ($CharID == NULL) {
-    header('Location: df-upgrade.php');
+    header('Location: /game/');
 }
 ?>
 
@@ -67,7 +67,7 @@ if ($CharID == NULL) {
                                 <li class="style9">One time fee! </li>
                             </ul>
                             </p>
-                            <span class="style1"><font color="#530000"><b>$2.50</b></font></span>
+                            <span class="style1"><span style="color: #530000;  font-weight: bold;">$2.50</span></span>
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <table style="visibility: hidden;">
@@ -114,7 +114,7 @@ if ($CharID == NULL) {
                                     <li class="style9">Support the growth of the Game</li>
                                     <li class="style9">One time fee!</li>
                                 </ul>
-                                <span class="style1"><font color="#530000"><b>$10.00</b></font></span>
+                                <span class="style1"><span style="color: #530000;  font-weight: bold;">$10.00</span></span>
                                 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                     <input type="hidden" name="cmd" value="_s-xclick">
                                     <table style="visibility: hidden;">
@@ -142,15 +142,15 @@ if ($CharID == NULL) {
                         </td>
 
                         <td class="tdFormCell">
-                            <span class="style1"><b>40000 Dragon Coins</b></span>
+                            <span class="style1" style="font-weight: bold;">40000 Dragon Coins</span>
                             <br>for your character
                             <p>And the following amazing items for every Amulet Character on your DragonFable account!</p>
-                            <p><b>Necrotic Sword of Doom</b>,<br> 
-                                <b>Doom Knight Helm</b>,<br>
-                                <b>Doom Knight Cloak</b>,<br>
-                                <b>Doom Knight Armor</b>
+                            <p><span style="font-weight: bold;">Necrotic Sword of Doom</span>,<br>
+                                <span style="font-weight: bold;">Doom Knight Helm</span>,<br>
+                                <span style="font-weight: bold;">Doom Knight Cloak</span>,<br>
+                                <span style="font-weight: bold;">Doom Knight Armor</span>
                             </p>           
-                            <span class="style1"><font color="#530000"><b>$15.00</b></font></span>
+                            <span class="style1"><span style="color: #530000;  font-weight: bold;">$15.00</span></span>
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <table style="visibility: hidden;">
@@ -177,9 +177,9 @@ if ($CharID == NULL) {
                             <img src="images/upgrade-coins.gif" width="192" height="208" alt="DragonCoins">
                         </td>
                         <td class="tdFormCell">
-                            <span class="style1"><b>10000 Dragon Coins</b></span><br>
+                            <span class="style1" style="font-weight: bold;">10000 Dragon Coins</span><br>
                             for your character<br>
-                            <span class="style1"><font color="#530000"><b>$2.00</b></font></span>
+                            <span class="style1"><span style="color: #530000;  font-weight: bold;">$2.00</span></span>
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">
                                 <table style="visibility: hidden;">
