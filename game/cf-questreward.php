@@ -100,4 +100,3 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $Core->returnXMLError("{$reason}", "{$message}");
 }
 $MySQLi->close();
-?>

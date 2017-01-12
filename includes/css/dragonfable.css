@@ -1,8 +1,7 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
-	background-color: #000000;
-	background: #000 url(../../images/skins/skin-DF-DoomKnight.jpg) no-repeat top center fixed;
+    background: #000 url(../../images/skins/skin-DF-DoomKnight.jpg) no-repeat fixed top center;
 }
 .dk-link {
 	border:none;
@@ -22,7 +21,7 @@ td {
 h1 {
 	font-size: 18px;
 	font-weight: bold;
-	margin: 0px;
+	margin: 0;
 	color: #FFFFFF;
 }
 .server {
@@ -80,13 +79,13 @@ a.red:hover {
 h2 a:link, h2 a:visited, h2 a:active{text-decoration:none !important;}
 .tdbase {
 	background-color: #660000;
-	border-width: 1px 0px 1px 0px;
+	border-width: 1px 0 1px 0;
 	border-color: #FFFF00;
 	border-style: solid;
 }
 .tdbase hr {
 	height: 2px;
-	border: 0px;
+	border: 0;
 	background-color: #FFFF00;
 }
 .tdtrim {
@@ -112,13 +111,11 @@ h2 a:link, h2 a:visited, h2 a:active{text-decoration:none !important;}
 /* Menu Styles */
 #menu {
 	width: 225px;
-	background-image:url(../../images/navbar/AkrilothBg.jpg);
-	background-position: top;
-	background-repeat: no-repeat;
-	margin-top: 0px!important;
+    background: url(../../images/navbar/AkrilothBg.jpg) no-repeat top;
+    margin-top: 0 !important;
 }
 #menu .nav {
-	margin: 240px 55px 0px 35px;
+	margin: 240px 55px 0 35px;
 	padding: 5px;
 	background: url(../../images/navbar/navbg.png) repeat;
 }
@@ -145,8 +142,8 @@ h2 a:link, h2 a:visited, h2 a:active{text-decoration:none !important;}
 	background: url(../../images/mod/top.jpg) no-repeat;
 }
 .mod-top p {
-	margin: 0px;
-	padding: 10px 0px 0px 15px;
+	margin: 0;
+	padding: 10px 0 0 15px;
 	font-weight: bold;
 }
 .mod-mid {
@@ -154,8 +151,8 @@ h2 a:link, h2 a:visited, h2 a:active{text-decoration:none !important;}
 	background: url(../../images/mod/mid.jpg) repeat-y;
 }
 .mod-mid p {
-	margin: 0px;
-	padding: 0px 15px 5px 15px;
+	margin: 0;
+	padding: 0 15px 5px 15px;
 }
 .mod-bottom {
 	width: 520px;
@@ -164,7 +161,7 @@ h2 a:link, h2 a:visited, h2 a:active{text-decoration:none !important;}
 }
 label {
 	width: 105px;
-	padding: 0px 5px 5px 0px;
+	padding: 0 5px 5px 0;
 	display:block;
 	float: left;
 	font-weight: bold;
@@ -178,7 +175,7 @@ input.code {
 }
 
 div.options p {
-	padding: 0px 15px;
+	padding: 0 15px;
 }
 div.options .header {
 	background: url(/info/novagem../../images/ng-header.jpg) no-repeat top;
@@ -194,7 +191,7 @@ div.options .text {
 	float: left;
 }
 div.options .acAmount {
-	padding: 22px 5px 0px 0px;
+	padding: 22px 5px 0 0;
 	float: right;
 	font-size: 16px;
 	color: #ffff00;
@@ -222,14 +219,14 @@ text-decoration:none!important;
 #skin-wrap {
 	position: absolute;
 	width: 1600px;
-	top: 0px;
+	top: 0;
 	left: 50%;
 	margin-left: -800px;
 }
 #main-content {
 	position: absolute;
 	width: 950px;
-	top: 0px;
+	top: 0;
 	left: 50%;
 	margin-left: -475px;
 }

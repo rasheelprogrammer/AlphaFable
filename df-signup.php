@@ -5,7 +5,6 @@ $fetch = $query->fetch_assoc();
 $signupSWF = $fetch['signupSWF'];
 $sitename = $fetch['DFSitename'];
 $MySQLi->close();
-?>
 <html lang="en" dir="ltr">
     <head>
         <title><?php echo $sitename; ?> | Register</title>

@@ -44,4 +44,3 @@
 			return ("<ninja2>".$_loc4."</ninja2>");
 		}
 	}
-?>

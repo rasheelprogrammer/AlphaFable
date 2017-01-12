@@ -139,4 +139,3 @@ if (isset($_POST['strUserName'])) {
     $Core->sendVar('strMsg', 'The information you entered was rejected by the server. Please go back and make sure that you filled out everything properly.');
 }
 $MySQLi->close();
-?>

@@ -47,4 +47,3 @@ if (isset($_POST['intUserID']) && isset($_POST['strToken'])) {
     $Core->sendErrorVar('Invalid Data!', 'none');
 }
 $MySQLi->close();
-?>

@@ -111,4 +111,3 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
 }
 echo $dom->saveXML();
 $MySQLi->close();
-?>

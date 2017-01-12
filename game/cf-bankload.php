@@ -98,4 +98,3 @@
 	}
 echo $dom->saveXML();
 $MySQLi->close();
-?>

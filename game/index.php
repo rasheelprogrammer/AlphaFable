@@ -27,7 +27,6 @@ $loaderSWF = $fetch['loaderSWF'];
 $CoreSWF = $fetch['gameSWF'];
 $sitename = $fetch['DFSitename'];
 $MySQLi->close();
-?>
 <html lang="en" dir="ltr">
     <head>
         <title><?php echo $sitename; ?> | Play</title>

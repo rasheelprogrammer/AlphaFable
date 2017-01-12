@@ -15,4 +15,3 @@ $MySQLi = new MySQLi($mysql_host, $mysql_user, $mysql_pass, $mysql_name);
 date_default_timezone_set('America/Los_Angeles');
 error_reporting(0);
 $dateToday = date('Y\-m\-j\TH\:i\:s\.B');
-?>

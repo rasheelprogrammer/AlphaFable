@@ -10,10 +10,7 @@ body,td,th {
 }
 body {
 	background-color: #FFFFFF;
-	margin-left: 0;
-	margin-top: 0;
-	margin-right: 0;
-	margin-bottom: 0;
+    margin: 0;
 }
 .style2 {font-size: 18px}
 a:link {

@@ -19,7 +19,7 @@ session_start();
         <link href="includes/css/dragonfable.css" rel="stylesheet" type="text/css" />
         <meta name="description" content="<?php echo $sitename; ?> is a free fantasy RPG that you can play online in your web browser. No downloads are required to train your dragon or play this game!" />
         <meta name="keywords" content="<?php echo $sitename; ?>, AdventureQuest, RPG, Web, Game, Dragon, Flash" />
-        <script src="includes/AC_RunActiveContent.js" type="text/javascript"></script>
+        <script src="includes/scripts/AC_RunActiveContent.js" type="text/javascript"></script>
         <style>
             body {
                 background: #000 url(<?php echo $skin; ?>) no-repeat top center fixed;
@@ -28,7 +28,7 @@ session_start();
     </head>
     <body>
         <!-- Header -->
-        <script src="includes/AC_RunActiveContent.js" type="text/javascript"></script>
+        <script src="includes/scripts/AC_RunActiveContent.js" type="text/javascript"></script>
         <table border="0" align="center" cellpadding="2" cellspacing="0">
             <tr>
                 <td bgcolor="#000000" valign="top"><table width="750" border="0" align="center" cellpadding="0" cellspacing="0">

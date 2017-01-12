@@ -55,4 +55,3 @@ if (isset($_POST['strCharacterName'])) {
     $Core->sendErrorVar('Invalid Data!', 'none');
 }
 $MySQLi->close();
-?>

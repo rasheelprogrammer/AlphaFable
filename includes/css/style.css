@@ -40,16 +40,11 @@
     background-color:#EE4444;
 }
 #mainMenu .hasSubMenu {
-    background-image:url('../images/icons/main-nav-normalstate.png');
-    background-repeat:no-repeat;
-    background-position:90% center;
+    background: url('../images/icons/main-nav-normalstate.png') no-repeat 90% center;
 }
 #mainMenu ul ul li.hover>a, #mainMenu ul ul li.Shover>a {
-    background-image:url('../images/icons/main-nav-hoverstate.png')!important;
-    background-repeat:no-repeat!important;
-    background-position:90% center!important;
     color:white !important;
-    background-color:#EE4444!important;
+    background: #EE4444 url('../images/icons/main-nav-hoverstate.png') no-repeat 90% center !important;
 }
 
 #mainMenu ul ul li.Shover>a {
@@ -77,7 +72,7 @@ body {
     font-family: 'BD Merced';
     src: url(fonts/bd-merced.ttf) format("truetype");
 }
-article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
     display: block;
 }
 a {
