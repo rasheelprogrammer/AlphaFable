@@ -6,6 +6,8 @@
  * File: cf-itemmerge - v0.0.2
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 

@@ -6,6 +6,8 @@
  * File: cf-loadpvpdragon.php - v0.0.2
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 
@@ -44,7 +46,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
             $query[3] = $MySQLi->query("SELECT * FROM df_hairs WHERE HairID = '{$result[0]['hairid']}' AND Gender = '{$result[0]['gender']}' LIMIT 1");
             $result[3] = $query[3]->fetch_assoc();
 
-            $query[4] = $MySQLi->query("SELECT * FROM `df_equipment` WHERE `charID` = {$charID} AND `StartingItem` = 1 AND `House` = 1 LIMIT 1");
+            $query[4] = $MySQLi->query("SELECT * FROM `df_equipment` WHERE `CharID` = {$charID} AND `StartingItem` = 1 AND `House` = 1 LIMIT 1");
             $result[4] = $query[4]->fetch_assoc();
             if ($query[4]->num_rows > 0 && $result[0]['HasHouse'] != 0) {
                 $HouseID = $result[4]['ItemID'];

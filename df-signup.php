@@ -5,6 +5,7 @@ $fetch = $query->fetch_assoc();
 $signupSWF = $fetch['signupSWF'];
 $sitename = $fetch['DFSitename'];
 $MySQLi->close();
+?>
 <html lang="en" dir="ltr">
     <head>
         <title><?php echo $sitename; ?> | Register</title>
@@ -13,7 +14,7 @@ $MySQLi->close();
         <link rel="shortcut icon" href="includes/favicon.ico" />
         
         <meta charset="utf-8" />
-        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!--[if lt IE 9]><script src="https://raw.githubusercontent.com/aFarkas/html5shiv/master/src/html5shiv.js"></script><![endif]-->
     </head>
     <body>
         <section id="window">

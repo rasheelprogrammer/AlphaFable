@@ -6,6 +6,8 @@
  * File: cf-loadfriend.php - v0.0.3
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 

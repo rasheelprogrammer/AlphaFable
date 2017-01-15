@@ -27,6 +27,7 @@ $loaderSWF = $fetch['loaderSWF'];
 $CoreSWF = $fetch['gameSWF'];
 $sitename = $fetch['DFSitename'];
 $MySQLi->close();
+?>
 <html lang="en" dir="ltr">
     <head>
         <title><?php echo $sitename; ?> | Play</title>
@@ -36,7 +37,7 @@ $MySQLi->close();
         <script src="../includes/scripts/extra.js" type="text/javascript"></script>
         
         <meta charset="utf-8" />
-        <!--[if lt IE 9]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+        <!--[if lt IE 9]><script src="https://raw.githubusercontent.com/aFarkas/html5shiv/master/src/html5shiv.js"></script><![endif]-->
     </head>
     <body onload="pageLoaded()">
         <section id="window" >

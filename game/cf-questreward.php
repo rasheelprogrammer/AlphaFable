@@ -6,6 +6,8 @@
  * File: cf-characterload - v0.0.7
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 

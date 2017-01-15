@@ -58,7 +58,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $quest->setAttribute("strMonsterType", $questq['MonsterType']);
         $quest->setAttribute("strMonsterGroupFileName", $questq['MonsterGroupFileName']);
 
-        $a = split(",", $questq['MonsterIDs']);
+        $a = explode(",", $questq['MonsterIDs']);
         $i = 0;
         while ($i <= count($a)) {
             $monsters = $MySQLi->query("SELECT * FROM df_monsters WHERE MonsterID = {$a[$i]}");

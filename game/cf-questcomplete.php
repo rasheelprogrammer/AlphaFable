@@ -6,6 +6,8 @@
  * File: cf-questcomplete - v0.0.3
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 

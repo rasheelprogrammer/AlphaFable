@@ -18,8 +18,8 @@ $sitename = $fetch['DFSitename'];
 session_start();
 
 if (isset($_POST['Login'])) {
-    $_SESSION["afname"] = mysql_escape_string($_POST['username']);
-    $_SESSION["afpass"] = mysql_escape_string($_POST['password']);
+    $_SESSION["afname"] = mysqli_real_escape_string($MySQLi, $_POST['username']);
+    $_SESSION["afpass"] = mysqli_real_escape_string($MySQLi, $_POST['password']);
     header("Location: df-upgrade.php?func=2");
 }
 
@@ -60,7 +60,6 @@ if (isset($_POST['character'])) {
                 margin-left: auto;
                 margin-right: auto;
                 padding: 10px 20px;
-                border-radius: 5px 2px 2px 5px;
                 max-height: 475px;
                 overflow-y: auto;
                 border: 1px solid #860000;

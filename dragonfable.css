@@ -1,8 +1,7 @@
 body {
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 10px;
-	background-color: #000000;
-	background: #000 url(../../images/skins/skin-DF-DoomKnight.jpg) no-repeat top center fixed;
+	background: #000 url(../../images/skins/skin-DF-DoomKnight.jpg) no-repeat fixed top center;
 }
 .dk-link {
 	border:none;
@@ -112,9 +111,7 @@ h2 a:link, h2 a:visited, h2 a:active{text-decoration:none !important;}
 /* Menu Styles */
 #menu {
 	width: 225px;
-	background-image:url(../../images/navbar/AkrilothBg.jpg);
-	background-position: top;
-	background-repeat: no-repeat;
+	background: url(../../images/navbar/AkrilothBg.jpg) no-repeat top;
 	margin-top: 0 !important;
 }
 #menu .nav {

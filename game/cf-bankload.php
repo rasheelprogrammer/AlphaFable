@@ -5,6 +5,8 @@
  * File: cf-bankload - v0.0.4
  */
 
+//TODO: Fix Item stacking and CharItemID
+
     require ("../includes/classes/Core.class.php");
     require ('../includes/config.php');
 

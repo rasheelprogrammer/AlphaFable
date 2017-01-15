@@ -66,7 +66,6 @@ if ($CharID == NULL) {
                                 <li class="style9">Support the growth of the Game</li>
                                 <li class="style9">One time fee! </li>
                             </ul>
-                            </p>
                             <span class="style1"><span style="color: #530000;  font-weight: bold;">$2.50</span></span>
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
                                 <input type="hidden" name="cmd" value="_s-xclick">

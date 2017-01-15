@@ -42,7 +42,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
         $change_intColorHorn = $MySQLi->query("UPDATE df_dragons SET intColorHorn='{$ColorHorn}' WHERE CharDragID='{$dragID}'");
         $change_intWings = $MySQLi->query("UPDATE df_dragons SET intWings='{$Wings}' WHERE CharDragID='{$dragID}'");
         $change_intHeads = $MySQLi->query("UPDATE df_dragons SET intHeads='{$Heads}' WHERE CharDragID='{$dragID}'");
-        $change_intTails = die("UPDATE df_dragons SET intTails='{$Tails}' WHERE CharDragID='{$dragID}'");
+        $change_intTails = $MySQLi->query("UPDATE df_dragons SET intTails='{$Tails}' WHERE CharDragID='{$dragID}'");
 
         if ($MySQLi->affected_rows > 0) {
             $dom = new DOMDocument();

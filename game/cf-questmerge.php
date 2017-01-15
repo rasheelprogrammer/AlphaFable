@@ -6,6 +6,8 @@
  * File: cf-questmerge - v0.0.1
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 include ("../includes/classes/Core.class.php");
 include ('../includes/config.php');
 

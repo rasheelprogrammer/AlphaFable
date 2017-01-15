@@ -6,6 +6,8 @@
  * File: cf-characterload.php - v0.1.0
  */
 
+//TODO: Fix Item stacking and CharItemID
+
 require("../includes/classes/Core.class.php");
 require('../includes/config.php');
 
@@ -177,7 +179,7 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
                             $items = $character->appendChild($dom->createElement('items'));
                             $result[8] = $query[8]->fetch_assoc();
                             $items->setAttribute('ItemID', $result[8]['ItemID']);
-                            $items->setAttribute('CharItemID', $result[8]['ItemID']);
+                            $items->setAttribute('CharItemID', $result[7]['id']);
                             $items->setAttribute('strItemName', $result[8]['ItemName']);
                             $items->setAttribute('intCount', $result[7]['count']);
                             $items->setAttribute('intHP', $result[8]['hp']);

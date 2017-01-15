@@ -32,7 +32,6 @@ if (filter_input(INPUT_GET, 'order') == "name" || filter_input(INPUT_GET, 'order
                             <td class='top100Heading'><a href="top100.php?order=coins"><b>Coins</b></a></td>
                             <td class='top100Heading'><a href="top100.php?order=dragon_amulet"><b>Upgraded</b></a></td>
                         </tr>
-            </tr>
             <?php
             if ($order == "name" || $order == "classid" || $order == "dragon_amulet" || $order == "userid") {
                 $character = $MySQLi->query("SELECT * FROM df_characters WHERE classid != 42 && classid != 71 ORDER BY ".$order." ASC LIMIT 100");

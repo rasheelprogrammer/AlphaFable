@@ -57,7 +57,6 @@ if (isset($_POST['How'])) {
                 margin-left: auto;
                 margin-right: auto;
                 padding: 10px 20px;
-                border-radius: 5px 2px 2px 5px;
                 overflow-y: auto;
                 border: 1px solid #860000;
                 background-color: #860000;
@@ -86,7 +85,7 @@ if (isset($_POST['How'])) {
                     </select><br />
                     <br />What Happened?:<br />
                     <textarea NAME="How" rows="10" cols="60" placeholder="What is the problem and how did it happen?"></textarea>
-                    </select><br />
+                    <br />
                     <br />Is it a recurring problem?:<br />
                     <select NAME="recurring">
                         <option value='No'>No</option>
