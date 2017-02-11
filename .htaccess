@@ -7,6 +7,3 @@ RewriteRule ^(.*)\.aspx$ $1.php
 
 # Redirect AlphaFable Client
 Redirect /game/df-signup.php /df-signup.php
-
-# Ignore File Case
-CheckSpelling on

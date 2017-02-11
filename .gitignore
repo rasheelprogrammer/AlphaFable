@@ -1,10 +1,6 @@
-*.swf
-*.swf_v=2
 /account/*
 /cms/*
 /includes/config.php
 /includes/classes/Security.class.php
-mb-charTransfer.php
 game/mb-cronStart.php
 .idea/*
-.htaccess
