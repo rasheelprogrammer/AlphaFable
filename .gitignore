@@ -4,10 +4,7 @@
 /cms/*
 /includes/config.php
 /includes/classes/Security.class.php
-/game/todo/*
-/private/*
-/nbproject/*
 mb-charTransfer.php
-game/chars/
 game/mb-cronStart.php
 .idea/*
+.htaccess
