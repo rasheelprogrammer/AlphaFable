@@ -8,22 +8,26 @@
 
 $Core = new Core();
 
-class Core {
+class Core
+{
 
-    public function makeXML() {
+    public function makeXML()
+    {
         header("Content-Type: application/xml");
         header("Charset: UTF-8");
         error_reporting(1);
         ini_set('error_reporting', 1);
     }
 
-    public function writeLog($theText) {
+    public function writeLog($theText)
+    {
         $fp = fopen("log.txt", "w");
         fwrite($fp, $theText);
         fclose($fp);
     }
 
-    function returnXMLError($title, $message) {
+    function returnXMLError($title, $message)
+    {
         $dom = new DOMDocument();
         $XML = $dom->appendChild($dom->createElement('error'));
         $info = $XML->appendChild($dom->createElement('info'));
@@ -35,7 +39,8 @@ class Core {
         exit;
     }
 
-    function returnCustomXMLMessage($element, $name, $value) {
+    function returnCustomXMLMessage($element, $name, $value)
+    {
         $dom = new DOMDocument();
         $XML = $dom->appendChild($dom->createElement($element));
         $XML->setAttribute($name, $value);
@@ -43,11 +48,13 @@ class Core {
         exit;
     }
 
-    function sendVar($name, $value) {
+    function sendVar($name, $value)
+    {
         echo("&{$name}={$value}");
     }
 
-    function sendErrorVar($reason, $message) {
+    function sendErrorVar($reason, $message)
+    {
         echo("&code=527.07&reason={$reason}&message={$message}&action=none");
         exit;
     }
@@ -56,7 +63,8 @@ class Core {
      * @param $level
      * @return int|number|string
      */
-    function calcEXPtoLevel($level) {
+    function calcEXPtoLevel($level)
+    {
         switch ($level) {
             case ($level < 10):
                 $exptolevel = pow(2, $level) * 10;
@@ -77,7 +85,8 @@ class Core {
         return $exptolevel;
     }
 
-    function valueCheck($value) {
+    function valueCheck($value)
+    {
         switch ($value) {
             default:
                 $result = $value;
@@ -164,7 +173,8 @@ class Core {
         return $result;
     }
 
-    function elementCheck($value) {
+    function elementCheck($value)
+    {
         switch ($value) {
             case 5:
                 $result = "Fire";

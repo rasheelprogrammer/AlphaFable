@@ -6,8 +6,8 @@
  * File: cf-loadhouseitemshop - v0.0.1
  */
 
-include ("../includes/classes/Core.class.php");
-include ('../includes/config.php');
+include("../includes/classes/Core.class.php");
+include('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');

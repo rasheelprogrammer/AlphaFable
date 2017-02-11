@@ -29,64 +29,68 @@ $sitename = $fetch['DFSitename'];
 $MySQLi->close();
 ?>
 <html lang="en" dir="ltr">
-    <head>
-        <title><?php echo $sitename; ?> | Play</title>
-        <link rel="stylesheet" href="../includes/css/style.css" />
-        <link rel="shortcut icon" href="../includes/favicon.ico" />
-        <script src="../includes/scripts/AC_RunActiveContent.js" type="text/javascript"></script>
-        <script src="../includes/scripts/extra.js" type="text/javascript"></script>
-        
-        <meta charset="utf-8" />
-        <!--[if lt IE 9]><script src="https://raw.githubusercontent.com/aFarkas/html5shiv/master/src/html5shiv.js"></script><![endif]-->
-    </head>
-    <body onload="pageLoaded()">
-        <section id="window" >
-            <section id="outsideWindow">
-                <section id="gameWindow" style="width:<?php
-                echo $width;
-                ?>; height:<?php
-                         echo $height;
-                         ?>;">
-                    <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="FFable" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="<?php
+<head>
+    <title><?php echo $sitename; ?> | Play</title>
+    <link rel="stylesheet" href="../includes/css/style.css"/>
+    <link rel="shortcut icon" href="../includes/favicon.ico"/>
+    <script src="../includes/scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+    <script src="../includes/scripts/extra.js" type="text/javascript"></script>
+
+    <meta charset="utf-8"/>
+    <!--[if lt IE 9]>
+    <script src="https://raw.githubusercontent.com/aFarkas/html5shiv/master/src/html5shiv.js"></script><![endif]-->
+</head>
+<body onload="pageLoaded()">
+<section id="window">
+    <section id="outsideWindow">
+        <section id="gameWindow" style="width:<?php
+        echo $width;
+        ?>; height:<?php
+        echo $height;
+        ?>;">
+            <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="FFable"
+                    codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0"
+                    width="<?php
                     echo $width;
                     ?>" height="<?php
-                            echo $height;
-                            ?>" align="middle">
-                        <param name="allowScriptAccess" value="sameDomain" />
-                        <param name="movie" value="gamefiles/<?php
-                        echo $loaderSWF;
-                        ?>" />
-                        <param name="menu" value="false" />
-                        <param name="allowFullScreen" value="true" />
+            echo $height;
+            ?>" align="middle">
+                <param name="allowScriptAccess" value="sameDomain"/>
+                <param name="movie" value="gamefiles/<?php
+                echo $loaderSWF;
+                ?>"/>
+                <param name="menu" value="false"/>
+                <param name="allowFullScreen" value="true"/>
 
-                        <param name="flashvars" value="strFileName=<?php
-                        echo $CoreSWF;
-                        ?>" />
-                        <param name="bgcolor" value="#530000" />
-                        <embed src="gamefiles/<?php
-                        echo $loaderSWF;
-                        ?>" FLASHVARS="strFileName=<?php
-                               echo $CoreSWF;
-                               ?>" name="FFable" bgcolor="#530000" menu="false"  allowFullScreen="true" width="<?php
-                               echo $width;
-                               ?>" height="<?php
-                               echo $height;
-                               ?>" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" swLiveConnect="true" />
-                    </object>
-                    <section id="linkWindow">
+                <param name="flashvars" value="strFileName=<?php
+                echo $CoreSWF;
+                ?>"/>
+                <param name="bgcolor" value="#530000"/>
+                <embed src="gamefiles/<?php
+                echo $loaderSWF;
+                ?>" FLASHVARS="strFileName=<?php
+                echo $CoreSWF;
+                ?>" name="FFable" bgcolor="#530000" menu="false" allowFullScreen="true" width="<?php
+                echo $width;
+                ?>" height="<?php
+                echo $height;
+                ?>" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"
+                       pluginspage="http://www.macromedia.com/go/getflashplayer" swLiveConnect="true"/>
+            </object>
+            <section id="linkWindow">
                         <span>
-                            <a href="../">Home</a> | 
                             <a href="index.php">Play</a> | 
                             <a href="../df-signup.php">Register</a> | 
                             <a href="../mb-charTransfer.php">Transfer</a> | 
                             <a href="../top100.php">Top100</a> | 
                             <a href="../mb-bugTrack.php">Submit Bug</a> | 
                             <a href="../df-upgrade.php">Upgrade</a> | 
-                            <a href="../account/">Account</a>
+                            <a href="../account/">Account</a> |
+                            <a href="../df-lostpassword.php">Lost Password</a>
                         </span>
-                    </section>
-                </section>
             </section>
         </section>
-    </body>
+    </section>
+</section>
+</body>
 </html>

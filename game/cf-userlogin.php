@@ -6,10 +6,10 @@
  * File: cf-userlogin.php - v0.1.0
  */
 
-require ("../includes/classes/Core.class.php");
-require ("../includes/classes/Security.class.php");
-require ("../includes/classes/Ninja.class.php");
-require ('../includes/config.php');
+require("../includes/classes/Core.class.php");
+require("../includes/classes/Security.class.php");
+require("../includes/classes/Ninja.class.php");
+require('../includes/config.php');
 
 $Core->makeXML();
 
@@ -101,9 +101,10 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
                 $Core->returnXMLError('Error!', 'There was an issue updating your account information.');
             }
         } else {
-            $Core->returnXMLError('User Not Found', 'Your username or password was incorrect, Please check your spelling and try again.');
+            $Core->returnXMLError('User Not Found', 'Your username or / and password were incorrect, Please check your spelling and try again.');
         }
     } else {
+        $MySQLi->query("INSERT INTO `df_error_logs` (`File`, `ErrorReason`, `PlayerID`, `UserID`) VALUES ('cf-userlogin', 'Database Communication Error', '0', '0');");
         $Core->returnXMLError('Error!', 'There was an error communicating with the database.');
     }
 } else {

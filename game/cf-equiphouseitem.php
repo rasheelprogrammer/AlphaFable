@@ -6,8 +6,8 @@
  * File: cf-equiphouseitem - v0.0.2
  */
 
-require ("../includes/classes/Core.class.php");
-require ('../includes/config.php');
+require("../includes/classes/Core.class.php");
+require('../includes/config.php');
 
 $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');

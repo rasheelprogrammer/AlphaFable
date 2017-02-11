@@ -15,13 +15,13 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
     $xml = new SimpleXMLElement($HTTP_RAW_POST_DATA);
     if (isset($xml->intTownID)) {
         $TownID = $xml->intTownID;
-        
-        $query  = [];
+
+        $query = [];
         $result = [];
-        
-        $query[0]  = $MySQLi->query("SELECT * FROM df_quests WHERE QuestID = '{$TownID}' LIMIT 1");
+
+        $query[0] = $MySQLi->query("SELECT * FROM df_quests WHERE QuestID = '{$TownID}' LIMIT 1");
         $result[0] = $query[0]->fetch_assoc();
-        
+
         $zones = explode(";", $result[0]['Extra']);
         for ($i = 0; $i <= count($zones); $i++) {
             if (isset($extra)) {
@@ -30,10 +30,10 @@ if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
                 $extra = $zones[$i] . "\n";
             }
         }
-        
+
         if ($query[0]->num_rows > 0) {
-            $dom   = new DOMDocument();
-            $XML   = $dom->appendChild($dom->createElement('LoadTown'));
+            $dom = new DOMDocument();
+            $XML = $dom->appendChild($dom->createElement('LoadTown'));
             $quest = $XML->appendChild($dom->createElement('newTown'));
             $quest->setAttribute("intTownID", $TownID);
             $quest->setAttribute("strQuestFileName", $result[0]['FileName']);

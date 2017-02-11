@@ -22,7 +22,8 @@ if (isset($_POST['How'])) {
 
     $string_exp = "/^[A-Za-z .'-]+$/";
 
-    function clean_string($string) {
+    function clean_string($string)
+    {
         $bad = ["content-type", "bcc:", "to:", "cc:", "href"];
         return str_replace($bad, "", $string);
     }
@@ -46,72 +47,73 @@ if (isset($_POST['How'])) {
 }
 ?>
 <html>
-    <head>
-        <link rel="stylesheet" href="includes/css/style.css" />
-        <link rel="shortcut icon" href="includes/favicon.ico" />
-        
-        <title><?php echo $sitename; ?> | Bug Tracker</title>
-        <style>
-            .downloaded {
-                width: 800px;
-                margin-left: auto;
-                margin-right: auto;
-                padding: 10px 20px;
-                overflow-y: auto;
-                border: 1px solid #860000;
-                background-color: #860000;
-                border-radius: 5px;
-            }
-        </style>
-    </head>
-    <body>
-        <br /><a href="game/index.php"><img src="images/logo.png" width="300px"/></a><br />
-        <section class="downloaded" style="width:500px;">
-            <?php
-            if (isset($_POST['How'])) {
-                echo $EmailResult;
-            } else {
-                ?>
-                <form method='post' name='submit'>
-                    <h2>Submit a Bug Report</h2>
-                    What type of problem is it?:<br />
-                    <select NAME="Type">
-                        <option value="Character / Inventory / Dragons">Character / Inventory / Dragons</option>
-                        <option value="Town / Quest / Scene / Zone">Town / Quest / Scene / Zone</option>
-                        <option value="Shop / Item">Shop / Item</option>
-                        <option value="NPCs / Pets / Guests">NPCs / Pets / Guests</option>
-                        <option value="Interfaces">Interfaces</option>
-                        <option value="Other Problems">Other Problems</option>
-                    </select><br />
-                    <br />What Happened?:<br />
-                    <textarea NAME="How" rows="10" cols="60" placeholder="What is the problem and how did it happen?"></textarea>
-                    <br />
-                    <br />Is it a recurring problem?:<br />
-                    <select NAME="recurring">
-                        <option value='No'>No</option>
-                        <option value='Yes'>Yes</option>
-                    </select><br />
-                    <br />What is your Username?:<br />
-                    <input name="username" placeholder="username"><br />
-                    <br />What is your Character name?:<br />
-                    <input name="charname" placeholder="character name"><br />
-                    <br /><input type='submit' name='bugs' value='Submit Bug'>
-                </form>
-                <?php
-            }
-            ?>
-        </section>
-        <section id="linkWindow"><br />
-                        <span>
-							<a href="index.php">Home</a> | 
+<head>
+    <link rel="stylesheet" href="includes/css/style.css"/>
+    <link rel="shortcut icon" href="includes/favicon.ico"/>
+
+    <title><?php echo $sitename; ?> | Bug Tracker</title>
+    <style>
+        .downloaded {
+            width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px 20px;
+            overflow-y: auto;
+            border: 1px solid #860000;
+            background-color: #860000;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<br/><a href="game/index.php"><img src="images/logo.png" width="300px"/></a><br/>
+<section class="downloaded" style="width:500px;">
+    <?php
+    if (isset($_POST['How'])) {
+        echo $EmailResult;
+    } else {
+        ?>
+        <form method='post' name='submit'>
+            <h2>Submit a Bug Report</h2>
+            What type of problem is it?:<br/>
+            <select NAME="Type">
+                <option value="Character / Inventory / Dragons">Character / Inventory / Dragons</option>
+                <option value="Town / Quest / Scene / Zone">Town / Quest / Scene / Zone</option>
+                <option value="Shop / Item">Shop / Item</option>
+                <option value="NPCs / Pets / Guests">NPCs / Pets / Guests</option>
+                <option value="Interfaces">Interfaces</option>
+                <option value="Other Problems">Other Problems</option>
+            </select><br/>
+            <br/>What Happened?:<br/>
+            <textarea NAME="How" rows="10" cols="60"
+                      placeholder="What is the problem and how did it happen?"></textarea>
+            <br/>
+            <br/>Is it a recurring problem?:<br/>
+            <select NAME="recurring">
+                <option value='No'>No</option>
+                <option value='Yes'>Yes</option>
+            </select><br/>
+            <br/>What is your Username?:<br/>
+            <input name="username" placeholder="username"><br/>
+            <br/>What is your Character name?:<br/>
+            <input name="charname" placeholder="character name"><br/>
+            <br/><input type='submit' name='bugs' value='Submit Bug'>
+        </form>
+        <?php
+    }
+    ?>
+</section>
+<section id="linkWindow"><br/>
+    <span>
                             <a href="game/">Play</a> | 
                             <a href="df-signup.php">Register</a> | 
                             <a href="mb-charTransfer.php">Transfer</a> | 
                             <a href="top100.php">Top100</a> | 
                             <a href="mb-bugTrack.php">Submit Bug</a> | 
                             <a href="df-upgrade.php">Upgrade</a> | 
-							<a href="account/">Account</a>
+							<a href="account/">Account</a> |
+                            <a href="df-lostpassword.php">Lost Password</a>
                         </span>
-        </section>
-    </body>
+</section>
+</body>
 </html>

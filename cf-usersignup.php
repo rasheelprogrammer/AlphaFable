@@ -30,8 +30,8 @@ if (isset($_POST['strUserName'])) {
             $query = $MySQLi->query("SELECT * FROM df_users WHERE name = '{$sign['User']['Name']}' LIMIT 1");
             $query = $query->fetch_assoc();
 
-            $SetQuer= $MySQLi->query("SELECT * FROM df_settings LIMIT 1");
-            $fetch = $SetQuer->fetch_assoc();
+            $SetQuery = $MySQLi->query("SELECT * FROM df_settings LIMIT 1");
+            $fetch = $SetQuery->fetch_assoc();
             $subject = "Welcome To {$fetch['DFSitename']}";
 
             $message = "<div style='text-align:center;padding:0;'>
@@ -119,7 +119,7 @@ if (isset($_POST['strUserName'])) {
             $Core->sendVar('strErr', 'Error Code 523.21');
             $Core->sendVar('strReason', 'MySQLi Query Error!');
             $Core->sendVar('strButtonName', 'Cancel');
-            $Core->sendVar('strButtonAction', 'Continue');
+            $Core->sendVar('strButtonAction', 'Username');
             $Core->sendVar('strMsg', 'One or more of the MySQLi Queries has failed to send. Please contact any  Administrator if this problem persists.');
         }
     } else {
