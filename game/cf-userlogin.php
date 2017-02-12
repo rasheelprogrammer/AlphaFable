@@ -16,8 +16,8 @@ $Core->makeXML();
 $HTTP_RAW_POST_DATA = file_get_contents('php://input');
 
 if (isset($HTTP_RAW_POST_DATA) && !empty($HTTP_RAW_POST_DATA)) {
-    $xml = $Ninja->decodeNinja($HTTP_RAW_POST_DATA);
-    $xml = new SimpleXMLElement($xml);
+    $NinjaXml = $HTTP_RAW_POST_DATA;
+    $xml = new SimpleXMLElement($NinjaXml);
 
     if (isset($xml->strUsername) && isset($xml->strPassword)) {
         $username = $xml->strUsername;

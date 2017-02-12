@@ -33,7 +33,7 @@ if (isset($_POST['strCharacterName'])) {
 
     //TODO: FIX HAIRFRAME ISSUE
     if ($sign['Char']['ID']['HairFrame'] == NULL || $sign['Char']['ID']['HairFrame'] == "") {
-        $sign['Char']['ID']['HairFrame'] == 1;
+        $sign['Char']['ID']['HairFrame'] = 1;
     }
 
     $userQuery = $MySQLi->query("SELECT * FROM `df_users` WHERE id = '{$sign['Char']['ID']['User']}' ORDER BY id DESC LIMIT 1");
@@ -44,7 +44,6 @@ if (isset($_POST['strCharacterName'])) {
         $STEVE = $MySQLi->query("INSERT INTO df_characters(userid, name, dragon_amulet, gender, born, hairid, colorhair, colorskin, colorbase, colortrim, classid, BaseClassID, PrevClassID, raceid, hairframe) VALUES('{$sign['Char']['ID']['User']}', '{$sign['Char']['Name']}', {$user['upgrade']}, '{$sign['Char']['Gender']}', '{$dateToday}', '{$sign['Char']['ID']['Hair']}', '{$sign['Char']['Color']['Hair']}', '{$sign['Char']['Color']['Skin']}', '{$sign['Char']['Color']['Base']}', '{$sign['Char']['Color']['Trim']}', '{$sign['Char']['ID']['Class']}', '{$sign['Char']['ID']['Class']}', '{$sign['Char']['ID']['Class']}', '{$sign['Char']['ID']['Race']}', '{$sign['Char']['ID']['HairFrame']}')");
         $file = 'people.txt';
         $current = "INSERT INTO df_characters(userid, name, dragon_amulet, gender, born, hairid, colorhair, colorskin, colorbase, colortrim, classid, BaseClassID, PrevClassID, raceid, hairframe) VALUES('{$sign['Char']['ID']['User']}', '{$sign['Char']['Name']}', {$user['upgrade']}, '{$sign['Char']['Gender']}', '{$dateToday}', '{$sign['Char']['ID']['Hair']}', '{$sign['Char']['Color']['Hair']}', '{$sign['Char']['Color']['Skin']}', '{$sign['Char']['Color']['Base']}', '{$sign['Char']['Color']['Trim']}', '{$sign['Char']['ID']['Class']}', '{$sign['Char']['ID']['Class']}', '{$sign['Char']['ID']['Class']}', '{$sign['Char']['ID']['Race']}', '{$sign['Char']['ID']['HairFrame']}')";
-        file_put_contents($file, $current);
         if ($MySQLi->affected_rows > 0) {
             /* Gives character an Unlimited X-Boost */
             $char_result = $MySQLi->query("SELECT * FROM df_characters WHERE userid = '{$sign['Char']['ID']['User']}' AND name = '{$sign['Char']['Name']}' AND born = '{$dateToday}'");
@@ -56,6 +55,7 @@ if (isset($_POST['strCharacterName'])) {
                 $Core->sendErrorVar('Equipment Error!', "There has been an error in one or more MySQL Queries; to resolve this issue, please contact the AlphaFable team and include following error.");
             }
         } else {
+
             $Core->sendErrorVar('Character Error!', "There has been an error in one or more MySQL Queries; to resolve this issue, please contact the AlphaFable team and include following error.");
         }
     } else {
