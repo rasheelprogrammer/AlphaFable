@@ -16,5 +16,5 @@ if (mysqli_connect_error()) {
 };
 
 date_default_timezone_set('America/Los_Angeles');
-error_reporting(1);
+error_reporting(0);
 $dateToday = date('Y\-m\-j\TH\:i\:s\.B');
